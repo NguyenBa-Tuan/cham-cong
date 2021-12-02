@@ -10,3 +10,4 @@
         <p><span style="margin-right: 40px">Level</span>{{$user->level}}</p>
     </div>
 @endforeach
+<a href="{{route('admin_index')}}">Back to dashboard</a>
