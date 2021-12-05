@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class User
+class UserCheck
 {
     /**
      * Handle an incoming request.

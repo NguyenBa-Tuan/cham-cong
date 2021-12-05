@@ -23,14 +23,13 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
+        $login = $request->validate([
             'email' => 'required',
             'password' => 'required',
         ]);
 
-        $login = $request->only('email', 'password');
         if (Auth::attempt($login)) {
-            if (Auth::user()->role == UserRole::ADMIN) {
+            if (Auth::user()->role == 0) {
                 return redirect()->route('admin_index');
             } else {
                 return redirect()->route('user_index');

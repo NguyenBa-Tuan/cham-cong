@@ -44,7 +44,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | User Providers
+    | UserCheck Providers
     |--------------------------------------------------------------------------
     |
     | All authentication drivers have a user provider. This defines how the
