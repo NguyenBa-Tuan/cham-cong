@@ -22,7 +22,8 @@ class UserController extends Controller
     public function edit()
     {
         $user = Auth::user();
-        return view('user.edit', compact('user'));
+        $levels = UserLevel::toSelectArray();
+        return view('user.edit', compact('user', 'levels'));
     }
 
     public function update(Request $request)

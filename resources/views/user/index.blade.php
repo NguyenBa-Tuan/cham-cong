@@ -4,5 +4,5 @@
 <p>{{$user->address}}</p>
 <p>{{$user->dayOfBirth}}</p>
 <p>{{$user->dayOfJoin}}</p>
-<p>{{$user->level}}</p>
+<p>{{\App\Enums\UserLevel::getDescription($user->level)}}</p>
 <a href="{{route('logout')}}">Logout</a>

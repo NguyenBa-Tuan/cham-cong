@@ -21,8 +21,12 @@
         <input type="date" placeholder="address" name="dayOfJoin" value="{{$user->dayOfJoin}}">
     </div>
     <div>
-        <label>Level</label>
-        <input type="text" placeholder="address" name="level" value="{{$user->level}}">
+        <label for="role">Level</label>
+        <select id="role" name="level">
+            @foreach($levels as $key=>$level)
+                <option value="{{$key}}">{{$level}}</option>
+            @endforeach
+        </select>
     </div>
     <button type="submit">Change</button>
 </form>

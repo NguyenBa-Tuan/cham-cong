@@ -29,14 +29,19 @@
         <input type="text" placeholder="phone" name="phone">
     </div>
     <div>
-        <label>Level</label>
-        <input type="text" placeholder="level" name="level">
+        <label>Role</label>
+        <select id="role" name="role">
+            @foreach($roles as $key=>$role)
+                <option value="{{$key}}">{{$role}}</option>
+            @endforeach
+        </select>
     </div>
     <div>
-        <label for="role">Role</label>
-        <select id="role" name="role">
-            <option value="0">Admin</option>
-            <option value="1">User</option>
+        <label for="role">Level</label>
+        <select id="role" name="level">
+            @foreach($levels as $key=>$level)
+                <option value="{{$key}}">{{$level}}</option>
+            @endforeach
         </select>
     </div>
 

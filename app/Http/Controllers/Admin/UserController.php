@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\UserLevel;
+use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -19,7 +21,10 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('admin.user.create');
+        $levels = UserLevel::toSelectArray();
+        $roles = UserRole::toSelectArray();
+//        dd(UserLevel::toSelectArray());
+        return view('admin.user.create', compact('levels', 'roles'));
     }
 
     public function store(Request $request)
@@ -41,7 +46,7 @@ class UserController extends Controller
 
     public function editPassword($id)
     {
-        $user=User::findOrFail($id);
+        $user = User::findOrFail($id);
         return view('user.password.edit', compact('user'));
     }
 
@@ -54,13 +59,11 @@ class UserController extends Controller
             'password' => 'required|confirmed|min:8',
         ]);
 
-
         $resetPassword->password = $request->password;
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             echo 'false';
-        }
-        else{
+        } else {
             $resetPassword->save();
             return redirect()->route('adminUserIndex');
         }
