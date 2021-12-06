@@ -39,4 +39,9 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($value);
     }
+
+    public function timesheet()
+    {
+        return $this->hasOne('App\Models\Timesheet');
+    }
 }

@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('page')
     <div class="container">
         <div class="card bg-light mt-3">
@@ -11,9 +12,26 @@
                     <input type="file" name="file" class="form-control">
                     <br>
                     <button class="btn btn-success">Import User Data</button>
-                    <a class="btn btn-warning" href="{{ route('time_keeping_export') }}">Export User Data</a>
+                    {{--                    <a class="btn btn-warning" href="{{ route('time_keeping_export') }}">Export User Data</a>--}}
                 </form>
             </div>
         </div>
+    </div>
+    <div class="container">
+        <table class="table table-bordered">
+
+{{--            <tr>--}}
+{{--                @foreach($datas as $d)--}}
+{{--                    <td>{{$d->date}}</td>--}}
+{{--                @endforeach--}}
+{{--            </tr>--}}
+{{--            <tr>--}}
+{{--                @foreach($datas as $d)--}}
+{{--                    <td>{{\App\Enums\Day::getDescription($d->day->day)}}</td>--}}
+{{--                @endforeach--}}
+{{--            </tr>--}}
+
+
+        </table>
     </div>
 @endsection

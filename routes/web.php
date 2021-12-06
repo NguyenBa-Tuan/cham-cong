@@ -37,7 +37,6 @@ Route::middleware('checkLogin')->group(function () {
     Route::middleware('checkAdmin')->group(function () {
         Route::get('/admin', [AdminController::class, 'index'])->name('admin_index');
         Route::get('/admin/users', [UserController::class, 'index'])->name('adminUserIndex');
-
     });
 });
 
@@ -46,6 +45,6 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login_check');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/timekeeping', [TimeKeepingController::class, 'index']);
-Route::get('/timekeeping/export', [TimeKeepingController::class, 'export'])->name('time_keeping_export');
-Route::post('/timekeeping/import', [TimeKeepingController::class, 'import'])->name('time_keeping_import');
+Route::get('/timekeeping', [TimeKeepingController::class, 'index'])->name('time_keeping');
+//Route::get('/timekeeping/export', [TimeKeepingController::class, 'export'])->name('time_keeping_export');
+Route::post('/timekeeping/', [TimeKeepingController::class, 'import'])->name('time_keeping_import');
