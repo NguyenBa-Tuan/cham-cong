@@ -11,7 +11,8 @@ class Timesheet extends Model
 
     protected $fillable = [
         'date',
-//        'day_id',
+        'user_id',
+        'data',
 //        'type',
 //        'note',
     ];
