@@ -1,4 +1,5 @@
 <a href="{{route('user_edit')}}">Edit</a>
+<a href="{{route('user_timesheet')}}" style="margin-left: 20px">Timesheet</a>
 <p>{{$user->name}}</p>
 <p>{{$user->phone}}</p>
 <p>{{$user->address}}</p>

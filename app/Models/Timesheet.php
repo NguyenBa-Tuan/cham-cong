@@ -13,17 +13,21 @@ class Timesheet extends Model
         'date',
         'user_id',
         'data',
-//        'type',
-//        'note',
+        'note_id',
+        'month_id',
     ];
 
-//    public function user()
-//    {
-//        return $this->belongsTo('App\Models\User', 'user_id');
-//    }
+    protected $hidden = [
+        'id',
+    ];
 
-//    public function day()
-//    {
-//        return $this->belongsTo('App\Models\Day', 'day_id');
-//    }
+    public function user()
+    {
+        return $this->belongsTo("App\Models\User", 'user_id');
+    }
+
+    public function note()
+    {
+        return $this->belongsTo('App\Models\Note', 'note_id');
+    }
 }

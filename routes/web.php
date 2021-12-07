@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\TimeKeepingController;
+use App\Http\Controllers\User\UserTimeKeepingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::middleware('checkLogin')->group(function () {
         Route::get('/user', [\App\Http\Controllers\UserController::class, 'index'])->name('user_index');
         Route::get('/user/edit', [\App\Http\Controllers\UserController::class, 'edit'])->name('user_edit');
         Route::post('/user/edit', [\App\Http\Controllers\UserController::class, 'update'])->name('user_update');
+        Route::get('/user/timesheet', [UserTimeKeepingController::class, 'index'])->name('user_timesheet');
 
     });
 
@@ -46,6 +48,7 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login_check');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/timekeeping', [TimeKeepingController::class, 'index'])->name('time_keeping');
+Route::get('/timekeeping', [TimeKeepingController::class, 'index']);
+Route::get('/timekeeping/import', [TimeKeepingController::class, 'import'])->name('time_keeping');
+Route::post('/timekeeping/import', [TimeKeepingController::class, 'upload'])->name('time_keeping_import');
 //Route::get('/timekeeping/export', [TimeKeepingController::class, 'export'])->name('time_keeping_export');
-Route::post('/timekeeping/', [TimeKeepingController::class, 'import'])->name('time_keeping_import');

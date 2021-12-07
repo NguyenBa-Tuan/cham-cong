@@ -5,18 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Day extends Model
+class Month extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
-
     protected $fillable = [
-        'day',
+        'month',
     ];
-
-    public function daySheet()
-    {
-        return $this->hasOne('App\Models\TimeSheet');
-    }
 }

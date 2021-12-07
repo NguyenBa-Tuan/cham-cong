@@ -3,28 +3,32 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\TimeSheetImport;
 use App\Models\Timesheet;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 
 class TimeKeepingController extends Controller
 {
     public function index()
     {
-        $datas = Timesheet::all();
-        return view('admin.timekeeping.index', compact('datas'));
+        $users=User::all();
+        return view('admin.timekeeping.index', compact('users'));
     }
-//
-//    public function export()
-//    {
-//        return Excel::download(new T(), 'cham-cong.xlsx');
-//    }
 
     public function import()
+    {
+        return view('admin.timekeeping.create');
+    }
+
+    public function upload()
     {
         Excel::import(new TimeSheetImport(), request()->file('file'));
         return redirect()->route('time_keeping');
     }
+
+//    public function export()
+//    {
+//        return Excel::download(new T(), 'cham-cong.xlsx');
+//    }
 }

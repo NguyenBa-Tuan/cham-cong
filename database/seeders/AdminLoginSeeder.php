@@ -14,12 +14,14 @@ class AdminLoginSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-    		'name'=>'daudangtung',
-    		'email'=>'daudangtung@gmail.com',
-    		'role'=>0,
-    		'level'=>1,
-    		'password'=>bcrypt('11111111'),
-    	]);
+        DB::table('users')->insert(
+            [
+                'name' => 'daudangtung',
+                'email' => 'daudangtung@gmail.com',
+                'role' => 0,
+                'level' => 1,
+                'password' => bcrypt('11111111'),
+            ],
+        );
     }
 }

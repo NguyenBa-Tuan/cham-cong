@@ -2,16 +2,12 @@
 
 namespace App\Imports;
 
+use App\Models\Note;
 use App\Models\Timesheet;
-use App\Models\Employee;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
-use App\Models\Status;
-use PhpOffice\PhpSpreadsheet\Calculation\DateTime;
 
 class TimesheetImport implements ToCollection
 {
@@ -44,26 +40,34 @@ class TimesheetImport implements ToCollection
         foreach ($collection as $key => $row) {
             if ($key >= 8 && $row[0]) {
                 $name = $row[1];
+                $note = $row[40];
                 $users = User::where('name', $name)->first();
+                if ($users) {
+                    Note::create([
+                        'note' => $row[40],
+                    ]);
 
-                foreach ($arrDate as $key => $item) {
-                    if ($users) {
+                    $notes = Note::where('note', $note)->first();
+
+                    foreach ($arrDate as $key => $item) {
                         Timesheet::create([
                             'user_id' => $users->id,
                             'date' => $item,
                             'data' => $row[$key],
+                            'note_id' => $notes->id,
+                            'month_id' => 1,
                         ]);
                     }
                 }
             }
 
 
-            foreach ($dataInsert as $key => $value) {
-//            print_r("<p>" . $key . "</p>");
-                Status::create([
-                    'status' => $value,
-                ]);
-            }
+//            foreach ($dataInsert as $key => $value) {
+////            print_r("<p>" . $key . "</p>");
+//                Status::create([
+//                    'status' => $value,
+//                ]);
+//            }
 
 //        $users = User::all();
 //        foreach ($users as $user) {
