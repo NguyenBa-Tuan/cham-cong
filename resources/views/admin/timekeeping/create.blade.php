@@ -11,11 +11,14 @@
                     @csrf
                     <input type="file" name="file" class="form-control">
                     <br>
-                    {{--                    <input type="month" name="month">--}}
+                    <input type="month" name="month" class="form-control">
+{{--                    <br>--}}
                     <button class="btn btn-success">Import User Data</button>
                     {{--                    <a class="btn btn-warning" href="{{ route('time_keeping_export') }}">Export User Data</a>--}}
                 </form>
             </div>
         </div>
     </div>
+
+    <a href="{{route('time_keeping_index')}}">Back to timekeeping sheet</a>
 @endsection

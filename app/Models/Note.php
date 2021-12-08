@@ -17,6 +17,6 @@ class Note extends Model
 
     public function noteTimesheet()
     {
-        return $this->hasMany('App\Models\Note');
+        return $this->hasMany('App\Models\Timesheet');
     }
 }

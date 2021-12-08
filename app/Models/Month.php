@@ -12,4 +12,9 @@ class Month extends Model
     protected $fillable = [
         'month',
     ];
+
+    public function monthTimesheet()
+    {
+        return $this->hasOne('App\Models\Timesheet');
+    }
 }

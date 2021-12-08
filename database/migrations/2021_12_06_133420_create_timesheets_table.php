@@ -12,7 +12,7 @@ class CreateTimesheetsTable extends Migration
             $table->id();
             $table->date('date');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('month_id')->nullable();
+            $table->unsignedInteger('month_id');
             $table->unsignedInteger('note_id')->nullable();
             $table->string('data')->nullable();
             $table->timestamps();

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Month;
 use App\Models\Note;
 use App\Models\Timesheet;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserTimeKeepingController extends Controller
 {
@@ -18,10 +20,40 @@ class UserTimeKeepingController extends Controller
 
     public function index()
     {
-        $d = Auth::user()->id;
-        $data = User::where('id', $d)->get();
-        $check=Timesheet::where('user_id', $d)->first();
+        $month = Month::all();
+        return view('user.timesheet.index', compact('month'));
+    }
 
-        return view('user.timesheet.index', compact('data', 'check'));
+    public function show($id)
+    {
+        $checkID = Auth::user()->id;
+
+        $month = Month::findOrFail($id);
+        $month_get = $month->month;
+        $from = $month_get . '-01';
+        $to = $month_get . '-' . Carbon::parse($month_get)->daysInMonth;
+
+        $begin = new \DateTime($from);
+        $end = new \DateTime($to);
+        $arrDate = [];
+        $key = 0;
+        for ($i = $begin; $i <= $end; $i->modify('+1 day')) {
+            $arrDate[$key] = $i->format("Y-m-d");
+            $key++;
+        }
+
+        $data = DB::table('timesheets')
+            ->where('user_id', '=', $checkID)
+            ->where('month_id', '=', $month->id)
+            ->get();
+
+        $note = DB::table('timesheets')
+            ->join('notes', 'timesheets.note_id', '=', 'notes.id')
+            ->join('users','timesheets.user_id', '=', 'users.id')
+            ->where('timesheets.user_id', '=', $checkID)
+            ->where('timesheets.month_id', '=', $id)
+            ->select('notes.note')
+            ->first();
+        return view('user.timesheet.show', compact('arrDate', 'month', 'data', 'note'));
     }
 }

@@ -1,23 +1,15 @@
 @extends('layouts.app')
 @section('page')
     <table class="table table-bordered">
-
-        @foreach($data as $d)
-
-            <tr>
-                @foreach($d->timesheet->pluck('date') as $date)
-                    <td> {{$date}}</td>
-                @endforeach
-            </tr>
-            <tr>
-                @foreach($d->timesheet->pluck('data') as $data)
-                    <td>{{$data ?? 'null'}}</td>
-                @endforeach
+        <tr>
+            @foreach($month as $m)
                 <td>
-                    {{$check->note->note}}
+                    <a href="{{route('user_timesheet_show', $m->id)}}">
+                        {{$m->month}}
+                    </a>
                 </td>
-            </tr>
-        @endforeach
+            @endforeach
+        </tr>
     </table>
     <a href="{{route('user_index')}}">Back to Dashboard</a>
 @endsection

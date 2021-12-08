@@ -26,8 +26,13 @@ class Timesheet extends Model
         return $this->belongsTo("App\Models\User", 'user_id');
     }
 
-    public function note()
+    public function notes()
     {
         return $this->belongsTo('App\Models\Note', 'note_id');
+    }
+
+    public function month()
+    {
+        return $this->belongsTo('App\Models\Month', 'month_id');
     }
 }
