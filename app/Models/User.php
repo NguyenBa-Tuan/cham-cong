@@ -44,4 +44,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Timesheet');
     }
+
+    public function overtime()
+    {
+        return $this->hasMany('App\Models\Overtime');
+    }
 }

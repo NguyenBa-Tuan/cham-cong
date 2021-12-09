@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Month;
-use App\Models\Note;
 use App\Models\Timesheet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -15,6 +14,11 @@ use App\Models\User;
 
 class TimeKeepingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkAdmin');
+    }
+
     public function index()
     {
         $month = Month::all();
