@@ -4,8 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Month;
-use App\Models\Note;
-use App\Models\Timesheet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,8 +50,8 @@ class UserTimeKeepingController extends Controller
             ->join('users','timesheets.user_id', '=', 'users.id')
             ->where('timesheets.user_id', '=', $checkID)
             ->where('timesheets.month_id', '=', $id)
-            ->select('notes.note')
-            ->first();
+            ->select('notes.note')->distinct()
+            ->get();
         return view('user.timesheet.show', compact('arrDate', 'month', 'data', 'note'));
     }
 }

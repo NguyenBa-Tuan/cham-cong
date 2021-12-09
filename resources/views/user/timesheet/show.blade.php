@@ -18,7 +18,9 @@
                 <td>{{$d->data}}</td>
             @endforeach
             <td>
-                {{$note->note}}
+                @foreach($note as $n)
+                    {{$n->note}}
+                @endforeach
             </td>
         </tr>
     </table>

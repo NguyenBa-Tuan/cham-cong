@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Month;
+use App\Models\Note;
 use App\Models\Timesheet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -36,16 +37,16 @@ class TimeKeepingController extends Controller
             $arrDate[$key] = $i->format("Y-m-d");
             $key++;
         }
+
         $users = User::all();
-
-//        $data = DB::table('timesheets')
-//            ->join('months', 'timesheets.id', '=', 'months.id')
-//            ->where('months.id', '=', $month)
-//            ->select('timesheets.data')
-//            ->get();
-
-        $data = Timesheet::where('month_id', $id)->get();
-        return view('admin.timekeeping.show', compact('month', 'arrDate', 'users', 'data'));
+        $data = Timesheet::with('notes')->where('month_id', $id)->get();
+        $note = DB::table('notes')
+            ->join('timesheets', 'notes.id', '=', 'timesheets.note_id')
+            ->select('notes.note', 'timesheets.month_id', 'timesheets.user_id')
+            ->where('timesheets.month_id', '=', $id)
+            ->distinct()
+            ->get();
+        return view('admin.timekeeping.show', compact('month', 'arrDate', 'users', 'data', 'note'));
     }
 
     public function import()
