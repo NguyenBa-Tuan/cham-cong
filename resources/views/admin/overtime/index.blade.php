@@ -1,18 +1,17 @@
 @extends('layouts.app')
 @section('page')
     <div class="container">
-        <div class="input-group mb-3">
-            <select class="custom-select" id="inputGroupSelect02">
-                <option selected>Choose...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-            <div class="input-group-append">
-                <label class="input-group-text" for="inputGroupSelect02">Select month</label>
+        <div class="dropdown">
+            <input class="text-box" type="text" placeholder="Select on" readonly>
+            <div class="options">
+                @foreach($monthList as $monthItem)
+                    <div class="items">
+                        <a href="{{route('overtime_index_mount', $monthItem->collect)}}"
+                           onclick="show('{{$monthItem->collect}}')">{{$monthItem->collect}}</a>
+                    </div>
+                @endforeach
             </div>
         </div>
-
         <table class="table table-bordered">
             <tr>
                 <td>User</td>

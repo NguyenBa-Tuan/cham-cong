@@ -38,9 +38,9 @@ Route::middleware('checkLogin')->group(function () {
         Route::get('/user/timesheet/show/{id}', [UserTimeKeepingController::class, 'show'])->name('user_timesheet_show');
 
         Route::get('/user/overtime', [UserOverTimeController::class, 'index'])->name('user_overtime');
-        Route::get('/user/overtime/show/{id}', [UserOverTimeController::class, 'show'])->name('user_overtime_show');
         Route::get('/user/overtime/create', [UserOverTimeController::class, 'create'])->name('user_overtime_create');
         Route::post('/user/overtime/create', [UserOverTimeController::class, 'store'])->name('user_overtime_store');
+        Route::get('/user/overtime/{month}', [UserOverTimeController::class, 'mount'])->name('user_overtime_show');
     });
 
     Route::middleware('checkAdmin')->group(function () {
@@ -58,7 +58,7 @@ Route::middleware('checkLogin')->group(function () {
         Route::get('/admin/overtime/edit/{id}', [OvertimeController::class, 'edit'])->name('overtime_index_edit');
         Route::post('/admin/overtime/edit/{id}', [OvertimeController::class, 'update'])->name('overtime_index_update');
 
-        Route::get('/admin/overtime/collect', [OvertimeController::class, 'mount'])->name('overtime_index_mount');
+        Route::get('/admin/overtime/{month}', [OvertimeController::class, 'mount'])->name('overtime_index_mount');
         //Route::get('/timekeeping/export', [TimeKeepingController::class, 'export'])->name('time_keeping_export');
     });
 });

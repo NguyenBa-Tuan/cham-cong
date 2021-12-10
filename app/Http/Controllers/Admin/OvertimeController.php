@@ -17,40 +17,30 @@ class OvertimeController extends Controller
 
     public function index()
     {
-        $data = Overtime::whereMonth('date', Carbon::now()->month)->get();
-        $month = DB::table('overtimes')->select('date')->get();
-        return view('admin.overtime.index', compact('data', 'month'));
-    }
-
-    public function mount()
-    {
-        $data = Overtime::all();
-        $month = DB::table('overtimes')->select('date')->get();
-
         $monthList = DB::table('overtimes')
-            ->select('date')
+            ->select(DB::raw('DATE_FORMAT(date, "%m-%Y") as collect'))
+            ->orderBy('collect', 'ASC')
+            ->distinct()
             ->get();
 
-        foreach ($monthList as $m) {
-            $date = date_create_from_format('Y-m-d', $m->date);
-            $arr = array(
-                (int)$date->format('Y'),
-                (int)$date->format('m'),
-                (int)$date->format('d'),
-            );
+        $data = Overtime::whereMonth('date', Carbon::now()->month)
+            ->whereYear('date', Carbon::now()->year)
+            ->get();
 
-            foreach ($arr->unique('value') as $key => $value) {
-                if ($key == 1) {
-                    print_r("<p>" . $value . "</p>");
-                }
-            }
-        }
+        return view('admin.overtime.index', compact('data', 'monthList'));
+    }
 
-//        foreach ($monthList->unique(Carbon::parse(date('M'))->month) as $m) {
-//            print_r("<p>" . \Carbon\Carbon::parse($m->date)->month . "</p>");
-//        }
+    public function mount($month)
+    {
+        $monthList = DB::table('overtimes')
+            ->select(DB::raw('DATE_FORMAT(date, "%m-%Y") as collect'))
+            ->orderBy('collect', 'DESC')
+            ->distinct()
+            ->get();
 
-        return view('admin.overtime.show', compact('data', 'month'));
+        $data = DB::table('overtimes')->where(DB::raw('DATE_FORMAT(date, "%m-%Y")'), $month)->get();
+
+        return view('admin.overtime.show', compact('data', 'month', 'monthList'));
     }
 
     public function edit($id)

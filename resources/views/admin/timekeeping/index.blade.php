@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('page')
+
     <table class="table">
         <tr>
             @foreach($month as $m)

@@ -12,15 +12,20 @@
                     <label for="date">Date</label>
                     <input type="date" class="form-control" id="date" name="date">
                 </div>
-                <div class="form-group">
-                    <label for="checkin">Check in</label>
-                    <input type="datetime-local" class="form-control" id="checkin" name="checkin">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="checkin">Check in</label>
+                            <input type="datetime-local" class="form-control" id="checkin" name="checkin">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="checkout">Check out</label>
+                            <input type="datetime-local" class="form-control" id="checkout" name="checkout">
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="checkout">Check out</label>
-                    <input type="datetime-local" class="form-control" id="checkout" name="checkout">
-                </div>
-
                 <div class="form-group">
                     <label for="">Note</label>
                     <textarea class="form-control" id="" rows="3" name="note"></textarea>
@@ -28,5 +33,6 @@
                 <button class="btn btn-primary" type="submit" style="width: 100%; margin-top: 1rem">Submit form</button>
             </form>
         </div>
+        <a href="{{route('user_overtime')}}">Back to overtime dashboard</a>
     </div>
 @endsection
