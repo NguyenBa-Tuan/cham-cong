@@ -1,9 +1,8 @@
 @extends('layouts.app')
 @section('page')
-
     <table class="table table-bordered">
         <tr>
-            <td rowspan="2">{{$month->month}}</td>
+            <td rowspan="2">{{date('m/Y', strtotime($month->month))}}</td>
             @foreach($arrDate as $key=>$value)
                 <td>{{Carbon\Carbon::parse($value)->day}}</td>
             @endforeach

@@ -2,7 +2,6 @@
 
 namespace App\Imports;
 
-use App\Models\Month;
 use App\Models\Note;
 use App\Models\Timesheet;
 use App\Models\User;
@@ -13,6 +12,8 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 
 class TimesheetImport implements ToCollection
 {
+    public $check = false;
+
     public function collection(Collection $collection)
     {
         $d = DB::table('months')->latest('created_at')->first();
@@ -30,19 +31,21 @@ class TimesheetImport implements ToCollection
             $arrDate[$key] = $i->format("Y-m-d");
             $key++;
         }
-
         foreach ($collection as $key => $row) {
             if ($key >= 8 && $row[0]) {
-
                 $name = $row[1];
                 $note = $row[40];
+
                 $users = User::where('name', $name)->first();
 
                 if ($users) {
+                    $this->check = true;
+
                     Note::create([
                         'note' => $row[40],
                     ]);
                     $notes = Note::where('note', $note)->first();
+
                     foreach ($arrDate as $key => $item) {
                         Timesheet::create([
                             'user_id' => $users->id,
@@ -53,7 +56,12 @@ class TimesheetImport implements ToCollection
                         ]);
                     }
                 }
+                else{
+                    return 1;
+                }
             }
         }
     }
+
 }
+

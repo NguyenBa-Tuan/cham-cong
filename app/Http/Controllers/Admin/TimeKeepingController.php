@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\TimeSheetImport;
 use App\Models\User;
+use App\Http\Requests\ImportExcelRequest;
+use Exception;
 
 class TimeKeepingController extends Controller
 {
@@ -58,18 +60,21 @@ class TimeKeepingController extends Controller
         return view('admin.timekeeping.create');
     }
 
-    public function upload(Request $request)
+    public function upload(ImportExcelRequest $request)
     {
-        $create = new Month;
-        $create->month = $request->month;
-        $create->save();
-
-        Excel::import(new TimeSheetImport(), request()->file('file'));
-        return redirect()->route('time_keeping_index');
+        DB::beginTransaction();
+        try {
+            $create = new Month;
+            $create->month = $request->month;
+            $create->save();
+Carbon::create();
+            $d=Excel::import(new TimeSheetImport(), request()->file('file'));
+            dd($d);
+            DB::commit();
+            return redirect()->route('time_keeping_create')->with('message', __('Upload bảng chấm công thành công!'));
+        } catch (Exception $exception) {
+            DB::rollBack();
+            throw new Exception($exception->getMessage());
+        }
     }
-
-//    public function export()
-//    {
-//        return Excel::download(new T(), 'cham-cong.xlsx');
-//    }
 }
