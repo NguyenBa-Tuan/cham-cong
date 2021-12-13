@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\UserLevel;
 use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterFormRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
@@ -15,7 +16,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(8);
         return view('admin.user.index', compact('users'));
     }
 
@@ -23,11 +24,10 @@ class UserController extends Controller
     {
         $levels = UserLevel::toSelectArray();
         $roles = UserRole::toSelectArray();
-//        dd(UserLevel::toSelectArray());
         return view('admin.user.create', compact('levels', 'roles'));
     }
 
-    public function store(Request $request)
+    public function store(RegisterFormRequest $request)
     {
         $createUser = new User;
         $createUser->name = $request->name;
@@ -40,8 +40,9 @@ class UserController extends Controller
         $createUser->role = $request->role;
         $createUser->level = $request->level;
         $createUser->save();
+
         Mail::to($createUser['email'])->send(new WelcomeMail($createUser));
-        return redirect()->route('adminUserIndex');
+        return redirect()->route('adminUserIndex')->with('message', __('Đăng ký tài khoản thành công!'));
     }
 
     public function editPassword($id)

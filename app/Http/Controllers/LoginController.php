@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserRole;
+use App\Http\Requests\LoginFormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -21,7 +22,7 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request)
+    public function login(LoginFormRequest $request)
     {
         $login = $request->validate([
             'email' => 'required',
@@ -34,6 +35,8 @@ class LoginController extends Controller
             } else {
                 return redirect()->route('user_index');
             }
+        } else {
+            return redirect()->route('login')->with('alert', __('Email hoặc mật khẩu nhập vào không đúng, xin mời nhập lại!'));
         }
         return redirect("login");
     }

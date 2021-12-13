@@ -24,6 +24,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/*login*/
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login_check');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
 Route::get('/password/{id}', [UserController::class, 'editPassword'])->name('userEditPassword');
 Route::post('/password/{id}', [UserController::class, 'updatePassword'])->name('userUpdatePassword');
 
@@ -72,7 +77,3 @@ Route::middleware('checkLogin')->group(function () {
     });
 });
 
-/*login*/
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class, 'login'])->name('login_check');
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

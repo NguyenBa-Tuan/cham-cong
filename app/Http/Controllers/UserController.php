@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditUserFormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Enums\UserLevel;
-use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -27,7 +27,7 @@ class UserController extends Controller
         return view('user.edit', compact('user', 'levels'));
     }
 
-    public function update(Request $request)
+    public function update(EditUserFormRequest $request)
     {
         $user = Auth::user();
         $user->name = $request->name;
