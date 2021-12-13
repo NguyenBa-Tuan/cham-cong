@@ -67,11 +67,17 @@ class TimeKeepingController extends Controller
             $create = new Month;
             $create->month = $request->month;
             $create->save();
-Carbon::create();
-            $d=Excel::import(new TimeSheetImport(), request()->file('file'));
-            dd($d);
-            DB::commit();
-            return redirect()->route('time_keeping_create')->with('message', __('Upload bảng chấm công thành công!'));
+
+            $data = new TimeSheetImport;
+            Excel::import($data, request()->file('file'));
+
+            if ($data->check == false) {
+                DB::rollBack();
+                return redirect()->route('time_keeping_create')->with('warning', __('Có lỗi trong khi upload: số lượng nhân viên trong file excel không bằng số lượng nhân viên có trong data!'));
+            } else {
+                DB::commit();
+                return redirect()->route('time_keeping_create')->with('message', __('Upload bảng chấm công thành công!'));
+            }
         } catch (Exception $exception) {
             DB::rollBack();
             throw new Exception($exception->getMessage());

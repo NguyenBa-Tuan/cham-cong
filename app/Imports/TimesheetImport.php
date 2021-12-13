@@ -44,6 +44,7 @@ class TimesheetImport implements ToCollection
                     Note::create([
                         'note' => $row[40],
                     ]);
+
                     $notes = Note::where('note', $note)->first();
 
                     foreach ($arrDate as $key => $item) {
@@ -55,13 +56,11 @@ class TimesheetImport implements ToCollection
                             'note_id' => $notes->id,
                         ]);
                     }
-                }
-                else{
-                    return 1;
+                } else {
+                    return $this->check = false;
                 }
             }
         }
     }
-
 }
 

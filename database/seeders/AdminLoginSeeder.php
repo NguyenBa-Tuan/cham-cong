@@ -16,7 +16,7 @@ class AdminLoginSeeder extends Seeder
     {
         DB::table('users')->insert(
             [
-                'name' => 'daudangtung',
+                'name' => 'Đậu Đăng Tùng',
                 'email' => 'daudangtung@gmail.com',
                 'role' => 0,
                 'level' => 1,
