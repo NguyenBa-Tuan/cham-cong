@@ -32,31 +32,59 @@
         </table>
     </div>
     <div class="general">
-        <h3>Tổng hợp</h3>
-        <table class="tk-table">
-            <thead>
-            <tr>
-                <td class="tk-general w-105">Đủ công</td>
-                <td class="tk-general w-105">Nửa công</td>
-                <td class="tk-general w-105">Nghỉ có lương</td>
-                <td class="tk-general w-105">Nghỉ phép</td>
-                <td class="tk-general w-105">Không phép</td>
-                <td class="tk-general w-105">Tổng cộng</td>
-                <td class="tk-general w-283">Ghi chú</td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td class="tk-data-general">22</td>
-                <td class="tk-data-general">22</td>
-                <td class="tk-data-general">22</td>
-                <td class="tk-data-general">22</td>
-                <td class="tk-data-general">22</td>
-                <td class="tk-data-general bg-light-green">22</td>
-                <td class="tk-data-general"></td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-md-3">
+                <h3>Ký hiệu chấm công</h3>
+                <div class="row">
+                    <div class="col-md-5">
+                        <p>Đủ công</p>
+                        <p>Nửa công</p>
+                        <p>Nghỉ phép</p>
+                        <p>Nghỉ không phép</p>
+                        <p>Nghỉ có lương</p>
+                        <p>Nghỉ lễ có lương</p>
+                    </div>
+                    <div class="col-md-7">
+                        <p>X</p>
+                        <p>X/2</p>
+                        <p>P</p>
+                        <p>KP</p>
+                        <p>PL</p>
+                        <p>
+                            <div class="bg-orange"></div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h3>Tổng hợp</h3>
+                <table class="tk-table">
+                    <thead>
+                    <tr>
+                        <td class="tk-general w-105">Đủ công</td>
+                        <td class="tk-general w-105">Nửa công</td>
+                        <td class="tk-general w-105">Nghỉ có lương</td>
+                        <td class="tk-general w-105">Nghỉ phép</td>
+                        <td class="tk-general w-105">Không phép</td>
+                        <td class="tk-general w-105">Tổng cộng</td>
+                        <td class="tk-general w-283">Ghi chú</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="tk-data-general">22</td>
+                        <td class="tk-data-general">22</td>
+                        <td class="tk-data-general">22</td>
+                        <td class="tk-data-general">22</td>
+                        <td class="tk-data-general">22</td>
+                        <td class="tk-data-general bg-light-green">22</td>
+                        <td class="tk-data-general"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 
 

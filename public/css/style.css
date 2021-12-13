@@ -38,6 +38,10 @@ h3 {
     font-size: 20px;
 }
 
+p {
+    margin: 0;
+}
+
 /*wrapper*/
 .wrapper {
     display: flex;
@@ -103,6 +107,10 @@ h3 {
 }
 
 /*main*/
+.main {
+    width: calc(100% - 250px);
+}
+
 .page {
     background-color: #E8EDF4;
     padding: 40px 30px 33px;
@@ -177,6 +185,13 @@ h3 {
 
 .extra-color {
     /*background-color: #DEF5DC;*/
+}
+
+/*sign*/
+.bg-orange {
+    background-color: #F79646;
+    width: 24px;
+    height: 16px;
 }
 
 
