@@ -15,7 +15,12 @@ a:hover {
     --tk-color: #4B545C;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin: 0;
     padding: 0;
 }
@@ -42,19 +47,24 @@ p {
     margin: 0;
 }
 
+
 /*wrapper*/
+
 .wrapper {
     display: flex;
 }
 
+
 /*header*/
 
+
+/* 
 .header {
     background-color: #ffffff;
     display: flex;
     justify-content: space-between;
     padding: 25px 0;
-}
+} */
 
 .header--user a {
     color: var(--tk-color);
@@ -67,7 +77,9 @@ p {
     background-color: #DEE2E6;
 }
 
+
 /*sidebar*/
+
 .sidebar {
     width: 250px;
     height: 100vh;
@@ -106,7 +118,9 @@ p {
     color: #ffffff;
 }
 
+
 /*main*/
+
 .main {
     width: calc(100% - 250px);
 }
@@ -126,7 +140,9 @@ p {
     text-align: center;
 }
 
+
 /*table*/
+
 .general {
     margin-top: 60px;
 }
@@ -136,7 +152,8 @@ p {
     color: var(--tk-color);
 }
 
-.tk-table tr, .tk-table td {
+.tk-table tr,
+.tk-table td {
     border: 1px solid #999999;
     padding: 12px 0;
 }
@@ -144,7 +161,6 @@ p {
 .tk-title {
     font-weight: 700;
     background-color: #D0DFF5;
-
     text-align: center;
     width: 62px;
 }
@@ -187,13 +203,14 @@ p {
     /*background-color: #DEF5DC;*/
 }
 
+
 /*sign*/
+
 .bg-orange {
     background-color: #F79646;
     width: 24px;
     height: 16px;
 }
-
 
 .dropdown {
     position: relative;
