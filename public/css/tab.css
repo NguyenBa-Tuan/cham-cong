@@ -1,0 +1,36 @@
+.tab-wrapper{
+    top: 4px;
+    left: 30px;
+}
+.tab-wrapper ul{
+    /*overflow: hidden;*/
+    background: #E8EDF4;
+
+}
+.tab-wrapper ul li{
+    float: left;
+    list-style: none;
+    padding: 8px 0;
+    width: 204px;
+    text-align: center;
+}
+.tab-wrapper ul li.active{
+    background: #ffffff;
+    border-radius: 3px 3px 0 0;
+}
+.tab-wrapper ul li.active a{
+    color: #4B545C;
+    font-weight: 700;
+    font-style: normal;
+}
+.tab-wrapper ul li a{
+    color: #4B545C;
+    font-weight: 400;
+    font-style: normal;
+}
+.tab-content{
+    /*padding: 20px;*/
+}
+.tab-item{
+    display: none;
+}

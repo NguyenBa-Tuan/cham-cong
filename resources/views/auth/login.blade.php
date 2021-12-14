@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd" placeholder="Enter your password" name="password">
+                <input type="password" class="form-control" id="pwd" placeholder="●●●●●●●●" name="password">
             </div>
             @if (session()->has('alert'))
                 <div class="alert alert-danger alert-block">
