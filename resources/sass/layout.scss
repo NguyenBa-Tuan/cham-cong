@@ -1,0 +1,93 @@
+//header
+.nav-header {
+    height: 67px;
+    padding: 0 !important;
+    .pushmenu {
+        padding-left: 30px !important;
+        padding-right: 0 !important;
+        .pushmenu1 {
+            width: 26px;
+            border-bottom: 1.9px solid #4b545c;
+            margin-bottom: 9px;
+        }
+        .pushmenu2 {
+            width: 22px;
+            border-bottom: 1.9px solid #4b545c;
+            margin-bottom: 9px;
+        }
+        .pushmenu3 {
+            width: 30px;
+            border-bottom: 1.9px solid #4b545c;
+        }
+    }
+    .header-content {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: #000;
+        margin-left: 20px;
+    }
+    .username,
+    .logout {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: #4b545c !important;
+    }
+    .username {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .logout {
+        padding-left: 0 !important;
+        padding-right: 22px !important;
+    }
+    .border-right {
+        border-right: 1px solid #e8edf4;
+        height: 27px;
+        margin: auto;
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+    .nav-right {
+        .nav-link {
+            height: auto !important;
+            line-height: 18px;
+        }
+    }
+}
+
+//aside
+.aside {
+    .header {
+        font-weight: bold;
+        font-size: 22px;
+        line-height: 26px;
+        /* identical to box height */
+        color: #ffffff;
+    }
+    .brand-link {
+        height: 67px;
+        padding: 23px 35px 18px 10px !important;
+    }
+    ul {
+        padding: 35px 9px !important;
+        li {
+            .active {
+                background: #494F55 !important;
+            }
+            a {
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 21px;
+                padding: 10px 16px 13px !important;
+                background: #3B4147 !important;
+                margin-bottom: 10px !important;
+            }
+        }
+    }
+}
+
+a {
+    text-decoration: none !important;
+}
