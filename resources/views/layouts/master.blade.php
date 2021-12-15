@@ -18,9 +18,8 @@
     @include('layouts.partial.nav')
     @include('layouts.partial.aside')
     <div class="content-wrapper">
-
         @yield('content')
-    </div><!-- /.container-fluid -->
+    </div>
 </body>
 
 <script src="{{ asset('js/app.js') }}"></script>
