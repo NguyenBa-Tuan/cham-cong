@@ -14,8 +14,9 @@ class ImportExcelRequest extends FormRequest
     public function rules()
     {
         return [
-            'file' => 'required|mimes:csv,xlsx,xls',
-            'month' => 'required|date_format:Y-m',
+            'file' => 'required',
+            // 'file' => 'required|mimes:csv,xlsx,xls',
+            // 'month' => 'required|date_format:Y-m',
         ];
     }
 
@@ -24,8 +25,8 @@ class ImportExcelRequest extends FormRequest
         return [
             'file.required' => __('Chưa thêm file excel!'),
             'file.mimes' => __('Không đúng định dạng file'),
-            'month.required' => __('Chưa nhập tháng chấm công!'),
-            'month.date_format' => __('Không dúng định dạng tháng- năm')
+            // 'month.required' => __('Chưa nhập tháng chấm công!'),
+            // 'month.date_format' => __('Không dúng định dạng tháng- năm')
         ];
     }
 }

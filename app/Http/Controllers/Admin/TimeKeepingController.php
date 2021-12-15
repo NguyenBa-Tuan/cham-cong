@@ -63,20 +63,22 @@ class TimeKeepingController extends Controller
     public function upload(ImportExcelRequest $request)
     {
         DB::beginTransaction();
+
         try {
-            $create = new Month;
-            $create->month = $request->month;
-            $create->save();
+            // $create = new Month;
+            // $create->month = $request->month;
+            // $create->save();
 
             $data = new TimeSheetImport;
             Excel::import($data, request()->file('file'));
 
-            if ($data->check == false) {
+            if ($data->response) {
                 DB::rollBack();
-                return redirect()->route('time_keeping_create')->with('warning', __('Có lỗi trong khi upload: số lượng nhân viên trong file excel không bằng số lượng nhân viên có trong data!'));
+                return redirect()->route('time_keeping_index')->with('errorUser', $data->response);
             } else {
                 DB::commit();
-                return redirect()->route('time_keeping_create')->with('message', __('Upload bảng chấm công thành công!'));
+
+                return redirect()->route('time_keeping_index')->with('success', __('Upload bảng chấm công thành công!'));
             }
         } catch (Exception $exception) {
             DB::rollBack();

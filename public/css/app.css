@@ -51870,6 +51870,10 @@ a.text-muted:hover {
   color: #3f474e;
 }
 @charset "UTF-8";
+body {
+  background: #EFF2F7;
+}
+
 .nav-header {
   height: 67px;
   padding: 0 !important;
@@ -51956,6 +51960,77 @@ a {
   text-decoration: none !important;
 }
 
+label {
+  margin-bottom: 10px !important;
+}
+
+.btn {
+  font-weight: bold !important;
+  font-size: 18px !important;
+  line-height: 21px !important;
+  /* identical to box height */
+  text-align: center;
+  color: #FFFFFF !important;
+  height: 46px;
+}
+
+@media only screen and (max-width: 767px) {
+  .nav-header .header-content {
+    font-size: 14px;
+  }
+  .nav-header .pushmenu {
+    padding-left: 10px !important;
+  }
+  .nav-header .logout {
+    padding-right: 10px !important;
+  }
+  .nav-header .username,
+.nav-header .logout {
+    font-size: 14px !important;
+  }
+  .nav-header .border-right {
+    margin-right: 10px !important;
+    margin-left: 10px !important;
+  }
+}
+.myTab-content #myTab {
+  border: none;
+  padding: 5px 30px 0 30px;
+  background: #E8EDF4;
+  height: 40px;
+}
+.myTab-content .nav-link {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  color: #4B545C;
+  height: 35px;
+  background: #EFF2F7 !important;
+}
+.myTab-content .nav-link.active {
+  color: #4B545C;
+  font-weight: bold;
+  background: #ffffff !important;
+  border-bottom: #ffffff;
+}
+.myTab-content .tab-content {
+  margin: 0 30px;
+  background: #ffffff;
+}
+
+@media only screen and (max-width: 767px) {
+  .myTab-content #myTab {
+    border: none;
+    padding: 5px 0 0;
+  }
+  .myTab-content .tab-content {
+    margin: 0;
+  }
+  .myTab-content .nav-link {
+    font-size: 14px;
+  }
+}
 /*!
  * Bootstrap v5.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
