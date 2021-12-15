@@ -16,9 +16,9 @@ class LoginController extends Controller
             if (Auth::user()->role == UserRole::ADMIN) {
                 return redirect()->route('admin_index');
             } else {
-                return redirect()->route('user_index');
+                return redirect()->route('user_timesheet');
             }
-        }
+        }   
         return view('auth.login');
     }
 

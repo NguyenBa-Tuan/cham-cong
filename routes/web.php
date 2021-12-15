@@ -41,7 +41,7 @@ Route::middleware('checkLogin')->group(function () {
 
         Route::prefix('timesheet')->group(function () {
             Route::get('/', [UserTimeKeepingController::class, 'index'])->name('user_timesheet');
-            Route::get('/show/{id}', [UserTimeKeepingController::class, 'show'])->name('user_timesheet_show');
+//            Route::get('/show/{id}', [UserTimeKeepingController::class, 'show'])->name('user_timesheet_show');
         });
         Route::prefix('overtime')->group(function () {
             Route::get('/', [UserOverTimeController::class, 'index'])->name('user_overtime');

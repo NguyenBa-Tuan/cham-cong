@@ -1,3 +1,4 @@
+/*width*/
 .w-105 {
     width: 104px;
 }
@@ -6,6 +7,15 @@
     width: 281px;
 }
 
+.w-210 {
+    width: 210px;
+}
+
+.w-80 {
+    width: 80px;
+}
+
+/*background color*/
 .bg-light-green {
     background-color: #DEF5DC;
 }
@@ -14,6 +24,10 @@
     background-color: #F5D0E7;
 }
 
+<<<<<<< HEAD
+=======
+/*margin*/
+>>>>>>> 7cb24b7 (fe user)
 .mb-15 {
     margin-bottom: 15px;
 }
@@ -26,6 +40,7 @@
     margin-top: 2px !important;
 }
 
+<<<<<<< HEAD
 .mt-60{
     margin-top: 60px;
 }
@@ -46,6 +61,55 @@
     color: #000000;
 }
 
+=======
+.mt-60 {
+    margin-top: 60px;
+}
+
+.mx-auto {
+    margin: 0 auto;
+}
+
+/*padding*/
+
+/*font weight*/
+.font-400 {
+    font-weight: 400;
+}
+
+.font-700 {
+    font-weight: 700;
+}
+
+/*font-size*/
+.f-14 {
+    font-size: 14px;
+}
+
+.f-16 {
+    font-size: 16px;
+}
+
+.f-18 {
+    font-size: 18px;
+}
+
+/*line height*/
+.line-h-16 {
+    line-height: 16px;
+}
+
+.line-h-14 {
+    line-height: 14px;
+}
+
+.line-h-21 {
+    line-height: 21px;
+}
+
+/*another atomic css*/
+
+>>>>>>> 7cb24b7 (fe user)
 .relative {
     position: relative;
 }
@@ -54,6 +118,12 @@
     position: absolute;
 }
 
+<<<<<<< HEAD
+=======
+.text-center {
+    text-align: center;
+}
+>>>>>>> 7cb24b7 (fe user)
 
 /*custom form-bootstrap-4*/
 
@@ -74,7 +144,11 @@ input[type=number]:focus,
 }
 
 .form-group textarea {
+<<<<<<< HEAD
     padding: 14px 15px;
+=======
+    padding: 14px 15px 13px;
+>>>>>>> 7cb24b7 (fe user)
     font-size: 16px;
     font-weight: 400;
     color: #000000;
@@ -93,6 +167,7 @@ label {
     margin-top: 20px;
 }
 
+<<<<<<< HEAD
 .tk-btn {
     background-color: #3B89CF;
     border-radius: 3px;
@@ -101,3 +176,32 @@ label {
     padding: 13px 0 12px;
 }
 
+=======
+.form-group input {
+    padding: 14px 15px 13px !important;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+    line-height: 19px;
+}
+
+.form-group input, textarea {
+    border-radius: 3px !important;
+}
+
+/*bs4 custom form input icon right*/
+.form-control[type=date]::-webkit-inner-spin-button,
+.form-control[type=datetime-local]::-webkit-inner-spin-button,
+.form-control[type=date]::-webkit-outer-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0;
+}
+
+input[type=date]::-webkit-calendar-picker-indicator, input[type=datetime-local]::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+    z-index: -1;
+    position: relative;
+    transform: translateX(16px);
+}
+>>>>>>> 7cb24b7 (fe user)

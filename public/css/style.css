@@ -58,7 +58,7 @@ p {
 /*header*/
 
 
-/* 
+/*
 .header {
     background-color: #ffffff;
     display: flex;
@@ -142,7 +142,6 @@ p {
 
 
 /*table*/
-
 .general {
     margin-top: 60px;
 }
@@ -152,8 +151,7 @@ p {
     color: var(--tk-color);
 }
 
-.tk-table tr,
-.tk-table td {
+.tk-table tr, .tk-table td {
     border: 1px solid #999999;
     padding: 12px 0;
 }
@@ -163,6 +161,8 @@ p {
     background-color: #D0DFF5;
     text-align: center;
     width: 62px;
+    font-size: 14px;
+    line-height: 16px;
 }
 
 .tk-date {
@@ -213,13 +213,22 @@ p {
     height: 16px;
 }
 
+<<<<<<< HEAD
 
+=======
+.general--sign p {
+    padding-bottom: 10px;
+    font-weight: 400;
+    font-size: 16px;
+    font-style: normal;
+>>>>>>> 7cb24b7 (fe user)
 }
 
 /*tk-search*/
 .tk-search-btn {
     width: 114px;
 }
+<<<<<<< HEAD
 
 .tk-select {
     width: 100%;
@@ -240,6 +249,52 @@ p {
 .tk-select:focus {
     outline: none;
 }
+=======
+
+.tk-select {
+    width: 100%;
+    padding: 10px 10px 11px;
+    border: 1px solid #CED4DA;
+    border-radius: 3px;
+    color: #333333;
+    font-weight: 500;
+    /*-webkit-appearance: none; !*icon select default*!*/
+    background: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='%23000000' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>") no-repeat;
+    background-position: calc(100% - 7px) center !important;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+
+}
+
+.tk-select:focus {
+    outline: none;
+}
+
+/*form*/
+>>>>>>> 7cb24b7 (fe user)
 
 /*form*/
 
+<<<<<<< HEAD
+=======
+.options .items:hover {
+    background-color: white;
+}
+
+.tk-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #1F232E;
+}
+
+.tk-btn {
+    background-color: #3B89CF;
+    border-radius: 3px;
+    color: #ffffff;
+    text-align: center;
+    padding: 13px 0 12px;
+}
+
+/*icon input form*/
+>>>>>>> 7cb24b7 (fe user)

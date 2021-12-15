@@ -4,6 +4,7 @@
     <div class="tab-wrapper absolute">
         <ul class="tab">
             <li>
+<<<<<<< HEAD
                 <a href="#tab-image">Bảng chấm công làm đêm</a>
             </li>
 
@@ -13,6 +14,14 @@
                 <a href="#tab-main-info">Đăng ký làm đêm</a>
             </li>
 
+=======
+                <a href="#tab-main-info">Đăng ký làm đêm</a>
+            </li>
+
+            <li>
+                <a href="#tab-image">Bảng chấm công làm đêm</a>
+            </li>
+>>>>>>> 7cb24b7 (fe user)
         </ul>
     </div>
     <div class="tab-item" id="tab-main-info">
