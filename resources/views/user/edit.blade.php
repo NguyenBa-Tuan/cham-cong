@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.master')
 @section('page-name', 'Thông tin cá nhân')
-@section('page')
+@section('content')
     <div class="row">
         <div class="col-md-3">
             <form action="{{route('user_update')}}" method="POST">

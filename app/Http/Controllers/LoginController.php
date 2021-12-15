@@ -18,7 +18,7 @@ class LoginController extends Controller
             } else {
                 return redirect()->route('user_timesheet');
             }
-        }   
+        }
         return view('auth.login');
     }
 

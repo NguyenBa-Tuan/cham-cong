@@ -15,6 +15,10 @@
     width: 80px;
 }
 
+.w-95 {
+    width: 95px;
+}
+
 /*background color*/
 .bg-light-green {
     background-color: #DEF5DC;
@@ -24,10 +28,7 @@
     background-color: #F5D0E7;
 }
 
-<<<<<<< HEAD
-=======
 /*margin*/
->>>>>>> 7cb24b7 (fe user)
 .mb-15 {
     margin-bottom: 15px;
 }
@@ -40,28 +41,6 @@
     margin-top: 2px !important;
 }
 
-<<<<<<< HEAD
-.mt-60{
-    margin-top: 60px;
-}
-
-.w-210{
-    width: 210px;
-}
-
-.mx-auto{
-    margin: 0 auto;
-}
-
-
-.form-group input {
-    padding: 14px 15px 13px !important;
-    font-size: 16px;
-    font-weight: 400;
-    color: #000000;
-}
-
-=======
 .mt-60 {
     margin-top: 60px;
 }
@@ -79,6 +58,10 @@
 
 .font-700 {
     font-weight: 700;
+}
+
+.font-500 {
+    font-weight: 500;
 }
 
 /*font-size*/
@@ -109,7 +92,6 @@
 
 /*another atomic css*/
 
->>>>>>> 7cb24b7 (fe user)
 .relative {
     position: relative;
 }
@@ -118,90 +100,6 @@
     position: absolute;
 }
 
-<<<<<<< HEAD
-=======
 .text-center {
     text-align: center;
 }
->>>>>>> 7cb24b7 (fe user)
-
-/*custom form-bootstrap-4*/
-
-textarea:focus,
-textarea.form-control:focus,
-input.form-control:focus,
-input[type=text]:focus,
-input[type=password]:focus,
-input[type=email]:focus,
-input[type=number]:focus,
-[type=text].form-control:focus,
-[type=password].form-control:focus,
-[type=email].form-control:focus,
-[type=tel].form-control:focus,
-[contenteditable].form-control:focus {
-    box-shadow: none;
-    border: 1px solid #CED4DA;
-}
-
-.form-group textarea {
-<<<<<<< HEAD
-    padding: 14px 15px;
-=======
-    padding: 14px 15px 13px;
->>>>>>> 7cb24b7 (fe user)
-    font-size: 16px;
-    font-weight: 400;
-    color: #000000;
-}
-
-label {
-    margin-bottom: 10px;
-}
-
-.form-group {
-    margin-bottom: 30px;
-}
-
-.btn {
-    width: 100%;
-    margin-top: 20px;
-}
-
-<<<<<<< HEAD
-.tk-btn {
-    background-color: #3B89CF;
-    border-radius: 3px;
-    color: #ffffff;
-    text-align: center;
-    padding: 13px 0 12px;
-}
-
-=======
-.form-group input {
-    padding: 14px 15px 13px !important;
-    font-size: 16px;
-    font-weight: 400;
-    color: #000000;
-    line-height: 19px;
-}
-
-.form-group input, textarea {
-    border-radius: 3px !important;
-}
-
-/*bs4 custom form input icon right*/
-.form-control[type=date]::-webkit-inner-spin-button,
-.form-control[type=datetime-local]::-webkit-inner-spin-button,
-.form-control[type=date]::-webkit-outer-spin-button {
-    -webkit-appearance: none !important;
-    margin: 0;
-}
-
-input[type=date]::-webkit-calendar-picker-indicator, input[type=datetime-local]::-webkit-calendar-picker-indicator {
-    color: rgba(0, 0, 0, 0);
-    background-color: rgba(0, 0, 0, 0);
-    z-index: -1;
-    position: relative;
-    transform: translateX(16px);
-}
->>>>>>> 7cb24b7 (fe user)
