@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserLevel;
+use App\Enums\UserRole;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -18,8 +20,8 @@ class AdminLoginSeeder extends Seeder
             [
                 'name' => 'Đậu Đăng Tùng',
                 'email' => 'daudangtung@gmail.com',
-                'role' => 0,
-                'level' => 1,
+                'role' => UserRole::ADMIN,
+                'level' => UserLevel::Admin,
                 'password' => bcrypt('11111111'),
             ],
         );
@@ -27,8 +29,8 @@ class AdminLoginSeeder extends Seeder
             [
                 'name' => 'Admin',
                 'email' => 'admin@gmail.com',
-                'role' => 0,
-                'level' => 1,
+                'role' => UserRole::ADMIN,
+                'level' =>  UserLevel::Admin,
                 'password' => bcrypt('12345678'),
             ],
         );

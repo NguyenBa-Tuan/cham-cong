@@ -9,9 +9,9 @@
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/OverlayScrollbars.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/atomic.css')}}">
-
+    {{-- <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/atomic.css')}}"> --}}
+    @stack('styles')
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -24,5 +24,5 @@
 </body>
 
 <script src="{{ asset('js/app.js') }}"></script>
-
+@stack('scripts')
 </html>

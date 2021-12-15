@@ -1,3 +1,7 @@
+body {
+    background: #EFF2F7;
+}
+
 //header
 .nav-header {
     height: 67px;
@@ -90,4 +94,40 @@
 
 a {
     text-decoration: none !important;
+}
+
+label {
+    margin-bottom: 10px !important;
+}
+
+.btn {
+    font-weight: bold !important;
+    font-size: 18px !important;
+    line-height: 21px !important;
+    /* identical to box height */
+    text-align: center;
+    color: #FFFFFF !important;
+    height: 46px;
+}
+
+@media only screen and (max-width: 767px) {
+    .nav-header {
+        .header-content {
+            font-size: 14px;
+        }
+        .pushmenu {
+            padding-left: 10px !important;
+        }
+        .logout {
+            padding-right: 10px !important;
+        }
+        .username,
+        .logout {
+            font-size: 14px !important;
+        }
+        .border-right {
+            margin-right: 10px !important;
+            margin-left: 10px !important;
+        }
+    }
 }

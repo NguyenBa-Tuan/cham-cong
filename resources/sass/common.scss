@@ -1,0 +1,42 @@
+.myTab-content {
+    #myTab {
+        border: none;
+        padding: 5px 30px 0 30px;
+        background: #E8EDF4;
+        height: 40px;
+    }
+    .nav-link {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        text-align: center;
+        color: #4B545C;
+        height: 35px;
+        background: #EFF2F7 !important;
+    }
+    .nav-link.active {
+        color: #4B545C;
+        font-weight: bold;
+        background: #ffffff !important;
+        border-bottom: #ffffff;
+    }
+    .tab-content {
+        margin: 0 30px;
+        background: #ffffff;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .myTab-content {
+        #myTab {
+            border: none;
+            padding: 5px 0 0;
+        }
+        .tab-content {
+            margin: 0;
+        }
+        .nav-link {
+            font-size: 14px;
+        }
+    }
+}
