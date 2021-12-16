@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\UserLevel;
 use App\Http\Controllers\Controller;
 use App\Models\Month;
 use App\Models\Timesheet;
@@ -18,13 +19,53 @@ class TimeKeepingController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('checkAdmin');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $month = Month::all();
-        return view('admin.timekeeping.index', compact('month'));
+        if (!$request->month) $request->month = Carbon::now()->month;
+        if (!$request->year) $request->year = Carbon::now()->year;
+
+        $date = $request->year . '-' . $request->month;
+
+        $listYear = Month::select(DB::raw('SUBSTR(month, 1, 4) as year'))->groupBy('year')->pluck('year');
+
+        $listUser = User::where('level', UserLevel::Employee)->pluck('name', 'id')->toArray();
+
+        $listCheckin = Timesheet::where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date)->get();
+
+        $begin = new \DateTime($date . '-01');
+        $end   = new \DateTime($date . '-' . Carbon::parse($date)->daysInMonth);
+
+        $arrDate = [];
+        for ($i = $begin; $i <= $end; $i->modify('+1 day')) {
+            $arrDate[$i->format("Y-m-d")] = [
+                'date' => $i->format("Y-m-d"),
+                'day' => $i->format("d"),
+                'day_of_week' => $this->getDayOfWeek($i->format("Y-m-d")),
+            ];
+        }
+
+        $arrData = [];
+
+        foreach ($listCheckin as $item) {
+            $arrData[$item->user_id][$item->date] = [
+                'data' => $item->data,
+            ];
+
+            if (!isset($arrData[$item->user_id][$item->data]))
+                $arrData[$item->user_id][$item->data] = 0;
+
+            $arrData[$item->user_id][$item->data] += 1;
+            $arrData[$item->user_id]['note'] = $item->note;
+        }
+
+        return view('admin.timekeeping.index', [
+            'listYear' => $listYear,
+            'listUser' => $listUser,
+            'arrDate' => $arrDate,
+            'arrData' => $arrData,
+        ]);
     }
 
     public function show($id)
@@ -84,5 +125,20 @@ class TimeKeepingController extends Controller
             DB::rollBack();
             throw new Exception($exception->getMessage());
         }
+    }
+
+    public function getDayOfWeek($day)
+    {
+        $arr = [
+            0 => 'CN',
+            1 => 'T2',
+            2 => 'T3',
+            3 => 'T4',
+            4 => 'T5',
+            5 => 'T6',
+            6 => 'T7',
+        ];
+
+        return $arr[Carbon::parse($day)->dayOfWeek];
     }
 }
