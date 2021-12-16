@@ -1,74 +1,10 @@
 @push('styles')
     <style>
-        .w-377 {
-            width: 377px;
-        }
-
-        .main-content {
-            padding: 68px 30px;
-        }
-
-        .lFile {
-            height: 46px;
-            background: #FFFFFF;
-            border: 1px solid #CED4DA;
-            box-sizing: border-box;
-            border-radius: 3px;
-            margin: 0;
-            text-align: center;
-            line-height: 44px;
-            font-weight: 500 !important;
-            font-size: 16px;
-            text-decoration: underline;
-            color: #444444;
-            cursor: pointer;
-        }
-
-        .dFile i {
-            font-size: 14px;
-            line-height: 16px;
-            color: #555555;
-            font-weight: 400;
-            display: block;
-        }
-
-        .dFile span {
-            font-size: 16px;
-            line-height: 19px;
-            font-weight: 400;
-            color: #333333;
-            margin-left: 10px;
-        }
-
-        .mt-50 {
-            margin-top: 50px;
-        }
-
-        @media only screen and (min-width: 768px) and (max-width: 1024px)  {
-            .w-377 {
-                width: 250px !important;
-            }
-        }
-
-        @media only screen and (max-width: 767px) {
-            .dFile span {
-                display: block;
-                margin-left: 0;
-            }
-
-            .w-377 {
-                width: 100% !important;
-            }
-        }
-
-        .main-content ul {
-            margin-bottom: 0 !important;
-            padding-bottom: 0 !important;
-        }
+        
 
     </style>
 @endpush
-<div class="main-content">
+<div class="main-content main-create">
     @if ($errors->any())
         <div class="alert alert-danger w-377">
             <ul>

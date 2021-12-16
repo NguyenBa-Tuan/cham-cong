@@ -31,6 +31,11 @@ class Timesheet extends Model
         return $this->belongsTo('App\Models\Note', 'note_id');
     }
 
+    public function getNoteAttribute()
+    {
+        return Note::find($this->note_id)->note ?? '';
+    }
+
     public function month()
     {
         return $this->belongsTo('App\Models\Month', 'month_id');
