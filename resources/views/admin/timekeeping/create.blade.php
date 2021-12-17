@@ -1,8 +1,12 @@
-@extends('layouts.app')
+@push('styles')
+    <style>
+        
 
-@section('page')
+    </style>
+@endpush
+<div class="main-content main-create">
     @if ($errors->any())
-        <div class="alert alert-danger">
+        <div class="alert alert-danger w-377">
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -10,32 +14,123 @@
             </ul>
         </div>
     @endif
-    <div class="container">
-        <div class="card bg-light mt-3">
-            <div class="card-header">
-                Laravel 8 Import Export Excel to database Example - ItSolutionStuff.com
-            </div>
-            <div class="card-body">
-                <form action="{{ route('time_keeping_import') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <label for="">Excel file</label>
-                    <input type="file" name="file" class="form-control">
-                    <label for="">Month</label>
-                    <input type="month" name="month" class="form-control">
-                    <button class="btn btn-success" style="margin-top: 30px">Import User Data</button>
-                </form>
-            </div>
+    @if (session()->has('errorUser'))
+        <div class="alert alert-danger w-377">
+            <ul>
+                @isset(session('errorUser')['date_error'])
+                    <li>
+                        Bắt buộc cột tháng X5, Cột năm (AA-AB)5
+                    </li>
+                @endisset
+                @isset(session('errorUser')['date_exist'])
+                    <li>
+                        Tháng này đã được thêm
+                    </li>
+                @endisset
+            </ul>
         </div>
-    </div>
-    @if(session()->has('message'))
+    @endif
+
+    @if (session()->has('success'))
         <div class="alert alert-success">
-            {{ session()->get('message') }}
+            {{ session()->get('success') }}
         </div>
     @endif
-    @if (session()->has('warning'))
-        <div class="alert alert-warning alert-block">
-           {{ session()->get('warning')  }}
+
+
+
+    <form action="{{ route('time_keeping_import') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="dFile">
+            <label class="d-block">Dữ liệu tải lên</label>
+            <input type="file" name="file" id="file" class="w-377 d-none">
+            <label for="file" class="lFile w-377">Chọn tệp tin</label>
+            <span>
+                Chưa có tệp tin
+            </span>
+            <i>Định dạng tệp tin tải lên (.csv; .xlsx)</i>
+        </div>
+        {{-- <label for="">Month</label>
+        <input type="month" name="month" class="form-control"> --}}
+        <div>
+            <button class="btn btn-primary w-377 mt-50">Tải lên</button>
+        </div>
+    </form>
+
+    @if (session()->has('errorUser'))
+        <div class="row">
+            @isset(session('errorUser')['user_none'])
+
+                <div class="col-md-6">
+                    <div class="w-377 mt-3">
+                        <span class="alert-danger">(*) Có {{ count(session('errorUser')['user_none']) }} nhân viên không
+                            có trong database </span>
+                    </div>
+                    <table class="table w-377">
+                        <thead>
+                            <tr>
+                                <td>STT</td>
+                                <td>Nhân Viên</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php($i = 1)
+                            @foreach (session('errorUser')['user_none'] as $item)
+                                <tr>
+                                    <td>{{ $i++ }}</td>
+                                    <td>{{ $item }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endisset
+
+            @isset(session('errorUser')['user_missing'])
+                <div class="col-md-6">
+                    <div class="w-377 mt-3">
+                        <span class="alert-danger">(*) Có {{ count(session('errorUser')['user_missing']) }} nhân viên
+                            không
+                            có
+                            trong bảng chấm công</span>
+                    </div>
+                    <table class="table table-hover w-377">
+                        <thead>
+                            <tr>
+                                <td>STT</td>
+                                <td>Nhân Viên</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php($i = 1)
+                            @foreach (session('errorUser')['user_missing'] as $item)
+                                <tr>
+                                    <td>{{ $i++ }}</td>
+                                    <td>{{ $item }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endisset
         </div>
     @endif
-    <a href="{{route('time_keeping_index')}}">Back to timekeeping sheet</a>
-@endsection
+    {{-- <a href="{{ route('time_keeping_index') }}">Back to timekeeping sheet</a> --}}
+</div>
+@push('scripts')
+    <script>
+        $('input[type=file]').change(function() {
+            let file = $('input[type=file]').val().split('\\').pop();
+            let arrFile = file.split('.');
+            let type = arrFile[arrFile.length - 1];
+            if (type == 'csv' || type == 'xlsx') {
+                $('.dFile span').css('color', '#333333');
+                $('.dFile span').html(file);
+            } else {
+                $('.dFile span').css('color', 'red');
+                $('.dFile span').html('(*) file không đúng định dạng');
+                $(this).val('');
+            }
+        });
+    </script>
+@endpush

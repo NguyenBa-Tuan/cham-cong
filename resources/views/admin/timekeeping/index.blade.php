@@ -1,44 +1,56 @@
-@extends('layouts.app')
-@section('page')
-@section('page-name', 'Chấm công hành chính')
-<h2>bảng chấm công hành chính</h2>
-<div class="timekeeping-search">
-    tháng 12-năm 2021
-</div>
+@extends('admin.app')
+@section('active_time_keeping', 'active')
+@section('header_content', 'Chấm công hành chính')
+@section('title', 'Chấm công hành chính')
 
-<table class="timekeeping-table">
-    <thead>
-    <tr>
-        <td rowspan="2">STT</td>
-        <td rowspan="2">Họ tên</td>
-        <td>1</td>
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/admin/timekeeping.css')}}">
+@endpush
 
-    </tr>
-    <tr>
-        <td>2</td>
-    </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>Lê Hữu Phước</td>
-        </tr>
-    <tr>
-        <td>2</td>
-        <td>Lê Hữu Phước</td>
-    </tr>
-    </tbody>
-</table>
-
-
-<table class="table">
-    <tr>
-        @foreach($month as $m)
-            <td>
-                <a href="{{route('time_keeping_show', $m->id)}}">{{$m->month}}</a>
-            </td>
-        @endforeach
-    </tr>
-</table>
-<a href="{{route('time_keeping_create')}}">upload sheet</a>
+@section('content')
+    <div class="myTab-content">
+        @if(request()->active == 'sheet')
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                        role="tab" aria-controls="home" aria-selected="true">Tải lên bảng chấm công</button>
+                </li>                         
+                <li class="nav-item" role="presentation">
+                    
+                    <button class="nav-link active" id="sheet-tab" data-bs-toggle="tab" data-bs-target="#sheet" type="button"
+                        role="tab" aria-controls="sheet" aria-selected="false">Bảng chấm công hành chính</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade " id="home" role="tabpanel" aria-labelledby="home-tab">
+                    @include('admin.timekeeping.create')
+                </div>
+                <div class="tab-pane fade show active" id="sheet" role="tabpanel" aria-labelledby="sheet-tab">
+                    @include('admin.timekeeping.show')
+                </div>
+            </div>
+        @else
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                        role="tab" aria-controls="home" aria-selected="true">Tải lên bảng chấm công</button>
+                </li>                         
+                <li class="nav-item" role="presentation">
+                    <a href="{{ route('time_keeping_index', ['active' => 'sheet']) }}">
+                    <button class="nav-link" id="sheet-tab" data-bs-toggle="tab" data-bs-target="#sheet" type="button"
+                        role="tab" aria-controls="sheet" aria-selected="false">Bảng chấm công hành chính</button>
+                    </a>
+                </li>
+            
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    @include('admin.timekeeping.create')
+                </div>
+                <div class="tab-pane fade" id="sheet" role="tabpanel" aria-labelledby="sheet-tab">
+                    
+                </div>
+            </div>
+        @endif
+    </div>
 @endsection
