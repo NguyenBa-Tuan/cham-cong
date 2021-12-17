@@ -53,7 +53,6 @@ Route::middleware('checkLogin')->group(function () {
 
         Route::prefix('users')->group(function () {
             Route::get('/', [UserController::class, 'index'])->name('adminUserIndex');
-            Route::get('/create', [UserController::class, 'create'])->name('adminUserCreate');
             Route::post('/create', [UserController::class, 'store'])->name('adminUserStore');
         });
 
@@ -68,7 +67,6 @@ Route::middleware('checkLogin')->group(function () {
             Route::get('', [OvertimeController::class, 'index'])->name('overtime_index');
             Route::get('/edit/{id}', [OvertimeController::class, 'edit'])->name('overtime_index_edit');
             Route::post('/edit/{id}', [OvertimeController::class, 'update'])->name('overtime_index_update');
-            Route::get('/{month}', [OvertimeController::class, 'mount'])->name('overtime_index_mount');
         });
     });
 });

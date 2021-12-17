@@ -49,10 +49,6 @@ p {
 
 /*main*/
 
-.main {
-    width: calc(100% - 250px);
-}
-
 .page {
     background-color: #E8EDF4;
 
@@ -261,3 +257,30 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator, input[type="dat
     background-color: #FFFFFF;
 }
 
+/*admin pages*/
+/*user information*/
+.ad-table{
+    width: 100%;
+}
+.ad-table td, th {
+    border: 1px solid #999999;
+    color: #4B545C;
+}
+
+.ad-table th {
+    padding: 32px 0 31px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+    text-transform: uppercase;
+}
+
+.ad-table td{
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.ad-table td a{
+    color: #4B545C;
+}

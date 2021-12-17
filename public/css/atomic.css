@@ -50,6 +50,18 @@
 }
 
 /*padding*/
+.pl-10 {
+    padding-left: 10px !important;
+}
+
+.py-17{
+    padding-top: 17px;
+    padding-bottom: 17px;
+}
+
+.pl-28{
+    padding-left: 28px;
+}
 
 /*font weight*/
 .font-400 {

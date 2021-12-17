@@ -91,14 +91,14 @@
         <div class="card-body">
             <p class="content-header">BẢNG CHẤM CÔNG LÀM ĐÊM</p>
             <div class="text-center">
-                <select name="month" class="form-select form-month">
+                <select name="month" class="form-select form-month ad-ot">
                     @for ($i = 1; $i <= 12; $i++)
-                        <option value="{{ $i }}" {{ $i == request()->month ? 'selected' : '' }}>Tháng
+                        <option value="{{ $i<10 ? '0' .$i : $i }}" {{ $i == request()->month ? 'selected' : '' }}>Tháng
                             {{ $i }}</option>
                     @endfor
                 </select>
                 <span> - </span>
-                <select name="year" class="form-select form-month">
+                <select name="year" class="form-select form-month ad-ot">
                     @foreach ($listYear as $item)
                         <option value="{{ $item }}" {{ $item == request()->year ? 'selected' : '' }}>Năm
                             {{ $item }}</option>
@@ -109,7 +109,7 @@
                 <table class="table-main w-100">
                     <thead>
                         <tr>
-                            <th rowspan="2" class="date">Ngày</th>
+                            <th rowspan="2" class="date" style="width: 50px">Ngày</th>
                             @foreach ($listUser as $item)
                                 <th colspan="2">{{ $item }}</th>
                             @endforeach
@@ -157,5 +157,11 @@
 @endsection
 
 @push('scripts')
-    
+    <script>
+        $('.ad-ot').change(function () {
+            let month = $('select[name=month]').val();
+            let year = $('select[name=year]').val();
+            location.assign(`{{ route('overtime_index') }}?year=${year}&month=${month}`)
+        });
+    </script>
 @endpush

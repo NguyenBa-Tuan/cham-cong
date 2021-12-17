@@ -3,58 +3,60 @@
 @section('header_content', 'Thông tin cá nhân')
 @push('styles')
     <link rel="stylesheet" href="{{asset('css/atomic.css')}}">
-    <link rel="stylesheet" href="{{asset('css/atomic.css')}}">
-    <link rel="stylesheet" href="{{asset('lib/icofont.min.css.css')}}">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('lib/icofont.min.css')}}">
 @endpush
 @section('content')
+    <div class="myTab-content">
+        @if(request()->active == 'sheet')
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                            role="tab" aria-controls="home" aria-selected="true">Tạo tài khoản
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
 
-
-    <i class="icofont-pencil-alt-1"></i>
-    <div class="page">
-        <div class="content">
-            <a href="{{ route('adminUserCreate') }}">Create new User</a>
-            @if (session()->has('message'))
-                <div class="alert alert-success">
-                    {{ session()->get('message') }}
+                    <button class="nav-link active" id="sheet-tab" data-bs-toggle="tab" data-bs-target="#sheet"
+                            type="button"
+                            role="tab" aria-controls="sheet" aria-selected="false">Danh sách tài khoản
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade " id="home" role="tabpanel" aria-labelledby="home-tab">
+                    @include('admin.user.create')
                 </div>
-            @endif
-            <div class="container">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Phone</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">Day of Birth</th>
-                            <th scope="col">Day of Join</th>
-                            <th scope="col">Level</th>
-                            <th scope="col">Role</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @foreach ($users as $key => $user)
-                            <tr>
-                                <th scope="row">{{ $users->firstItem() + $key }}</th>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->phone }}</td>
-                                <td>{{ $user->address }}</td>
-                                <td>{{ $user->dayOfBirth ? date('d/m/Y', strtotime($user->dayOfBirth)) : '' }}</td>
-                                <td>{{ $user->dayOfJoin ? date('d/m/Y', strtotime($user->dayOfJoin)) : '' }}</td>
-                                <td>{{ \App\Enums\UserLevel::getDescription($user->level) }}</td>
-                                <td>{{ \App\Enums\UserRole::getDescription($user->role) }}</td>
-                            </tr>
-
-                        @endforeach
-                    </tbody>
-
-                </table>
-                {{ $users->links() }}
-                <a href="{{ route('admin_index') }}">Back to dashboard</a>
+                <div class="tab-pane fade show active" id="sheet" role="tabpanel" aria-labelledby="sheet-tab">
+                    @include('admin.user.show')
+                </div>
             </div>
-        </div>
+        @else
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                            type="button"
+                            role="tab" aria-controls="home" aria-selected="true">Tạo tài khoản
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a href="{{ route('adminUserIndex', ['active' => 'sheet']) }}">
+                        <button class="nav-link" id="sheet-tab" data-bs-toggle="tab" data-bs-target="#sheet"
+                                type="button"
+                                role="tab" aria-controls="sheet" aria-selected="false">Danh sách tài khoản
+                        </button>
+                    </a>
+                </li>
+
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    @include('admin.user.create')
+                </div>
+                <div class="tab-pane fade" id="sheet" role="tabpanel" aria-labelledby="sheet-tab">
+
+                </div>
+            </div>
+        @endif
     </div>
 @endsection

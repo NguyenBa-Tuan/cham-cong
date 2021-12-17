@@ -30,7 +30,7 @@ class OvertimeController extends Controller
         $listUser = User::where('level', UserLevel::Employee)->pluck('name', 'id')->toArray();
 
         $begin = new \DateTime($date . '-01');
-        $end   = new \DateTime($date . '-' . Carbon::parse($date)->daysInMonth);
+        $end = new \DateTime($date . '-' . Carbon::parse($date)->daysInMonth);
         $arrDate = [];
 
         for ($i = $begin; $i <= $end; $i->modify('+1 day')) {
@@ -43,8 +43,8 @@ class OvertimeController extends Controller
         $listOverTime = Overtime::where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date)->get();
 
         $arrData = [];
-        $totalTime=0;
-        
+        $totalTime = 0;
+
         foreach ($listOverTime as $item) {
             $checkin = $item->checkin ? Carbon::parse($item->checkin)->format('H:i') : '';
             $checkout = $item->checkin ? Carbon::parse($item->checkout)->format('H:i') : '';
@@ -52,11 +52,16 @@ class OvertimeController extends Controller
             $totalTime = (strtotime($checkout) - strtotime($checkin)) / 60 / 60;
 
             $arrData[$item->user_id][$item->date] = [
-                'checkin' => $checkin ,
+                'checkin' => $checkin,
                 'checkout' => $checkout,
                 'note' => $item->note,
                 'total_time' => $totalTime,
             ];
+
+//            $totalHour = floor(($totalTime * 60) / 60);
+//            $totalMin = ($totalTime * 60) % 60;
+//            $getTime=$totalHour . ":" . $totalMin;
+//            dd($getTime);
 
             if (!isset($arrData[$item->user_id]['total'])) $arrData[$item->user_id]['total'] = 0;
 
@@ -64,19 +69,6 @@ class OvertimeController extends Controller
         }
 
         return view('admin.overtime.index', compact('listYear', 'listUser', 'arrDate', 'arrData'));
-    }
-
-    public function mount($month)
-    {
-        $monthList = DB::table('overtimes')
-            ->select(DB::raw('DATE_FORMAT(date, "%m-%Y") as collect'))
-            ->orderBy('collect', 'DESC')
-            ->distinct()
-            ->get();
-
-        $data = DB::table('overtimes')->where(DB::raw('DATE_FORMAT(date, "%m-%Y")'), $month)->get();
-
-        return view('admin.overtime.show', compact('data', 'month', 'monthList'));
     }
 
     public function edit($id)
