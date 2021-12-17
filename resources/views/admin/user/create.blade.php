@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('page')
+
     <div class="container">
         <h1 style="font-size: 30px; margin-top: 50px; text-align: center">Create new User</h1>
         <form action="{{route('adminUserStore')}}" method="POST">
@@ -59,20 +58,20 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="role">Role</label>
-                        <select class="form-control" id="role" name="role">
-                            @foreach($roles as $key=>$role)
-                                <option value="{{$key}}">{{$role}}</option>
-                            @endforeach
-                        </select>
+{{--                        <select class="form-control" id="role" name="role">--}}
+{{--                            @foreach($roles as $key=>$role)--}}
+{{--                                <option value="{{$key}}">{{$role}}</option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="level">Level</label>
                         <select class="form-control" id="level" name="level">
-                            @foreach($levels as $key=>$level)
-                                <option value="{{$key}}">{{$level}}</option>
-                            @endforeach
+{{--                            @foreach($levels as $key=>$level)--}}
+{{--                                <option value="{{$key}}">{{$level}}</option>--}}
+{{--                            @endforeach--}}
                         </select>
                     </div>
                 </div>
@@ -82,4 +81,4 @@
 
         <a href="{{route('adminUserIndex')}}">Back</a>
     </div>
-@endsection
+
