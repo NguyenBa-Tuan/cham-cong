@@ -10,13 +10,14 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/atomic.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/tab.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/lib/icofont.css')}}">
 </head>
 <body>
 <div class="wrapper">
     @include('layouts.sidebar')
     <div class="main">
         @include('layouts.header')
-        <div class="page relative">
+        <div class="page">
             <div class="content">
                 @yield('page')
             </div>
@@ -50,6 +51,22 @@
 
     activeTab($('.tab li:first-child'));
 </script>
+
 <script src="{{asset('js/user-overtime.js')}}"></script>
+
+<script>
+    $('.tk-timesheet').change(function () {
+        let month = $('select[name=month]').val();
+        let year = $('select[name=year]').val();
+        location.assign(`{{ route('user_timesheet') }}?year=${year}&month=${month}`)
+    });
+    $('.tk-overtime').change(function () {
+        let month = $('select[name=month]').val();
+        let year = $('select[name=year]').val();console.log(year);
+
+
+        location.assign(`{{ route('user_overtime') }}?year=${year}&month=${month}`)
+    });
+</script>
 </body>
 </html>

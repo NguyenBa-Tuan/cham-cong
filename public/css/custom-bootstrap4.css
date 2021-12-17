@@ -1,0 +1,73 @@
+/*custom form-bootstrap-4*/
+
+textarea:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=number]:focus,
+[type=text].form-control:focus,
+[type=password].form-control:focus,
+[type=email].form-control:focus,
+[type=tel].form-control:focus,
+[contenteditable].form-control:focus {
+    box-shadow: none;
+    border: 1px solid #CED4DA;
+}
+
+.form-group textarea {
+    padding: 14px 15px 13px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 30px;
+}
+
+.btn {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.form-group input {
+    padding: 14px 15px 13px !important;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+    line-height: 19px;
+    position: relative;
+
+}
+
+.form-group input, textarea {
+    border-radius: 3px !important;
+}
+
+.form-group input {
+    height: -webkit-fill-available !important;
+}
+
+/*bs4 custom form input icon right*/
+.form-control[type=date]::-webkit-inner-spin-button,
+.form-control[type=datetime-local]::-webkit-inner-spin-button,
+.form-control[type=date]::-webkit-outer-spin-button {
+    /*-webkit-appearance: none !important;*/
+    margin: 0;
+}
+
+/*custom bootstrap 4 row*/
+.row {
+    --bs-gutter-x: 0 !important;
+}
+
+/*overtime show custom form control*/
+.form-control{
+    background-color: #FFFFFF;
+}

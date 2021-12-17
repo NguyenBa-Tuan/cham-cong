@@ -35,19 +35,15 @@ Route::post('/password/{id}', [UserController::class, 'updatePassword'])->name('
 Route::middleware('checkLogin')->group(function () {
     /*user*/
     Route::middleware('checkUser')->prefix('user')->group(function () {
-//        Route::get('/', [\App\Http\Controllers\UserController::class, 'index'])->name('user_index');
         Route::get('/', [\App\Http\Controllers\UserController::class, 'edit'])->name('user_edit');
         Route::post('/', [\App\Http\Controllers\UserController::class, 'update'])->name('user_update');
 
-        Route::prefix('timesheet')->group(function () {
-            Route::get('/', [UserTimeKeepingController::class, 'index'])->name('user_timesheet');
-//            Route::get('/show/{id}', [UserTimeKeepingController::class, 'show'])->name('user_timesheet_show');
-        });
+        Route::get('/timesheet', [UserTimeKeepingController::class, 'index'])->name('user_timesheet');
+
         Route::prefix('overtime')->group(function () {
             Route::get('/', [UserOverTimeController::class, 'index'])->name('user_overtime');
             Route::get('/create', [UserOverTimeController::class, 'create'])->name('user_overtime_create');
             Route::post('/create', [UserOverTimeController::class, 'store'])->name('user_overtime_store');
-//            Route::get('/{month}', [UserOverTimeController::class, 'mount'])->name('user_overtime_show');
         });
     });
 
