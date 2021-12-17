@@ -1,8 +1,15 @@
 @extends('admin.app')
 @section('aside_user', 'active')
 @section('header_content', 'Thông tin cá nhân')
-
+@push('styles')
+    <link rel="stylesheet" href="{{asset('css/atomic.css')}}">
+    <link rel="stylesheet" href="{{asset('css/atomic.css')}}">
+    <link rel="stylesheet" href="{{asset('lib/icofont.min.css.css')}}">
+@endpush
 @section('content')
+
+
+    <i class="icofont-pencil-alt-1"></i>
     <div class="page">
         <div class="content">
             <a href="{{ route('adminUserCreate') }}">Create new User</a>

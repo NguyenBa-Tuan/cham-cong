@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('user.app')
 @section('header_content', 'Thông tin cá nhân')
 @section('title', 'Thông tin cá nhân')
-{{--@section('active_user', 'active')--}}
+@section('active_user', 'active')
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/style.css')}}">
     <link rel="stylesheet" href="{{ asset('css/atomic.css')}}">
