@@ -10,13 +10,14 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/atomic.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/tab.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/lib/icofont.css')}}">
 </head>
 <body>
 <div class="wrapper">
     @include('layouts.sidebar')
     <div class="main">
         @include('layouts.header')
-        <div class="page relative">
+        <div class="page">
             <div class="content">
                 @yield('page')
             </div>
@@ -25,18 +26,11 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
         crossorigin="anonymous"></script>
-<script>
-    $(document).ready(function () {
-        $('#data_table').ready(function () {
-            $('#data_table tr').each(function () {
-                var data = $(this).find(".tk-day").text();
-                if (data === 'T7') {
-                    $('.tk-day').removeClass('bg-light-green').addClass('bg-light-pink');
-                }
-            });
-        });
-    });
-</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
+
 <script>
     function activeTab(obj) {
         $('.tab-wrapper ul li').removeClass('active');
@@ -57,6 +51,22 @@
 
     activeTab($('.tab li:first-child'));
 </script>
+
+<script src="{{asset('js/user-overtime.js')}}"></script>
+
+<script>
+    $('.tk-timesheet').change(function () {
+        let month = $('select[name=month]').val();
+        let year = $('select[name=year]').val();
+        location.assign(`{{ route('user_timesheet') }}?year=${year}&month=${month}`)
+    });
+    $('.tk-overtime').change(function () {
+        let month = $('select[name=month]').val();
+        let year = $('select[name=year]').val();console.log(year);
+
+
+        location.assign(`{{ route('user_overtime') }}?year=${year}&month=${month}`)
+    });
 </script>
 </body>
 </html>

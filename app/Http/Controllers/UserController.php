@@ -37,6 +37,6 @@ class UserController extends Controller
         $user->dayOfJoin = $request->dayOfJoin;
         $user->level = $request->level;
         $user->save();
-        return redirect()->route('user_edit ');
+        return redirect()->route('user_edit');
     }
 }

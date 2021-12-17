@@ -16,46 +16,87 @@ class UserOverTimeController extends Controller
         $this->middleware('checkUser');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $month_get = Carbon::now()->format('Y-m');
+        if (!$request->month) $request->month = Carbon::now()->month;
+        if (!$request->year) $request->year = Carbon::now()->year;
 
-        $from = $month_get . '-01';
+        $date = $request->year . '-' . $request->month;
+        $listYear=Overtime::select(DB::raw('SUBSTR(date, 1, 4) as year'))->groupBy('year')->pluck('year');
 
-        $to = $month_get . '-' . Carbon::parse($month_get)->daysInMonth;
+//        $month_get = Carbon::now()->format('Y-m');
+
+        $from = $date . '-01';
+
+        $to = $date . '-' . Carbon::parse($date)->daysInMonth;
 
         $begin = new \DateTime($from);
         $end = new \DateTime($to);
         $arrDate = [];
-        $key = 0;
+        $arrCheckin = [];
+        $arrCheckout = [];
+        $arrTotalTime = [];
+        $arrProjectName = [];
+        $arrNote = [];
+
         for ($i = $begin; $i <= $end; $i->modify('+1 day')) {
-            $arrDate[$key] = $i->format("Y-m-d");
-            $key++;
+            $arrDate[$i->format("Y-m-d")] = $i->format("Y-m-d");
+            $arrCheckin[$i->format("Y-m-d")] = false;
+            $arrCheckout[$i->format("Y-m-d")] = false;
+            $arrTotalTime[$i->format("Y-m-d")] = false;
+            $arrProjectName[$i->format("Y-m-d")] = false;
+            $arrNote[$i->format("Y-m-d")] = false;
         }
+
         $data = Overtime::where('user_id', Auth::id())
-            ->whereMonth('date', Carbon::now()->month)
-            ->whereYear('date', Carbon::now()->year)
+            ->where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date)
+//            ->whereMonth('date', Carbon::now()->month)
+//            ->whereYear('date', Carbon::now()->year)
             ->orderby('date', 'DESC')
             ->get();
 
-        return view('user.overtime.index', compact('data', 'arrDate'));
-    }
+        $count = Overtime::where('user_id', Auth::id())
+            ->select('totalTime')
+            ->where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date)
+//            ->whereMonth('date', Carbon::now()->month)
+//            ->whereYear('date', Carbon::now()->year)
+            ->sum(DB::raw("TIME_TO_SEC(totalTime)"));
 
-    public function mount($month)
-    {
-        $monthList = DB::table('overtimes')
-            ->select(DB::raw('DATE_FORMAT(date, "%m-%Y") as collect'))
-            ->where('user_id', '=', Auth::id())
-            ->orderBy('collect', 'DESC')
-            ->distinct()
-            ->get();
+        $h = floor($count / 60 / 60);
+        $m = $count / 60 % 60;
+        $getTotal = "$h" . ":" . "$m";
 
-        $data = DB::table('overtimes')
-            ->where(DB::raw('DATE_FORMAT(date, "%m-%Y")'), $month)
-            ->where('user_id', '=', Auth::id())
-            ->get();
 
-        return view('user.overtime.index', compact('data', 'month', 'monthList'));
+        foreach ($data as $item) {
+            $arrCheckin[$item->date] = [
+                'checkin' => $item->checkin,
+            ];
+        }
+
+        foreach ($data as $item) {
+            $arrCheckout[$item->date] = [
+                'checkout' => $item->checkout,
+            ];
+        }
+
+        foreach ($data as $item) {
+            $arrTotalTime[$item->date] = [
+                'totalTime' => $item->totalTime,
+            ];
+        }
+
+        foreach ($data as $item) {
+            $arrProjectName[$item->date] = [
+                'projectName' => $item->projectName,
+            ];
+        }
+
+        foreach ($data as $item) {
+            $arrNote[$item->date] = [
+                'note' => $item->note,
+            ];
+        }
+        return view('user.overtime.index', compact('listYear', 'data', 'arrDate', 'arrCheckin', 'arrCheckout', 'arrTotalTime', 'arrProjectName', 'arrNote', 'getTotal'));
     }
 
     public function create()
@@ -67,7 +108,7 @@ class UserOverTimeController extends Controller
     {
         $create = new Overtime();
         $create->user_id = Auth::id();
-        $create->date = $request->date;
+        $create->date = Carbon::parse($request->date)->format('Y-m-d');
         $create->checkin = Carbon::parse($request->checkin);
         $create->checkout = Carbon::parse($request->checkout);
         $create->totalTime = $create->checkout->diff($create->checkin)->format('%H:%I:%S');

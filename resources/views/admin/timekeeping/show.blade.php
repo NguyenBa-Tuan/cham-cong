@@ -1,6 +1,6 @@
 @push('styles')
     <style>
-        
+
 
     </style>
     <link rel="stylesheet" href="{{ asset('css/datatables/dataTables.bootstrap4.min.css') }}">

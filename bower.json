@@ -1,0 +1,20 @@
+{
+  "name": "chamcong",
+  "description": "",
+  "main": "",
+  "authors": [
+    "daudangtung1 <dangtung.dau.bka@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/trongnong/timekeeping",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "datetimepicker": "flat-datetimepicker#^0.1.39"
+  }
+}
