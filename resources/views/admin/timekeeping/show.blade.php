@@ -11,7 +11,7 @@
     <div class="text-center">
         <select name="month" class="form-select form-month">
             @for ($i = 1; $i <= 12; $i++)
-                <option value="{{ $i }}" {{ $i == request()->month ? 'selected' : '' }}>Tháng
+                <option value="{{ ($i < 10) ? '0' . $i : $i }}" {{ $i == request()->month ? 'selected' : '' }}>Tháng
                     {{ $i }}</option>
             @endfor
         </select>
