@@ -14,11 +14,11 @@ class UserController extends Controller
         $this->middleware('checkUser');
     }
 
-    public function index()
-    {
-        $user = Auth::user();
-        return view('user.index', compact('user'));
-    }
+//    public function index()
+//    {
+//        $user = Auth::user();
+//        return view('user.index', compact('user'));
+//    }
 
     public function edit()
     {
@@ -37,6 +37,6 @@ class UserController extends Controller
         $user->dayOfJoin = $request->dayOfJoin;
         $user->level = $request->level;
         $user->save();
-        return redirect()->route('user_index');
+        return redirect()->route('user_edit ');
     }
 }

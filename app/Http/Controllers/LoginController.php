@@ -33,7 +33,7 @@ class LoginController extends Controller
             if (Auth::user()->role == 0) {
                 return redirect()->route('admin_index');
             } else {
-                return redirect()->route('user_index');
+                return redirect()->route('user_timesheet');
             }
         } else {
             return redirect()->route('login')->with('alert', __('Email hoặc mật khẩu nhập vào không đúng, xin mời nhập lại!'));

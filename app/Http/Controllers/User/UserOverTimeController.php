@@ -18,19 +18,27 @@ class UserOverTimeController extends Controller
 
     public function index()
     {
-        $monthList = DB::table('overtimes')
-            ->select(DB::raw('DATE_FORMAT(date, "%m-%Y") as collect'))
-            ->where('user_id', '=', Auth::id())
-            ->orderBy('collect', 'DESC')
-            ->distinct()
-            ->get();
+        $month_get = Carbon::now()->format('Y-m');
 
+        $from = $month_get . '-01';
+
+        $to = $month_get . '-' . Carbon::parse($month_get)->daysInMonth;
+
+        $begin = new \DateTime($from);
+        $end = new \DateTime($to);
+        $arrDate = [];
+        $key = 0;
+        for ($i = $begin; $i <= $end; $i->modify('+1 day')) {
+            $arrDate[$key] = $i->format("Y-m-d");
+            $key++;
+        }
         $data = Overtime::where('user_id', Auth::id())
             ->whereMonth('date', Carbon::now()->month)
             ->whereYear('date', Carbon::now()->year)
             ->orderby('date', 'DESC')
             ->get();
-        return view('user.overtime.index', compact('data', 'monthList'));
+
+        return view('user.overtime.index', compact('data', 'arrDate'));
     }
 
     public function mount($month)
