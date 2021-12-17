@@ -99,6 +99,23 @@ class UserOverTimeController extends Controller
         return view('user.overtime.index', compact('listYear', 'data', 'arrDate', 'arrCheckin', 'arrCheckout', 'arrTotalTime', 'arrProjectName', 'arrNote', 'getTotal'));
     }
 
+//    public function mount($month)
+//    {
+//        $monthList = DB::table('overtimes')
+//            ->select(DB::raw('DATE_FORMAT(date, "%m-%Y") as collect'))
+//            ->where('user_id', '=', Auth::id())
+//            ->orderBy('collect', 'DESC')
+//            ->distinct()
+//            ->get();
+//
+//        $data = DB::table('overtimes')
+//            ->where(DB::raw('DATE_FORMAT(date, "%m-%Y")'), $month)
+//            ->where('user_id', '=', Auth::id())
+//            ->get();
+//
+//        return view('user.overtime.index', compact('data', 'month', 'monthList'));
+//    }
+
     public function create()
     {
         return view('user.overtime.create');

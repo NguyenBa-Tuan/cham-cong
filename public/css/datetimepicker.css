@@ -1,0 +1,464 @@
+/*width*/
+.w-105 {
+    width: 104px;
+}
+
+.w-283 {
+    width: 281px;
+}
+
+.w-210 {
+    width: 210px;
+}
+
+.w-80 {
+    width: 80px;
+}
+
+.w-95 {
+    width: 95px;
+}
+
+/*background color*/
+.bg-light-green {
+    background-color: #DEF5DC;
+}
+
+.bg-light-pink {
+    background-color: #F5D0E7;
+}
+
+/*margin*/
+.mb-15 {
+    margin-bottom: 15px;
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}
+
+.mt-2 {
+    margin-top: 2px !important;
+}
+
+.mt-60 {
+    margin-top: 60px;
+}
+
+.mx-auto {
+    margin: 0 auto;
+}
+
+/*padding*/
+/*.p-40-30 {*/
+/*    padding: 40px 30px 0;*/
+/*}*/
+
+/*font weight*/
+.font-400 {
+    font-weight: 400;
+}
+
+.font-700 {
+    font-weight: 700;
+}
+
+/*font-size*/
+.f-14 {
+    font-size: 14px;
+}
+
+.f-16 {
+    font-size: 16px;
+}
+
+.f-18 {
+    font-size: 18px;
+}
+
+/*line height*/
+.line-h-16 {
+    line-height: 16px;
+}
+
+.line-h-14 {
+    line-height: 14px;
+}
+
+.line-h-21 {
+    line-height: 21px;
+}
+
+/*another atomic css*/
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/*custom form-bootstrap-4*/
+
+textarea:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=number]:focus,
+[type=text].form-control:focus,
+[type=password].form-control:focus,
+[type=email].form-control:focus,
+[type=tel].form-control:focus,
+[contenteditable].form-control:focus {
+    box-shadow: none;
+    border: 1px solid #CED4DA;
+}
+
+.form-group textarea {
+    padding: 14px 15px 13px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 30px;
+}
+
+.btn {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.form-group input {
+    padding: 14px 15px 13px !important;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+    /*color: #FFFFFF;*/
+    line-height: 19px;
+    position: relative;
+}
+
+.form-group input, textarea {
+    border-radius: 3px !important;
+}
+
+/*bs4 custom form input icon right*/
+.form-control[type=date]::-webkit-inner-spin-button,
+.form-control[type=datetime-local]::-webkit-inner-spin-button,
+.form-control[type=date]::-webkit-outer-spin-button {
+    /*-webkit-appearance: none !important;*/
+    margin: 0;
+}
+
+/*custom bootstrap 4 row*/
+.row {
+    --bs-gutter-x: 0 !important;
+}
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+a:hover {
+    text-decoration: none;
+    color: currentColor;
+}
+
+:root {
+    --tk-color: #4B545C;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000000;
+}
+
+h2 {
+    font-weight: 700;
+    color: #151515;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+h3 {
+    font-weight: 700;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+p {
+    margin: 0;
+}
+
+
+/*wrapper*/
+.wrapper {
+    display: flex;
+}
+
+
+/*header*/
+.header--user a {
+    color: var(--tk-color);
+    font-weight: 500;
+}
+
+.header--border {
+    width: 1px;
+    height: 27px;
+    background-color: #DEE2E6;
+}
+
+/*sidebar*/
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #343A40;
+}
+
+.sidebar--header {
+    color: #ffffff;
+    font-weight: 700;
+    /*font-size: 22px;*/
+    font-size: 20px;
+    padding: 23px 35px 18px 10px;
+    border-bottom: 1px solid #4B545C;
+}
+
+.sidebar--list {
+    padding: 25px 10px 0 10px;
+}
+
+.sidebar--item {
+    background-color: #494f55;
+    padding: 10px 0 13px 16px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #babfc8;
+    border-radius: 3px;
+    display: block;
+}
+
+.sidebar--item:hover {
+    color: #ffffff;
+}
+
+.active {
+    color: #ffffff;
+}
+
+
+/*main*/
+
+.main {
+    width: calc(100% - 250px);
+}
+
+.page {
+    background-color: #E8EDF4;
+
+    /*layout app.css*/
+    padding: 44px 30px 33px;
+}
+
+.content {
+    background-color: #ffffff;
+    padding: 60px 30px;
+}
+
+.tk-search {
+    padding: 20px 0 25px;
+    text-align: center;
+}
+
+
+/*table*/
+.general {
+    margin-top: 60px;
+}
+
+.tk-table {
+    font-size: 14px;
+    color: var(--tk-color);
+}
+
+.tk-table tr, .tk-table td {
+    border: 1px solid #999999;
+    padding: 12px 0;
+}
+
+.tk-title {
+    font-weight: 700;
+    background-color: #D0DFF5;
+    text-align: center;
+    width: 62px;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.tk-date {
+    background-color: #E8EDF4;
+    width: 49px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.tk-day {
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.tk-data {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.tk-general {
+    color: #ffffff;
+    background-color: #3B89CF;
+    font-size: 15px;
+    text-align: center;
+}
+
+.tk-data-general {
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 26px 0;
+}
+
+.extra-color {
+    /*background-color: #DEF5DC;*/
+}
+
+
+/*sign*/
+
+.bg-orange {
+    background-color: #F79646;
+    width: 24px;
+    height: 16px;
+}
+
+.general--sign p {
+    padding-bottom: 10px;
+    font-weight: 400;
+    font-size: 16px;
+    font-style: normal;
+}
+
+/*tk-search*/
+.tk-search-btn {
+    width: 114px;
+}
+
+.tk-select {
+    width: 100%;
+    padding: 10px 10px 11px;
+    border: 1px solid #CED4DA;
+    border-radius: 3px;
+    color: #333333;
+    font-weight: 500;
+    /*-webkit-appearance: none; !*icon select default*!*/
+    background: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='%23000000' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>") no-repeat;
+    background-position: calc(100% - 7px) center !important;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+
+}
+
+.tk-select:focus {
+    outline: none;
+}
+
+/*form*/
+
+.dropdown .options div:hover {
+    background: #62baea;
+    color: #fff;
+}
+
+.options .items:hover {
+    background-color: white;
+}
+
+.tk-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #1F232E;
+}
+
+.tk-btn {
+    background-color: #3B89CF;
+    border-radius: 3px;
+    color: #ffffff;
+    text-align: center;
+    padding: 13px 0 12px;
+    font-size: 18px;
+    line-height: 21px;
+    font-weight: 700;
+}
+
+.tk-btn-overtime {
+}
+
+/*icon input form*/
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator, input[type="date"]::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    opacity: 1;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: #F4F6F9;
+    padding: 13px 18px 15px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-left: 1px solid #CED4DA;
+    border-radius: 0 3px 3px 0;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    background-image: url("/icon/clock-time.svg");
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-image: url("/icon/calendar.svg");
+}

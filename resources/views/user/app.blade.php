@@ -4,17 +4,17 @@
 
 @section('aside_content')
     <li class="nav-item">
-        <a href="{{route('time_keeping_index')}}" class="nav-link @yield('active_time_keeping')">
+        <a href="{{route('user_timesheet')}}" class="nav-link">
             Chấm công hành chính
         </a>
     </li>
     <li class="nav-item ">
-        <a href="{{route('overtime_index')}}" class="nav-link @yield('active_overtime')">
+        <a href="{{route('user_overtime')}}" class="nav-link">
             Chấm công làm đêm
         </a>
     </li>
     <li class="nav-item ">
-        <a href="{{ route('adminUserIndex') }}" class="nav-link @yield('aside_user')">
+        <a href="{{ route('user_edit') }}" class="nav-link">
             Thông tin cá nhân
         </a>
     </li>

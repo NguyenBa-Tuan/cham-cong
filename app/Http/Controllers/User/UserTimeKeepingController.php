@@ -21,7 +21,7 @@ class UserTimeKeepingController extends Controller
     {
         $checkID = Auth::user()->id;
 
-        $month=Carbon::now()->format('Y-m');
+        $month = Carbon::now()->format('Y-m');
         $month_get = $month;
 
         $from = $month_get . '-01';
@@ -35,63 +35,70 @@ class UserTimeKeepingController extends Controller
             $arrDate[$key] = $i->format("Y-m-d");
             $key++;
         }
-        $find_month=Month::where('month', $month)->first();
+        $find_month = Month::where('month', $month)->first();
+        $month_list=Month::all();
 
-        $data = DB::table('timesheets')
-            ->where('user_id', '=', $checkID)
-            ->where('month_id', '=', $find_month->id)
-            ->get();
+        if ($find_month==null){
+            return view('user.timesheet.null', compact('arrDate'));
+        }
+        else{
+            $data = DB::table('timesheets')
+                ->where('user_id', '=', $checkID)
+                ->where('month_id', '=', $find_month->id)
+                ->get();
 
-        $note = DB::table('timesheets')
-            ->join('notes', 'timesheets.note_id', '=', 'notes.id')
-            ->join('users','timesheets.user_id', '=', 'users.id')
-            ->where('timesheets.user_id', '=', $checkID)
-            ->where('timesheets.month_id', '=', $find_month->id)
-            ->select('notes.note')->distinct()
-            ->first();
+            $note = DB::table('timesheets')
+                ->join('notes', 'timesheets.note_id', '=', 'notes.id')
+                ->join('users', 'timesheets.user_id', '=', 'users.id')
+                ->where('timesheets.user_id', '=', $checkID)
+                ->where('timesheets.month_id', '=', $find_month->id)
+                ->select('notes.note')->distinct()
+                ->first();
 
-        $dataX= DB::table('timesheets')
-            ->join('notes', 'timesheets.note_id', '=', 'notes.id')
-            ->join('users','timesheets.user_id', '=', 'users.id')
-            ->where('timesheets.user_id', '=', $checkID)
-            ->where('timesheets.month_id', '=', $find_month->id)
-            ->where('timesheets.data', '=', 'X')
-            ->count('timesheets.data');
+            $dataX = DB::table('timesheets')
+                ->join('notes', 'timesheets.note_id', '=', 'notes.id')
+                ->join('users', 'timesheets.user_id', '=', 'users.id')
+                ->where('timesheets.user_id', '=', $checkID)
+                ->where('timesheets.month_id', '=', $find_month->id)
+                ->where('timesheets.data', '=', 'X')
+                ->count('timesheets.data');
 
-        $dataX_2= DB::table('timesheets')
-            ->join('notes', 'timesheets.note_id', '=', 'notes.id')
-            ->join('users','timesheets.user_id', '=', 'users.id')
-            ->where('timesheets.user_id', '=', $checkID)
-            ->where('timesheets.month_id', '=', $find_month->id)
-            ->where('timesheets.data', '=', 'X/2')
-            ->count('timesheets.data');
+            $dataX_2 = DB::table('timesheets')
+                ->join('notes', 'timesheets.note_id', '=', 'notes.id')
+                ->join('users', 'timesheets.user_id', '=', 'users.id')
+                ->where('timesheets.user_id', '=', $checkID)
+                ->where('timesheets.month_id', '=', $find_month->id)
+                ->where('timesheets.data', '=', 'X/2')
+                ->count('timesheets.data');
 
-        $dataPL= DB::table('timesheets')
-            ->join('notes', 'timesheets.note_id', '=', 'notes.id')
-            ->join('users','timesheets.user_id', '=', 'users.id')
-            ->where('timesheets.user_id', '=', $checkID)
-            ->where('timesheets.month_id', '=', $find_month->id)
-            ->where('timesheets.data', '=', 'PL')
-            ->count('timesheets.data');
+            $dataPL = DB::table('timesheets')
+                ->join('notes', 'timesheets.note_id', '=', 'notes.id')
+                ->join('users', 'timesheets.user_id', '=', 'users.id')
+                ->where('timesheets.user_id', '=', $checkID)
+                ->where('timesheets.month_id', '=', $find_month->id)
+                ->where('timesheets.data', '=', 'PL')
+                ->count('timesheets.data');
 
-        $dataP= DB::table('timesheets')
-            ->join('notes', 'timesheets.note_id', '=', 'notes.id')
-            ->join('users','timesheets.user_id', '=', 'users.id')
-            ->where('timesheets.user_id', '=', $checkID)
-            ->where('timesheets.month_id', '=', $find_month->id)
-            ->where('timesheets.data', '=', 'P')
-            ->count('timesheets.data');
+            $dataP = DB::table('timesheets')
+                ->join('notes', 'timesheets.note_id', '=', 'notes.id')
+                ->join('users', 'timesheets.user_id', '=', 'users.id')
+                ->where('timesheets.user_id', '=', $checkID)
+                ->where('timesheets.month_id', '=', $find_month->id)
+                ->where('timesheets.data', '=', 'P')
+                ->count('timesheets.data');
 
-        $dataKP= DB::table('timesheets')
-            ->join('notes', 'timesheets.note_id', '=', 'notes.id')
-            ->join('users','timesheets.user_id', '=', 'users.id')
-            ->where('timesheets.user_id', '=', $checkID)
-            ->where('timesheets.month_id', '=', $find_month->id)
-            ->where('timesheets.data', '=', 'KP')
-            ->count('timesheets.data');
+            $dataKP = DB::table('timesheets')
+                ->join('notes', 'timesheets.note_id', '=', 'notes.id')
+                ->join('users', 'timesheets.user_id', '=', 'users.id')
+                ->where('timesheets.user_id', '=', $checkID)
+                ->where('timesheets.month_id', '=', $find_month->id)
+                ->where('timesheets.data', '=', 'KP')
+                ->count('timesheets.data');
 
-        $total=$dataX-($dataX_2/2)+$dataPL;
-        return view('user.timesheet.index', compact('arrDate', 'month', 'data', 'note', 'dataX', 'dataX_2', 'dataPL', 'dataP', 'dataKP', 'total'));
+            $total = $dataX - ($dataX_2 / 2) + $dataPL;
+            return view('user.timesheet.index', compact('month_list', 'arrDate', 'month', 'data', 'note', 'dataX', 'dataX_2', 'dataPL', 'dataP', 'dataKP', 'total'));
+        }
+
     }
 
     public function show($id)
@@ -119,53 +126,53 @@ class UserTimeKeepingController extends Controller
 
         $note = DB::table('timesheets')
             ->join('notes', 'timesheets.note_id', '=', 'notes.id')
-            ->join('users','timesheets.user_id', '=', 'users.id')
+            ->join('users', 'timesheets.user_id', '=', 'users.id')
             ->where('timesheets.user_id', '=', $checkID)
             ->where('timesheets.month_id', '=', $id)
             ->select('notes.note')->distinct()
             ->get();
 
-        $dataX= DB::table('timesheets')
+        $dataX = DB::table('timesheets')
             ->join('notes', 'timesheets.note_id', '=', 'notes.id')
-            ->join('users','timesheets.user_id', '=', 'users.id')
+            ->join('users', 'timesheets.user_id', '=', 'users.id')
             ->where('timesheets.user_id', '=', $checkID)
             ->where('timesheets.month_id', '=', $id)
             ->where('timesheets.data', '=', 'X')
             ->count('timesheets.data');
 
-        $dataX_2= DB::table('timesheets')
+        $dataX_2 = DB::table('timesheets')
             ->join('notes', 'timesheets.note_id', '=', 'notes.id')
-            ->join('users','timesheets.user_id', '=', 'users.id')
+            ->join('users', 'timesheets.user_id', '=', 'users.id')
             ->where('timesheets.user_id', '=', $checkID)
             ->where('timesheets.month_id', '=', $id)
             ->where('timesheets.data', '=', 'X/2')
             ->count('timesheets.data');
 
-        $dataPL= DB::table('timesheets')
+        $dataPL = DB::table('timesheets')
             ->join('notes', 'timesheets.note_id', '=', 'notes.id')
-            ->join('users','timesheets.user_id', '=', 'users.id')
+            ->join('users', 'timesheets.user_id', '=', 'users.id')
             ->where('timesheets.user_id', '=', $checkID)
             ->where('timesheets.month_id', '=', $id)
             ->where('timesheets.data', '=', 'PL')
             ->count('timesheets.data');
 
-        $dataP= DB::table('timesheets')
+        $dataP = DB::table('timesheets')
             ->join('notes', 'timesheets.note_id', '=', 'notes.id')
-            ->join('users','timesheets.user_id', '=', 'users.id')
+            ->join('users', 'timesheets.user_id', '=', 'users.id')
             ->where('timesheets.user_id', '=', $checkID)
             ->where('timesheets.month_id', '=', $id)
             ->where('timesheets.data', '=', 'P')
             ->count('timesheets.data');
 
-        $dataKP= DB::table('timesheets')
+        $dataKP = DB::table('timesheets')
             ->join('notes', 'timesheets.note_id', '=', 'notes.id')
-            ->join('users','timesheets.user_id', '=', 'users.id')
+            ->join('users', 'timesheets.user_id', '=', 'users.id')
             ->where('timesheets.user_id', '=', $checkID)
             ->where('timesheets.month_id', '=', $id)
             ->where('timesheets.data', '=', 'KP')
             ->count('timesheets.data');
 
-        $total=$dataX-($dataX_2/2)+$dataPL;
+        $total = $dataX - ($dataX_2 / 2) + $dataPL;
 
         return view('user.timesheet.show', compact('arrDate', 'month', 'data', 'note', 'dataX', 'dataX_2', 'dataPL', 'dataP', 'dataKP', 'total'));
     }

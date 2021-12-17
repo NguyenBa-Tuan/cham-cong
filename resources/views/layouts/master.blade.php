@@ -8,9 +8,8 @@
     <title>{{ env('APP_NAME') }} | @yield('title')</title>
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
     <link rel="stylesheet" href="{{ asset('css/OverlayScrollbars.min.css') }}">
-    {{-- <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/atomic.css')}}"> --}}
     @stack('styles')
 </head>
 
@@ -23,5 +22,7 @@
 </body>
 
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
+<script src="{{asset('js/user-overtime.js')}}"></script>
 @stack('scripts')
 </html>
