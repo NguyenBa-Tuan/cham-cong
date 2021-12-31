@@ -21,13 +21,11 @@ class CreateUsersTable extends Migration
             $table->date('dayOfBirth')->nullable();
             $table->date('dayOfJoin')->nullable();
             $table->string('email')->unique();
-            $table->integer('role');
+            $table->integer('role')->default(1);
             $table->integer('level');
             $table->string('password');
-
             $table->rememberToken();
-
-//            $table->timestamps();
+            $table->timestamps();
 //            $table->timestamp('email_verified_at')->nullable();
         });
     }

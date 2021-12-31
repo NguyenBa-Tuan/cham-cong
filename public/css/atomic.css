@@ -54,13 +54,17 @@
     padding-left: 10px !important;
 }
 
-.py-17{
+.py-17 {
     padding-top: 17px;
     padding-bottom: 17px;
 }
 
-.pl-28{
+.pl-28 {
     padding-left: 28px;
+}
+
+.pr-130 {
+    padding-right: 130px;
 }
 
 /*font weight*/
@@ -117,4 +121,25 @@
 }
 
 
+/*new from sublime text*/
 
+.flex {
+    display: flex;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.py-16 {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.p-30 {
+    padding: 30px;
+}

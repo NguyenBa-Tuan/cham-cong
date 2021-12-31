@@ -15,9 +15,8 @@ class RegisterFormRequest extends FormRequest
     {
         return [
             'name' => 'required|',
-            'email' => 'required|email',
-            'password' => 'required|min:8|max:25',
-            'role' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8|max:25|confirmed',
             'level' => 'required',
         ];
     }
@@ -29,11 +28,12 @@ class RegisterFormRequest extends FormRequest
             'name.required' => 'Thiếu họ tên!',
             'email.required' => 'Thiếu email!',
             'password.required' => 'Thiếu mật khẩu!',
-            'role.required' => 'Thiếu quyền sử dụng!',
             'level.required' => 'Thiếu chức vụ!',
             'password.min' => 'Độ dài mật khẩu không được ít hơn 8 ký tự!',
             'password.max' => 'Độ dài mật khẩu không được nhiều hơn 25 ký tự!',
+            'password.confirmed' => 'Mật khẩu nhập lại không đúng!',
             'email.email' => 'Không đúng định dạng email!',
+            'email.unique' => 'Email này đã được sử dụng!',
         ];
     }
 }

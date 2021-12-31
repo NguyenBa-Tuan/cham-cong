@@ -10,7 +10,7 @@
         </div>
     @endif
 
-    <table class="ad-table">
+    <table class="ad-table table-responsive">
         <thead>
         <tr>
             <th class="bg-light-green" style="width: 36px">STT</th>
