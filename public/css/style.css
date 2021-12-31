@@ -180,6 +180,7 @@ p {
     font-size: 16px;
     font-weight: 500;
     color: #1F232E;
+    display: block;
 }
 
 .tk-btn {
@@ -259,9 +260,10 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator, input[type="dat
 
 /*admin pages*/
 /*user information*/
-.ad-table{
+.ad-table {
     width: 100%;
 }
+
 .ad-table td, th {
     border: 1px solid #999999;
     color: #4B545C;
@@ -276,11 +278,85 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator, input[type="dat
     text-transform: uppercase;
 }
 
-.ad-table td{
+.ad-table td {
     font-size: 16px;
     line-height: 19px;
 }
 
-.ad-table td a{
+.ad-table td a {
     color: #4B545C;
+}
+
+
+/*admin-modal*/
+.ad-ot-table {
+    margin: 0 auto;
+    color: #4B545C;
+    width: 667px;
+    padding: 30px 10px 0;
+    height: 310px;
+    position: fixed;
+    top: 250px;
+    left: 740px;
+}
+
+.ad-ot-table th, tr, td {
+    border: 1px solid #999999;
+}
+
+.ad-ot-table th {
+    background-color: #D0DFF5;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.ad-ot-table {
+    font-size: 14px;
+    line-height: 16px;
+    background: #ffffff;
+
+}
+
+.ad-ot-date {
+    background-color: #D0DFF5;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.ad-ot-title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.ad-ot-data {
+    padding: 30px 0 31px;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.ad-table-head {
+    background-color: #3B89CF;
+    height: 26px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 3px 3px 0 3px
+}
+
+.ad-ot-close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: #333333;
+    margin-left: 10px;
 }

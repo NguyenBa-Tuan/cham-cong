@@ -16,8 +16,8 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
-        return view('admin.user.index', compact('users'));
+        $users = User::all();$levels = UserLevel::toSelectArray();
+        return view('admin.user.index', compact('users', 'levels'));
     }
 
     public function create()
@@ -37,7 +37,6 @@ class UserController extends Controller
         $createUser->address = $request->address;
         $createUser->dayOfBirth = $request->dayOfBirth;
         $createUser->dayOfJoin = $request->dayOfJoin;
-        $createUser->role = $request->role;
         $createUser->level = $request->level;
         $createUser->save();
 
