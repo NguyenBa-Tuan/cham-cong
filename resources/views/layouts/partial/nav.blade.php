@@ -46,7 +46,7 @@
     </ol>
     <!-- Right navbar links -->
     <ol class="navbar-nav ml-auto nav-right">
-        <li class="nav-item  d-flex">
+        <li class="nav-item  d-flex hidden-mobile">
             <a class="nav-link username" href="" role="button">
                 {{ Auth::user()->name ?? '' }}
             </a>

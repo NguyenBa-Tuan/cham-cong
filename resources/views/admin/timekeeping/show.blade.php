@@ -1,6 +1,9 @@
 @push('styles')
     <style>
-
+        .main-list .form-month {
+            background-image: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='%23000000' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>");
+            background-position: calc(100% - 7px);
+        }
 
     </style>
     <link rel="stylesheet" href="{{ asset('css/datatables/dataTables.bootstrap4.min.css') }}">
@@ -8,19 +11,21 @@
 @endpush
 <div class="main-content main-list">
     <p class="text-center content-title">BẢNG CHẤM CÔNG HÀNH CHÍNH</p>
-    <div class="text-center">
+    <div class="text-center d-flex" style="justify-content: center">
         <select name="month" class="form-select form-month">
             @for ($i = 1; $i <= 12; $i++)
-                <option value="{{ ($i < 10) ? '0' . $i : $i }}" {{ $i == request()->month ? 'selected' : '' }}>Tháng
+                <option value="{{ $i < 10 ? '0' . $i : $i }}" {{ $i == request()->month ? 'selected' : '' }}>Tháng
                     {{ $i }}</option>
             @endfor
         </select>
-        <span>-</span>
+        <hr style="border: 1px solid #4B545C; width: 6px; margin: 22px 5px; opacity: 1;box-sizing: border-box;">
         <select name="year" class="form-select form-month">
-            @foreach ($listYear as $item)
+            @forelse ($listYear as $item)
                 <option value="{{ $item }}" {{ $item == request()->year ? 'selected' : '' }}>Năm
                     {{ $item }}</option>
-            @endforeach
+            @empty
+
+            @endforelse
         </select>
     </div>
     <div class="mt-25">
@@ -65,7 +70,8 @@
                         <td>{{ $kp = isset($arrData[$idUser]['KP']) ? $arrData[$idUser]['KP'] : 0 }}</td>
                         <td class="font-weight-bold">{{ $x + $x2 / 2 + $pl }}</td>
 
-                        <td class="border-right text-left1">{{ isset($arrData[$idUser]['note']) ? $arrData[$idUser]['note'] : ''  }}</td>
+                        <td class="border-right text-left1">
+                            {{ isset($arrData[$idUser]['note']) ? $arrData[$idUser]['note'] : '' }}</td>
                     </tr>
                 @endforeach
             </tbody>

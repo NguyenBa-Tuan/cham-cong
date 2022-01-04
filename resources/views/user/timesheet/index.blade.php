@@ -6,6 +6,12 @@
         <link rel="stylesheet" href="{{ asset('css/style.css')}}">
         <link rel="stylesheet" href="{{ asset('css/atomic.css')}}">
         <link rel="stylesheet" href="{{ asset('css/custom-bootstrap4.css')}}">
+        <style>
+            .data-sheet table td {
+                padding-left: 10px !important;
+                padding-right: 10px !important; 
+            }
+        </style>
     @endpush
 
     <div class="tk-pt-41">
@@ -21,7 +27,7 @@
                             @endfor
                         </select>
                     </div>
-                    <hr style="border: 1px solid #4B545C; width: 6px; margin: 22px 5px">
+                    <hr style="border: 1px solid #4B545C; width: 6px; margin: 22px 5px; opacity: 1;box-sizing: border-box;">
                     <div class="tk-search-btn tk-timesheet">
                         <select class="tk-select" name="year">
                             @foreach ($listYear as $item)
@@ -31,7 +37,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="data-sheet">
+                <div class="data-sheet" style="overflow: auto">
                     <table class="tk-table" id="data_table">
                         <thead>
                         <tr>
@@ -55,13 +61,21 @@
                         <tbody>
                         <tr>
                             <td class="tk-title" style="padding: 15px 0 22px">Ngày công</td>
-                            @foreach($data as $key =>$d)
+                            @forelse($data as $key =>$d)
                                 @if(\App\Enums\Day::getDescription(\Carbon\Carbon::parse($d->date)->dayOfWeek)=='T7'||\App\Enums\Day::getDescription(\Carbon\Carbon::parse($d->date)->dayOfWeek)=='Cn')
                                     <td class="tk-data bg-light-pink">{{$d->data}}</td>
                                 @else
                                     <td class="tk-data">{{$d->data}}</td>
                                 @endif
+                            @empty
+                            @foreach($arrDate as $key=>$value)
+                                @if(\App\Enums\Day::getDescription(Carbon\Carbon::parse($value)->dayOfWeek)=='T7'||\App\Enums\Day::getDescription(Carbon\Carbon::parse($value)->dayOfWeek)=='Cn')
+                                    <td class="tk-day bg-light-pink"></td>
+                                @else
+                                    <td class="tk-day "></td>
+                                @endif
                             @endforeach
+                            @endforelse
                         </tr>
                         </tbody>
                     </table>
@@ -93,7 +107,7 @@
                         </div>
 
                         <div class="col-md-9">
-                            <h3 class="mb-30" style="margin-left: 407px">Tổng hợp</h3>
+                            <h3 class="mb-30 text-center" >Tổng hợp</h3>
                             <table class="tk-table">
                                 <thead>
                                 <tr>

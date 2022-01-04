@@ -23,12 +23,17 @@ class TimeKeepingController extends Controller
 
     public function index(Request $request)
     {
-        if (!$request->month) $request->month = Carbon::now()->month;
+        if (!$request->month) $request->month = Carbon::now()->month  < 10 ? '0' . Carbon::now()->month : Carbon::now()->month;
         if (!$request->year) $request->year = Carbon::now()->year;
 
         $date = $request->year . '-' . $request->month;
+        $listYear = Month::select(DB::raw('SUBSTR(month, 1, 4) as year'))->groupBy('year')->pluck('year')->toArray();
 
-        $listYear = Month::select(DB::raw('SUBSTR(month, 1, 4) as year'))->groupBy('year')->pluck('year');
+        if (!in_array(Carbon::now()->year, $listYear)) {
+            array_push($listYear, Carbon::now()->year);
+        }
+
+        sort($listYear);
 
         $listUser = User::where('level', UserLevel::Employee)->pluck('name', 'id')->toArray();
 

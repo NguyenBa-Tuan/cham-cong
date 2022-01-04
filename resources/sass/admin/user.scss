@@ -1,0 +1,103 @@
+.content-user {
+    padding: 30px;
+    .form-control {
+        padding: 12px 15px 11px;
+        height: -webkit-fill-available !important;
+    }
+    .form-control:focus {
+        outline: none;
+        box-shadow: none;
+        border: 1px solid #ced4da;
+    }
+    .admin-btn {
+        border: 1px solid #3B89CF;
+        width: 337px;
+        margin-top: 60px;
+    }
+    .admin-btn:hover,
+    .admin-btn:active {
+        background: #5191c9;
+    }
+    .content-group {
+        width: 812px;
+    }
+    .default-width {
+        width: 337px;
+        display: inline-grid;
+        margin-top: 30px;
+    }
+    .space-content {
+        width: 130px;
+        display: inline-grid;
+    }
+    .mt-30 {
+        margin-top: 30px;
+    }
+    .invalid-feedback {
+        display: block;
+    }
+    .btn-primary {
+        width: 190px;
+        background: #D1499B;
+        border-color: #D1499B;
+        margin-top: 0;
+    }
+    .btn-primary:hover {
+        background: #dd80ba;
+        border-color: #dd80ba;
+    }
+    .btn-primary {
+        width: 190px;
+        background: #D1499B;
+        border-color: #D1499B;
+    }
+    .btn-primary:hover,
+    .btn-primary:active {
+        background: #dd80ba !important;
+        border-color: #dd80ba !important;
+    }
+    textarea.form-control {
+        height: 161px !important;
+    }
+    @media only screen and (max-width: 1210px) {
+        .content-group-button {
+            width: 760px;
+        }
+        .space-content {
+            width: 50px;
+        }
+    }
+    @media only screen and (max-width: 1124px) {
+        .default-width {
+            width: 250px;
+        }
+        .content-group-button {
+            width: 550px;
+        }
+    }
+    @media only screen and (max-width: 1024px) {
+        .content-group {
+            width: 100%;
+        }
+    }
+    @media only screen and (max-width: 650px) {
+        .content-group-button {
+            width: 100%;
+        }
+        .default-width {
+            width: 100%;
+        }
+        .space-content {
+            display: none;
+        }
+        .admin-btn {
+            width: 100%;
+        }
+        .d-delete {
+            float: none !important;
+        }
+        .btn-delete {
+            width: 100% !important;
+        }
+    }
+}
