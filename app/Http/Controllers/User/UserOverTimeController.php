@@ -13,16 +13,22 @@ class UserOverTimeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('checkUser');
+        // $this->middleware('checkUser');
     }
 
     public function index(Request $request)
     {
-        if (!$request->month) $request->month = Carbon::now()->month;
+        if (!$request->month) $request->month = Carbon::now()->month  < 10 ? '0' . Carbon::now()->month : Carbon::now()->month;
         if (!$request->year) $request->year = Carbon::now()->year;
 
         $date = $request->year . '-' . $request->month;
-        $listYear=Overtime::select(DB::raw('SUBSTR(date, 1, 4) as year'))->groupBy('year')->pluck('year');
+        $listYear=Overtime::select(DB::raw('SUBSTR(date, 1, 4) as year'))->groupBy('year')->pluck('year')->toArray();
+
+        if (!in_array(Carbon::now()->year, $listYear)) {
+            array_push($listYear, Carbon::now()->year);
+        }
+
+        sort($listYear);
 
 //        $month_get = Carbon::now()->format('Y-m');
 

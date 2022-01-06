@@ -34,9 +34,9 @@ class UserController extends Controller
         $user->phone = $request->phone;
         $user->address = $request->address;
         $user->dayOfBirth = $request->dayOfBirth;
-        $user->dayOfJoin = $request->dayOfJoin;
         $user->level = $request->level;
         $user->save();
-        return redirect()->route('user_edit');
+
+        return redirect()->route('user_edit')->with('message', 'Cập nhật thành công');
     }
 }

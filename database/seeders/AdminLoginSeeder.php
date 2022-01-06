@@ -18,6 +18,8 @@ class AdminLoginSeeder extends Seeder
     {
         DB::table('users')->insert(
             [
+                'user_id' => 1,
+                'username' => 'username1',
                 'name' => 'Đậu Đăng Tùng',
                 'email' => 'daudangtung@gmail.com',
                 'role' => UserRole::ADMIN,
@@ -27,7 +29,9 @@ class AdminLoginSeeder extends Seeder
         );
         DB::table('users')->insert(
             [
+                'user_id' => 2,
                 'name' => 'Admin',
+                'username' => 'username2',
                 'email' => 'admin@gmail.com',
                 'role' => UserRole::ADMIN,
                 'level' =>  UserLevel::Admin,

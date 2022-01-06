@@ -15,7 +15,7 @@
                 <div class="form-group relative">
                     <label for="date" class="tk-label">Ngày</label>
                     <div class="relative">
-                        <input type="date" class="form-control " id="date" name="date">
+                        <input type="date" class="form-control " id="date" name="date" required>
                         <div class="tk-icon">
                             <i class="icofont-calendar"></i>
                         </div>
@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label for="checkin" class="tk-label">Giờ Checkin</label>
                     <div class="relative">
-                        <input type="datetime-local" class="form-control relative" id="checkin" name="checkin">
+                        <input type="datetime-local" class="form-control relative" id="checkin" name="checkin" required>
                         <div class="tk-icon">
                             <i class="icofont-clock-time"></i>
                         </div>
@@ -33,7 +33,7 @@
                 <div class="form-group">
                     <label for="checkout" class="tk-label">Giờ Checkout</label>
                     <div class="relative">
-                        <input type="datetime-local" class="form-control" id="checkout" name="checkout">
+                        <input type="datetime-local" class="form-control" id="checkout" name="checkout" required>
                         <div class="tk-icon">
                             <i class="icofont-clock-time"></i>
                         </div>
@@ -41,12 +41,12 @@
                 </div>
                 <div class="form-group">
                     <label for="totalTime" class="tk-label">Tổng thời gian (h)</label>
-                    <input type="text" class="form-control w-95" id="totalTime" name="projectName" disabled
+                    <input type="text" class="form-control w-95" id="totalTime" name="projectName" disabled required
                            style="padding: 13px 26px;">
                 </div>
                 <div class="form-group">
                     <label for="project" class="tk-label">Dự án đang làm</label>
-                    <textarea class="form-control" id="project" name="projectName" rows="3"
+                    <textarea class="form-control" id="project" name="projectName" rows="3" required
                               placeholder="Dự án"></textarea>
                 </div>
 

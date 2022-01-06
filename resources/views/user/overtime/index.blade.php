@@ -1,5 +1,6 @@
 @extends('user.app')
 @section('header_content', 'Chấm công hành chính')
+@section('title', 'Chấm công hành chính')
 @section('active_user_overtime', 'active')
 @section('content')
     @push('styles')

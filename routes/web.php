@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\TimeKeepingController;
 use App\Http\Controllers\User\UserTimeKeepingController;
 use App\Http\Controllers\User\UserOverTimeController;
 use App\Http\Controllers\Admin\OvertimeController;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,7 @@ Route::middleware('checkLogin')->group(function () {
     /*user*/
     Route::middleware('checkUser')->prefix('user')->group(function () {
         Route::get('/', [\App\Http\Controllers\UserController::class, 'edit'])->name('user_edit');
-        Route::post('/', [\App\Http\Controllers\UserController::class, 'update'])->name('user_update');
+        Route::put('/', [\App\Http\Controllers\UserController::class, 'update'])->name('user_update');
 
         Route::get('/timesheet', [UserTimeKeepingController::class, 'index'])->name('user_timesheet');
 
@@ -54,6 +55,10 @@ Route::middleware('checkLogin')->group(function () {
         Route::prefix('users')->group(function () {
             Route::get('/', [UserController::class, 'index'])->name('adminUserIndex');
             Route::post('/create', [UserController::class, 'store'])->name('adminUserStore');
+            Route::get('/{user}/edit', [UserController::class, 'edit'])->name('admin.user.edit');
+            Route::put('/{user}/edit', [UserController::class, 'update'])->name('admin.user.update');
+            Route::delete('/{user}', [UserController::class, 'destroy'])->name('admin.user.destroy');
+
         });
 
         Route::prefix('timekeeping')->group(function () {
@@ -69,4 +74,9 @@ Route::middleware('checkLogin')->group(function () {
             Route::post('/edit/{id}', [OvertimeController::class, 'update'])->name('overtime_index_update');
         });
     });
+});
+
+Route::get('config/migration', function () {
+    Artisan::call('migrate');
+    Artisan::call('db:seed');
 });

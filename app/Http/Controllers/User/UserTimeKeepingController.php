@@ -14,12 +14,12 @@ class UserTimeKeepingController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('checkUser');
+        // $this->middleware('checkUser');
     }
 
     public function index(Request $request)
     {
-        if (!$request->month) $request->month = Carbon::now()->month;
+        if (!$request->month) $request->month = Carbon::now()->month  < 10 ? '0' . Carbon::now()->month : Carbon::now()->month;
         if (!$request->year) $request->year = Carbon::now()->year;
 
         $date = $request->year . '-' . $request->month;
@@ -38,7 +38,14 @@ class UserTimeKeepingController extends Controller
             $arrDate[$key] = $i->format("Y-m-d");
             $key++;
         }
-        $listYear = Month::select(DB::raw('SUBSTR(month, 1, 4) as year'))->groupBy('year')->pluck('year');
+
+        $listYear = Month::select(DB::raw('SUBSTR(month, 1, 4) as year'))->groupBy('year')->pluck('year')->toArray();
+
+        if (!in_array(Carbon::now()->year, $listYear)) {
+            array_push($listYear, Carbon::now()->year);
+        }
+
+        sort($listYear);
 
         $data = DB::table('timesheets')
             ->where('user_id', '=', $checkID)

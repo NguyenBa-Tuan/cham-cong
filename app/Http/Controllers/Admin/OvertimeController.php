@@ -19,13 +19,19 @@ class OvertimeController extends Controller
 
     public function index(Request $request)
     {
-        if (!$request->month) $request->month = Carbon::now()->month;
+        if (!$request->month) $request->month = Carbon::now()->month  < 10 ? '0' . Carbon::now()->month : Carbon::now()->month;
         if (!$request->year) $request->year = Carbon::now()->year;
 
         $date = $request->year . '-' . $request->month;
 
         $listYear = DB::table('overtimes')
-            ->select(DB::raw('DATE_FORMAT(date, "%Y") as year'))->groupBy('year')->pluck('year');
+            ->select(DB::raw('DATE_FORMAT(date, "%Y") as year'))->groupBy('year')->pluck('year')->toArray();
+
+        if (!in_array(Carbon::now()->year, $listYear)) {
+            array_push($listYear, Carbon::now()->year);
+        }
+
+        sort($listYear);
 
         $listUser = User::where('level', UserLevel::Employee)->pluck('name', 'id')->toArray();
 
@@ -39,7 +45,6 @@ class OvertimeController extends Controller
                 'day' => $i->format("d"),
             ];
         }
-
         $listOverTime = Overtime::where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date)->get();
 
         $arrData = [];
@@ -64,13 +69,7 @@ class OvertimeController extends Controller
             $arrData[$item->user_id]['total'] += $totalTime;
         }
 
-        if ($arrData == null) return view('admin.overtime.index', compact('listYear', 'listUser', 'arrDate', 'arrData'));
-        else {
-            $getH = floor(($arrData[$item->user_id]['total'] * 60) / 60);
-            $getM = ($arrData[$item->user_id]['total'] * 60) % 60;
-            $getTotal = $getH . ':' . $getM;
-            return view('admin.overtime.index', compact('listYear', 'listUser', 'arrDate', 'arrData', 'getTotal'));
-        }
+        return view('admin.overtime.index', compact('listYear', 'listUser', 'arrDate', 'arrData'));
     }
 
     public function edit($id)

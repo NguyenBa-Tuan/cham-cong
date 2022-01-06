@@ -18,6 +18,8 @@ class UserLoginSeeder extends Seeder
         DB::table('users')->insert(
             [
                 [
+                    'user_id' => 3,
+                    'username' => 'username5',
                     'name' => 'Lê Hữu Phước',
                     'email' => 'daudangtung1@gmail.com',
                     'role' => 1,
@@ -25,6 +27,8 @@ class UserLoginSeeder extends Seeder
                     'password' => bcrypt('11111111'),
                 ],
                 [
+                    'user_id' => 4,
+                    'username' => 'username4',
                     'name' => 'Trần Thị Duyên',
                     'email' => 'daudangtung2@gmail.com',
                     'role' => 1,
@@ -32,6 +36,8 @@ class UserLoginSeeder extends Seeder
                     'password' => bcrypt('11111111'),
                 ],
                 [
+                    'user_id' => 5,
+                    'username' => 'username3',
                     'name' => 'Cao Ngọc Thế',
                     'email' => 'daudangtung3@gmail.com',
                     'role' => 1,

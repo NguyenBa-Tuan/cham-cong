@@ -3,34 +3,34 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\UserLevel;
-use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RegisterFormRequest;
+use App\Http\Requests\Admin\CreateUserRequest;
+use App\Http\Requests\Admin\UpdateUserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeMail;
-use Validator;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        $users = User::all();$levels = UserLevel::toSelectArray();
-        return view('admin.user.index', compact('users', 'levels'));
-    }
-
-    public function create()
+    public function index(Request $request)
     {
         $levels = UserLevel::toSelectArray();
-        $roles = UserRole::toSelectArray();
-        return view('admin.user.create', compact('levels', 'roles'));
+
+        if ($request->active == 'sheet') {
+            $users = User::all();
+
+            return view('admin.user.index', compact('levels', 'users'));
+        }
+
+        return view('admin.user.index', compact('levels'));
     }
 
-    public function store(RegisterFormRequest $request)
+    public function store(CreateUserRequest $request)
     {
         $createUser = new User;
         $createUser->name = $request->name;
+        $createUser->username = $request->username;
         $createUser->email = $request->email;
         $createUser->password = $request->password;
         $createUser->phone = $request->phone;
@@ -38,34 +38,45 @@ class UserController extends Controller
         $createUser->dayOfBirth = $request->dayOfBirth;
         $createUser->dayOfJoin = $request->dayOfJoin;
         $createUser->level = $request->level;
+        $createUser->user_id = $request->user_id;
         $createUser->save();
 
-        Mail::to($createUser['email'])->send(new WelcomeMail($createUser));
+        // Mail::to($createUser['email'])->send(new WelcomeMail($createUser));
         return redirect()->route('adminUserIndex')->with('message', __('Đăng ký tài khoản thành công!'));
     }
 
-    public function editPassword($id)
+    public function edit(User $user, Request $request)
     {
-        $user = User::findOrFail($id);
-        return view('user.password.edit', compact('user'));
+        $levels = UserLevel::toSelectArray();
+
+        return view('admin.user.index', compact('levels', 'user'));
     }
 
-    public function updatePassword($id, Request $request)
+    public function update(User $user, UpdateUserRequest $request)
     {
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->dayOfBirth = $request->dayOfBirth;
+        $user->dayOfJoin = $request->dayOfJoin;
+        $user->level = $request->level;
+        $user->user_id = $request->user_id;
 
-        $resetPassword = User::findOrFail($id);
+        if ($request->password)
+            $user->password = $request->password;
 
-        $validator = Validator::make($request->all(), [
-            'password' => 'required|confirmed|min:8',
-        ]);
+        $user->save();
 
-        $resetPassword->password = $request->password;
+        // Mail::to($createUser['email'])->send(new WelcomeMail($createUser));
+        return redirect()->back()->with('message', __('Cập tài khoản thành công!'));
+    }
 
-        if ($validator->fails()) {
-            echo 'false';
-        } else {
-            $resetPassword->save();
-            return redirect()->route('adminUserIndex');
-        }
+    public function destroy($id)
+    {
+        User::destroy($id);
+
+        return redirect()->route('adminUserIndex')->with('message', __('Xóa tài khoản thành công!'));
     }
 }

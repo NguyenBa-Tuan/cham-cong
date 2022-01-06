@@ -16,7 +16,8 @@ mix.js("resources/js/app.js", "public/js")
     .css(
         "node_modules/admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
         "public/css"
-    );
+    )
+    .copy("resources/js/common.js", "public/js");
 
 //datatable
 mix.copy(
@@ -51,3 +52,4 @@ mix.copy(
 
 //admin
 mix.sass("resources/sass/admin/timekeeping.scss", "public/css/admin");
+mix.sass("resources/sass/admin/user.scss", "public/css/admin");

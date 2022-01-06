@@ -5,17 +5,17 @@
 @section('aside_content')
     <li class="nav-item">
         <a href="{{route('user_timesheet')}}" class="nav-link @yield('active_user_timesheet')">
-            Chấm công hành chính
+            <p>Chấm công hành chính</p>
         </a>
     </li>
     <li class="nav-item ">
         <a href="{{route('user_overtime')}}" class="nav-link @yield('active_user_overtime')">
-            Chấm công làm đêm
+            <p>Chấm công làm đêm</p>
         </a>
     </li>
     <li class="nav-item ">
         <a href="{{ route('user_edit') }}" class="nav-link @yield('active_user')">
-            Thông tin cá nhân
+            <p>Thông tin cá nhân</p>
         </a>
     </li>
 @endsection

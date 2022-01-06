@@ -36,7 +36,7 @@ class LoginController extends Controller
                 return redirect()->route('user_timesheet');
             }
         } else {
-            return redirect()->route('login')->with('alert', __('Email hoặc mật khẩu nhập vào không đúng, xin mời nhập lại!'));
+            return redirect()->route('login')->with('alert', __('Email hoặc mật khẩu không chính xác!'));
         }
         return redirect("login");
     }

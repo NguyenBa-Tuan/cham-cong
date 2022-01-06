@@ -1,0 +1,103 @@
+.content-user {
+  padding: 30px;
+}
+.content-user .form-control {
+  padding: 12px 15px 11px;
+  height: -webkit-fill-available !important;
+}
+.content-user .form-control:focus {
+  outline: none;
+  box-shadow: none;
+  border: 1px solid #ced4da;
+}
+.content-user .admin-btn {
+  border: 1px solid #3B89CF;
+  width: 337px;
+  margin-top: 60px;
+}
+.content-user .admin-btn:hover,
+.content-user .admin-btn:active {
+  background: #5191c9;
+}
+.content-user .content-group {
+  width: 812px;
+}
+.content-user .default-width {
+  width: 337px;
+  display: inline-grid;
+  margin-top: 30px;
+}
+.content-user .space-content {
+  width: 130px;
+  display: inline-grid;
+}
+.content-user .mt-30 {
+  margin-top: 30px;
+}
+.content-user .invalid-feedback {
+  display: block;
+}
+.content-user .btn-primary {
+  width: 190px;
+  background: #D1499B;
+  border-color: #D1499B;
+  margin-top: 0;
+}
+.content-user .btn-primary:hover {
+  background: #dd80ba;
+  border-color: #dd80ba;
+}
+.content-user .btn-primary {
+  width: 190px;
+  background: #D1499B;
+  border-color: #D1499B;
+}
+.content-user .btn-primary:hover,
+.content-user .btn-primary:active {
+  background: #dd80ba !important;
+  border-color: #dd80ba !important;
+}
+.content-user textarea.form-control {
+  height: 161px !important;
+}
+@media only screen and (max-width: 1210px) {
+  .content-user .content-group-button {
+    width: 760px;
+  }
+  .content-user .space-content {
+    width: 50px;
+  }
+}
+@media only screen and (max-width: 1124px) {
+  .content-user .default-width {
+    width: 250px;
+  }
+  .content-user .content-group-button {
+    width: 550px;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .content-user .content-group {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .content-user .content-group-button {
+    width: 100%;
+  }
+  .content-user .default-width {
+    width: 100%;
+  }
+  .content-user .space-content {
+    display: none;
+  }
+  .content-user .admin-btn {
+    width: 100%;
+  }
+  .content-user .d-delete {
+    float: none !important;
+  }
+  .content-user .btn-delete {
+    width: 100% !important;
+  }
+}

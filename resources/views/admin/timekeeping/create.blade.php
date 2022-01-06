@@ -7,7 +7,7 @@
 <div class="main-content main-create">
     @if ($errors->any())
         <div class="alert alert-danger w-377">
-            <ul>
+            <ul style="margin-bottom: 0px">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -16,7 +16,7 @@
     @endif
     @if (session()->has('errorUser'))
         <div class="alert alert-danger w-377">
-            <ul>
+            <ul style="margin-bottom: 0px">
                 @isset(session('errorUser')['date_error'])
                     <li>
                         Bắt buộc cột tháng X5, Cột năm (AA-AB)5

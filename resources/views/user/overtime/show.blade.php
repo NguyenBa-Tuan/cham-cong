@@ -2,6 +2,12 @@
     <link rel="stylesheet" href="{{ asset('css/style.css')}}">
     <link rel="stylesheet" href="{{ asset('css/atomic.css')}}">
     <link rel="stylesheet" href="{{ asset('css/custom-bootstrap4.css')}}">
+    <style>
+        .tk-table td {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    </style>
 @endpush
 <div class="tk-content">
     <div class="tk-search" style="display: flex; justify-content: center">

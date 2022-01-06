@@ -79,14 +79,26 @@ body {
         li {
             .active {
                 background: #494F55 !important;
+                p {
+                    color: #ffffff;
+                }
             }
             a {
+                height: 44px;
                 font-weight: 500;
                 font-size: 18px;
                 line-height: 21px;
-                padding: 10px 16px 13px !important;
+                padding: 0 16px 13px !important;
                 background: #3B4147 !important;
                 margin-bottom: 10px !important;
+            }
+            p {
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 21px;
+                /* identical to box height */
+                color: #C2C7D0;
+                line-height: 44px;
             }
         }
     }
@@ -110,6 +122,16 @@ label {
     height: 46px;
 }
 
+@media only screen and (max-width: 768px) {
+    .content-wrapper {
+        #main,
+        .tk-px-30 {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+    }
+}
+
 @media only screen and (max-width: 767px) {
     .nav-header {
         .header-content {
@@ -128,6 +150,9 @@ label {
         .border-right {
             margin-right: 10px !important;
             margin-left: 10px !important;
+        }
+        .hidden-mobile {
+            display: none !important;
         }
     }
 }
