@@ -41,7 +41,17 @@ class UserController extends Controller
         $createUser->user_id = $request->user_id;
         $createUser->save();
 
-        // Mail::to($createUser['email'])->send(new WelcomeMail($createUser));
+        $setToken = DB::table('password_resets')->insert([
+            'email' => $createUser->email,
+            'token' => Str::random(60),
+            'created_at' => Carbon::now(),
+            'expire_at' => Carbon::now()->addHours(24),
+        ]);
+
+        $token_data = DB::table('password_resets')->where('email', $createUser->email)->first();
+        if (!$token_data) return redirect()->to('login');
+
+        Mail::to($createUser['email'])->send(new WelcomeMail($createUser, $token_data));
         return redirect()->route('adminUserIndex')->with('message', __('Đăng ký tài khoản thành công!'));
     }
 
