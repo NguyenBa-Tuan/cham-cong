@@ -20,39 +20,41 @@
                 <span class="login-span">-</span>
                 Hệ thống chấm công
             </h1>
+            @if (session()->has('success'))
+            <div class="alert alert-success text-center">
+                {{ session()->get('success') }}
+            </div>
+            @endif
             <form action="{{ route('login_check') }}" method="POST" class="login-form">
                 @csrf
                 <h2>Đăng nhập</h2>
                 <div class="login-field">
-                    @if ($errors->any())
-                        <div class="alert alert-danger alert-block">
-                            <ul style="margin: 0; list-style-type: none; padding: 0">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
                     @if (session()->has('alert'))
-                        <div class="alert alert-danger alert-block">
-                            {{ session()->get('alert') }}
-                        </div>
+                    <div class="alert alert-danger alert-block">
+                        {{ session()->get('alert') }}
+                    </div>
                     @endif
                 </div>
                 <div class="login-field">
                     <label for="username" class="login-label">Username</label>
-                    <input id="username" placeholder="Vui lòng nhập tên tài khoản hoặc email" class="login-input"
-                        type="email" name="email">
+                    <input id="username" placeholder="Vui lòng nhập tên tài khoản hoặc email" class="login-input" type="email" name="email">
+                    @error('email')
+                    <div class="rp-error">
+                        {{ $message }}
+                    </div>
+                    @enderror
                 </div>
                 <div class="login-field">
                     <label for="password" class="login-label">Mật khẩu</label>
                     <input id="password" placeholder="●●●●●●●●" class="login-input" type="password" name="password">
+                    @error('password')
+                    <div class="rp-error">
+                        {{ $message }}
+                    </div>
+                    @enderror
                 </div>
                 <button type="submit" class="login-btn">Đăng nhập</button>
             </form>
-
-
-
         </div>
     </div>
 </body>

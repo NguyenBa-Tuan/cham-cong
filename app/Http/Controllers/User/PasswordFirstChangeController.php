@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ResetPasswordFormRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -20,18 +21,14 @@ class PasswordFirstChangeController extends Controller
         return view('user.password.edit', compact('user'));
     }
 
-    public function update(Request $request, $id)
+    public function update(ResetPasswordFormRequest $request, $id)
     {
         $reset = User::find($id);
         $reset->password = $request->password;
         $check = $reset->save();
         if ($check) {
             DB::table('password_resets')->where('email', $reset->email)->delete();
-            return redirect('login');
-        } else return redirect('reset_password_index');
-    }
-
-    protected function tokenExpired($createdAt){
-        return Carbon::parse($createdAt)->addSeconds($this->expires)->isPast();
+            return redirect()->route('login')->with('success', 'Bạn đã đổi mật khẩu thành công, bạn hãy login để đăng nhập hệ thống!');
+        } else return redirect()->route('reset_password_index')->with('warning', 'Có lỗi!');
     }
 }
