@@ -10,28 +10,10 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeMail;
-<<<<<<< HEAD
 
 class UserController extends Controller
 {
     public function index(Request $request)
-=======
-use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-use Validator;
-
-class UserController extends Controller
-{
-    public function index()
-    {
-        $users = User::all();
-        $levels = UserLevel::toSelectArray();
-        return view('admin.user.index', compact('users', 'levels'));
-    }
-
-    public function create()
->>>>>>> 86c5195 (send mail pass done)
     {
         $levels = UserLevel::toSelectArray();
 
