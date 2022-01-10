@@ -10,6 +10,8 @@ use App\Http\Controllers\User\UserOverTimeController;
 use App\Http\Controllers\Admin\OvertimeController;
 use Illuminate\Support\Facades\Artisan;
 
+use App\Http\Controllers\User\PasswordFirstChangeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,8 +32,13 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login_check');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/password/{id}', [UserController::class, 'editPassword'])->name('userEditPassword');
-Route::post('/password/{id}', [UserController::class, 'updatePassword'])->name('userUpdatePassword');
+// Route::get('/password/{id}', [UserController::class, 'editPassword'])->name('userEditPassword');
+// Route::post('/password/{id}', [UserController::class, 'updatePassword'])->name('userUpdatePassword');
+
+
+/*06/01/2022 send user password with url lifetime*/
+Route::get('/reset/{token}', [PasswordFirstChangeController::class, 'index'])->name('reset_password_index');
+Route::post('/reset/{token}', [PasswordFirstChangeController::class, 'update'])->name('reset_password_update');
 
 Route::middleware('checkLogin')->group(function () {
     /*user*/
