@@ -75,10 +75,17 @@
                         <td class="stt">{{ $i++ }}</td>
                         <td class="name">{{ $itemUser }}</td>
                         @foreach ($arrDate as $itemDate)
-                            <td class="{{ in_array($itemDate['day_of_week'], ['T7', 'CN']) ? 'weekend' : '' }}"
-                                style="{{ (isset($arrData[$idUser][$itemDate['date']]) && $arrData[$idUser][$itemDate['date']]['data'] == 'LL') ? 'background: #F79646 !important' : '' }}">
-                                {{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['data'] : '' }}
-                            </td>
+                            @if (isset($arrData[$idUser][$itemDate['date']]) && $arrData[$idUser][$itemDate['date']]['data'] == 'LL')
+                                <td class="{{ in_array($itemDate['day_of_week'], ['T7', 'CN']) ? 'weekend' : '' }}"
+                                    style="background: #F79646 !important">
+                                   
+                                </td>
+                            @else
+                                <td class="{{ in_array($itemDate['day_of_week'], ['T7', 'CN']) ? 'weekend' : '' }}">
+                                    {{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['data'] : '' }}
+                                </td>
+                            @endif
+
                         @endforeach
                         <td>{{ $x = isset($arrData[$idUser]['X']) ? ($x = $arrData[$idUser]['X']) : 0 }}</td>
                         <td>{{ $x2 = isset($arrData[$idUser]['X/2']) ? $arrData[$idUser]['X/2'] : 0 }}</td>
