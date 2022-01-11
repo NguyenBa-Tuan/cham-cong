@@ -35,7 +35,11 @@ class TimeKeepingController extends Controller
 
         sort($listYear);
 
-        $listUser = User::where('level', UserLevel::Employee)->pluck('name', 'id')->toArray();
+        $listUser = User::where('level', UserLevel::Employee)
+        ->whereHas('timesheet', function ($query) use ($date) {
+            $query->where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date);
+        })
+        ->pluck('name', 'id')->toArray();
 
         $listCheckin = Timesheet::where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date)->get();
 

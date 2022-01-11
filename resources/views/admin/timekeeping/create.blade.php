@@ -1,6 +1,8 @@
 @push('styles')
     <style>
-        
+        .main-create {
+            height: calc(100vh - 160px);
+        }
 
     </style>
 @endpush
