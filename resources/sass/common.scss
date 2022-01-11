@@ -14,11 +14,12 @@
         height: 35px;
         background: #EFF2F7 !important;
     }
-    .nav-link.active {
-        color: #4B545C;
-        font-weight: bold;
+    .nav-link.active,
+    .nav-tabs .nav-link:hover {
+        color: #4B545C !important;
+        font-weight: bold !important;
         background: #ffffff !important;
-        border-bottom: #ffffff;
+        border-bottom: #ffffff !important;
     }
     .tab-content {
         margin: 0 30px;

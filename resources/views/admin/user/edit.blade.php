@@ -146,7 +146,7 @@
                 <div class="relative">
                     <select class="form-control" id="level" name="level">
                         @foreach ($levels as $key => $level)
-                            <option value="{{ $key }}" {{ $user->name == $key ? 'selected' : '' }}>
+                            <option value="{{ $key }}" {{ $user->level == $key ? 'selected' : '' }}>
                                 {{ $level }}</option>
                         @endforeach
                     </select>
@@ -162,7 +162,7 @@
             </div>
         </div>
         <div class="content-group content-group-button text-center">
-            <button class="tk-btn admin-btn" type="submit">Đăng ký</button>
+            <button class="tk-btn admin-btn" type="submit">Cập nhật</button>
         </div>
 
     </div>

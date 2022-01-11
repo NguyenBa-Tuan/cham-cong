@@ -83,7 +83,7 @@ class UserController extends Controller
         $user->save();
 
         // Mail::to($createUser['email'])->send(new WelcomeMail($createUser));
-        return redirect()->back()->with('message', __('Cập tài khoản thành công!'));
+        return redirect()->back()->with('message', __('Cập nhật tài khoản thành công!'));
     }
 
     public function destroy($id)

@@ -35,7 +35,7 @@
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
-                        role="tab" aria-controls="home" aria-selected="true">Tạo tài khoản
+                        role="tab" aria-controls="home" aria-selected="true"> {{ (isset($user->id)) ? 'Sửa tài khoản' : 'Tạo tài khoản' }}
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
