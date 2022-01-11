@@ -10,9 +10,9 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\TimeSheetImport;
 use App\Models\User;
 use App\Http\Requests\ImportExcelRequest;
+use App\Imports\TimesheetImport;
 use Exception;
 
 class TimeKeepingController extends Controller
@@ -115,7 +115,7 @@ class TimeKeepingController extends Controller
             // $create->month = $request->month;
             // $create->save();
 
-            $data = new TimeSheetImport;
+            $data = new TimesheetImport();
             Excel::import($data, request()->file('file'));
 
             if ($data->response) {

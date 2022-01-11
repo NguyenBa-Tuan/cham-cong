@@ -14,7 +14,7 @@
             </ul>
         </div>
     @endif
-    @if (session()->has('errorUser'))
+    @if (isset(session('errorUser')['date_error']) || isset(session('errorUser')['date_exist']))
         <div class="alert alert-danger w-377">
             <ul style="margin-bottom: 0px">
                 @isset(session('errorUser')['date_error'])
