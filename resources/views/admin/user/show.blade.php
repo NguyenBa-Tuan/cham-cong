@@ -7,11 +7,12 @@
             text-align: center;
             padding-top: 24px;
             padding-bottom: 24px;
+            font-size: 14px;
         }
 
         td {
             padding: 16px 10px !important;
-            font-size: 16px;
+            font-size: 14px;
             line-height: 19px;
             color: #4B545C;
         }
@@ -34,11 +35,11 @@
                 <th class="bg-light-green" style="width: 60px">EMAIL</th>
                 <th class="bg-light-green" style="width: 166px">HỌ TÊN</th>
                 <th class="bg-light-green" style="width: 134px; white-space:nowrap">SỐ ĐIỆN THOẠI</th>
-                <th class="bg-light-green" style="width: 689px">ĐỊA CHỈ</th>
+                <th class="bg-light-green" style="width: 450px">ĐỊA CHỈ</th>
                 <th class="bg-light-green" style="width: 132px">NGÀY SINH</th>
                 <th class="bg-light-green" style="width: 134px; ">NGÀY VÀO CÔNG TY</th>
                 <th class="bg-light-green" style="width: 134px">CHỨC VỤ</th>
-                <th class="bg-light-green" style="width: 134px">chỉnh sửa</th>
+                <th class="bg-light-green" style="width: 134px">CHỈNH SỬA</th>
             </tr>
         </thead>
 
@@ -47,7 +48,7 @@
                 <tr>
                     <td class="py-17 text-center text-center font-700">{{ $key + 1 }}</td>
                     <td class="py-17 pl-10 font-500 text-center">{{ $user->user_id }}</td>
-                    <td class="py-17 pl-10 font-500 text-center">{{ $user->username }}</td>
+                    <td class="py-17 pl-10 font-500 text-left">{{ $user->username }}</td>
                     <td class="py-17 pl-10 font-500">{{ $user->email }}</td>
                     <td class="py-17 pl-10 font-500">{{ $user->name }}</td>
                     <td class="py-17 text-center font-400">{{ $user->phone }}</td>

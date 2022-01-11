@@ -5,6 +5,21 @@
             background-position: calc(100% - 7px);
         }
 
+        .DTFC_LeftHeadWrapper,
+        .DTFC_LeftBodyWrapper {
+            width: calc(100% + 0.5px) !important;
+        }
+
+        .DTFC_LeftBodyLiner {
+            width: 100% !important;
+            overflow-y: hidden !important;
+            padding: 0 !important;
+        }
+
+        .DTFC_Cloned {
+            border-right: 1px solid #999999 !important;
+        }
+
     </style>
     <link rel="stylesheet" href="{{ asset('css/datatables/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/datatables/fixedColumns.bootstrap4.min.css') }}">
@@ -60,7 +75,9 @@
                         <td class="stt">{{ $i++ }}</td>
                         <td class="name">{{ $itemUser }}</td>
                         @foreach ($arrDate as $itemDate)
-                            <td>{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['data'] : '' }}
+                            <td class="{{ in_array($itemDate['day_of_week'], ['T7', 'CN']) ? 'weekend' : '' }}"
+                                style="{{ (isset($arrData[$idUser][$itemDate['date']]) && $arrData[$idUser][$itemDate['date']]['data'] == 'LL') ? 'background: #F79646 !important' : '' }}">
+                                {{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['data'] : '' }}
                             </td>
                         @endforeach
                         <td>{{ $x = isset($arrData[$idUser]['X']) ? ($x = $arrData[$idUser]['X']) : 0 }}</td>
@@ -132,6 +149,6 @@
             let year = $('select[name=year]').val();
 
             location.assign(`{{ route('time_keeping_index') }}?active=sheet&year=${year}&month=${month}`)
-        })
+        });
     </script>
 @endpush
