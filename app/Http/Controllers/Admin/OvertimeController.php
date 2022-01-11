@@ -52,7 +52,7 @@ class OvertimeController extends Controller
 
         foreach ($listOverTime as $item) {
             $checkin = $item->checkin ? Carbon::parse($item->checkin)->format('d-m-Y H:i') : '';
-            $checkout = $item->checkin ? Carbon::parse($item->checkout)->format('d-m-Y H:i') : '';
+            $checkout = $item->checkout ? Carbon::parse($item->checkout)->format('d-m-Y H:i') : '';
 
             $totalTime = (strtotime($checkout) - strtotime($checkin)) / 60 / 60;
 

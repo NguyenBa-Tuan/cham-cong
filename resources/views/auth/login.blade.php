@@ -37,7 +37,7 @@
                 </div>
                 <div class="login-field">
                     <label for="username" class="login-label">Username</label>
-                    <input id="username" placeholder="Vui lòng nhập tên tài khoản hoặc email" class="login-input" type="email" name="email">
+                    <input id="username" placeholder="Vui lòng nhập tên tài khoản hoặc email" class="login-input" type="text" name="email">
                     @error('email')
                     <div class="rp-error">
                         {{ $message }}
