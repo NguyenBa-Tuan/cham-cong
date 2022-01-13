@@ -5,8 +5,7 @@
     <style>
         th {
             text-align: center;
-            padding-top: 24px;
-            padding-bottom: 24px;
+            padding: 24px 10px;
             font-size: 14px;
         }
 
@@ -33,11 +32,11 @@
                 <th class="bg-light-green" style="width: 60px">ID</th>
                 <th class="bg-light-green" style="width: 60px">USERNAME</th>
                 <th class="bg-light-green" style="width: 60px">EMAIL</th>
-                <th class="bg-light-green" style="width: 166px">HỌ TÊN</th>
+                <th class="bg-light-green" style="min-width: 166px">HỌ TÊN</th>
                 <th class="bg-light-green" style="width: 134px; white-space:nowrap">SỐ ĐIỆN THOẠI</th>
-                <th class="bg-light-green" style="width: 450px">ĐỊA CHỈ</th>
+                <th class="bg-light-green" style="min-width: 450px">ĐỊA CHỈ</th>
                 <th class="bg-light-green" style="width: 132px">NGÀY SINH</th>
-                <th class="bg-light-green" style="width: 134px; ">NGÀY VÀO CÔNG TY</th>
+                <th class="bg-light-green" style="min-width: 134px; ">NGÀY VÀO <br> CÔNG TY</th>
                 <th class="bg-light-green" style="width: 134px">CHỨC VỤ</th>
                 <th class="bg-light-green" style="width: 134px">CHỈNH SỬA</th>
             </tr>
