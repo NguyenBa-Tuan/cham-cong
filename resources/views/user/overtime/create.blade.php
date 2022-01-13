@@ -80,9 +80,9 @@
 <script>
     $("#checkin").timepicker({
         timeFormat: 'H:mm',
-        interval: 30,
+        interval: 15,
         minTime: '0',
-        maxTime: '23:30',
+        maxTime: '23:50',
         // defaultTime: '11',
         startTime: '00:00',
         dynamic: false,
@@ -92,40 +92,52 @@
 
     $("#checkout").timepicker({
         timeFormat: 'H:mm',
-        interval: 30,
+        interval: 10,
         minTime: '0',
-        maxTime: '23:30',
+        maxTime: '23:50',
         // defaultTime: '11',
         startTime: '00:00',
         dynamic: false,
         dropdown: true,
         scrollbar: true,
         change: () => {
+            var date = $("input#date").val();
             var checkin = $("input#checkin").val();
             var checkout = $("input#checkout").val();
 
-            total = NaN;
+            var startCheckPrev = new Date("1/1/1900 " + "18:00:00");
+            var endCheckPrev = new Date("1/1/1900 " + "23:59:00");
+            var startCheckNext = new Date("1/1/1900 " + "00:00:00");
+            var endCheckNext = new Date("1/1/1900 " + "7:00:00");
 
-            if (checkout > checkin) {
+            var startDate = new Date("1/1/1900 " + checkin);
+            var endDate = new Date("1/1/1900 " + checkout);
 
-                var startDate = new Date("1/1/1900 " + checkin);
-                var endDate = new Date("1/1/1900 " + checkout);
+            if (startDate >= startCheckPrev && endDate <= endCheckPrev || endDate <= endCheckNext && startDate >= startCheckNext) {
+                total = NaN;
 
-                var totalHour = Math.floor((endDate - startDate) / 1000 / 60 / 60);
-                var totalMin = (endDate - startDate) / 1000 / 60 % 60;
+                if (checkout > checkin) {
 
-                var total=totalHour + ':' + totalMin;
+                    var totalHour = Math.floor((endDate - startDate) / 1000 / 60 / 60);
+                    var totalMin = (endDate - startDate) / 1000 / 60 % 60;
 
-                if (totalHour > 12) {
-                    alert('thoi gian lam ot khong duoc qua 12 tieng!');
-                    document.getElementById('checkin').value = "";
-                    document.getElementById('checkout').value = "";
-                    $('#totalTime').val();
+                    var total = totalHour + ':' + totalMin;
+
+                    if (totalHour > 12) {
+                        alert('thoi gian lam ot khong duoc qua 12 tieng!');
+                        document.getElementById('checkin').value = "";
+                        document.getElementById('checkout').value = "";
+                        $('#totalTime').val();
+                    } else {
+                        $('#totalTime').val(total);
+                    }
                 } else {
-                    $('#totalTime').val(total);
+                    alert('Giờ checkout phải lớn hơn giờ checkin!');
+                    document.getElementById('checkout').value = "";
                 }
             } else {
-                alert('Giờ checkout phải lớn hơn giờ checkin!');
+                alert('Khung giờ làm đêm là từ 18:00 đến 23:59, hoặc 0:00 đến 7:00 của ngày hôm sau!');
+                document.getElementById('checkin').value = "";
                 document.getElementById('checkout').value = "";
             }
         },
