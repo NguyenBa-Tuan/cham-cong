@@ -104,20 +104,17 @@
             var checkin = $("input#checkin").val();
             var checkout = $("input#checkout").val();
 
-            var timeStart = new Date("01/01/2007 " + checkin).getTime();
-            var timeEnd = new Date("01/01/2007 " + checkout).getTime();
-
-            totalHour = NaN;
-
-            console.log(timeStart, timeEnd);
+            total = NaN;
 
             if (checkout > checkin) {
-                var timeStart = new Date("01/01/2007 " + checkin).getTime();
-                var timeEnd = new Date("01/01/2007 " + checkout).getTime();
 
-                var hourDiff = timeEnd - timeStart;
+                var startDate = new Date("1/1/1900 " + checkin);
+                var endDate = new Date("1/1/1900 " + checkout);
 
-                var totalHour = new Date("01/01/2007 " + hourDiff).getTime();
+                var totalHour = Math.floor((endDate - startDate) / 1000 / 60 / 60);
+                var totalMin = (endDate - startDate) / 1000 / 60 % 60;
+
+                var total=totalHour + ':' + totalMin;
 
                 if (totalHour > 12) {
                     alert('thoi gian lam ot khong duoc qua 12 tieng!');
@@ -125,7 +122,7 @@
                     document.getElementById('checkout').value = "";
                     $('#totalTime').val();
                 } else {
-                    $('#totalTime').val(totalHour);
+                    $('#totalTime').val(total);
                 }
             } else {
                 alert('Giờ checkout phải lớn hơn giờ checkin!');
@@ -133,46 +130,6 @@
             }
         },
     });
-
-
-
-    // function myFunction() {
-    //     var checkin = $("input#checkin").val();
-    //     var checkout = $("input#checkout").val();
-
-    //     var timeStart = new Date("01/01/2007 " + checkin).getTime();
-    //     var timeEnd = new Date("01/01/2007 " + checkout).getTime();
-
-    //     totalHour = NaN;
-
-    //     console.log(timeStart, timeEnd);
-
-    //     if (checkout > checkin) {
-    //         // var timeStart = new Date("01/01/2007 " + checkin).getTime();
-    //         // var timeEnd = new Date("01/01/2007 " + checkout).getTime();
-
-
-    //         // var totalHour = new Date("01/01/2007 " + hourDiff).getTime();
-    //         var totalHour = timeEnd - timeStart;
-
-
-
-    //         if (totalHour > 12) {
-    //             alert('thoi gian lam ot khong duoc qua 12 tieng!');
-    //             document.getElementById('checkin').value = "";
-    //             document.getElementById('checkout').value = "";
-    //             $('#totalTime').val();
-    //         } else {
-    //             $('#totalTime').val(totalHour);
-    //         }
-    //     } else {
-    //         alert('Giờ checkout phải lớn hơn giờ checkin!');
-    //         document.getElementById('checkout').value = "";
-    //     }
-    // }
-
-
-
 
     $('input#checkin').timepicker({
         change: (time) => {
