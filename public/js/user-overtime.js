@@ -3,6 +3,15 @@ document.querySelector("#checkout").addEventListener("change", myFunction);
 function myFunction() {
     var checkin = $("input#checkin").val();
     var checkout = $("input#checkout").val();
+    // var date=$("input#date").val();
+    
+
+    // console.log(dateNow);
+
+    // if(date<dateNow){
+    //     alert('khong the dang ky lam tang ca cho hom truoc!');
+    //     document.getElementById('date').value = "";
+    // }
 
     totalHour = NaN;
     if (checkout > checkin) {
@@ -13,21 +22,20 @@ function myFunction() {
 
         var totalHour = Math.floor(hourDiff / 1000 / 60 / 60);
         var totalMin = hourDiff / 1000 / 60 % 60;
-        total = totalHour + ':' + totalMin;
+        var totalMinFormat = (totalMin < 10) ? '0' + totalMin : totalMin
+        total = totalHour + ':' + totalMinFormat;
 
-        console.log(totalMin);
-
-        // if (totalHour > 24) {
-        //     alert('thoi gian lam ot khong duoc qua 24 tieng!');
-        //     document.getElementById('checkin').value = "";
-        //     document.getElementById('checkout').value = "";
-        //     $('#totalTime').val();
-        // } else {
-        //     $('#totalTime').val(total);
-        // }
+        if (totalHour > 12) {
+            alert('thoi gian lam ot khong duoc qua 12 tieng!');
+            document.getElementById('checkin').value = "";
+            document.getElementById('checkout').value = "";
+            $('#totalTime').val();
+        } else {
+            $('#totalTime').val(total);
+        }
     }
     else {
-        alert('ngay check out phai sau ngay check in!');
+        alert('gio checkout phai sau ngay gio checkin!');
         document.getElementById('checkout').value = "";
     }
 }

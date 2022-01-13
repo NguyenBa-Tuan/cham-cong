@@ -230,7 +230,7 @@
                             <th class="date">Tổng</th>
                             @foreach ($listUser as $idUser => $name)
                                 <th colspan="2" class="bg-green1">
-                                    {{ isset($arrData[$idUser]['total']) ? round($arrData[$idUser]['total'], 1) : '' }}
+                                    {{ isset($arrData[$idUser]['total_time']) ? $total_get: '' }}
                                 </th>
                             @endforeach
                         </tr>
