@@ -83,7 +83,7 @@
                             <td></td>
                         @else
                             @foreach($data as $d)
-                                <td class="text-center f-14 font-400">{{date('H:i', strtotime($d))}}<br></td>
+                                <td class="text-center f-14 font-700">{{date('H:i', strtotime($d))}}<br></td>
                             @endforeach
                         @endif
                     @endforeach

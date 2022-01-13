@@ -14,12 +14,6 @@ class UserController extends Controller
         $this->middleware('checkUser');
     }
 
-//    public function index()
-//    {
-//        $user = Auth::user();
-//        return view('user.index', compact('user'));
-//    }
-
     public function edit()
     {
         $user = Auth::user();
@@ -34,7 +28,7 @@ class UserController extends Controller
         $user->phone = $request->phone;
         $user->address = $request->address;
         $user->dayOfBirth = $request->dayOfBirth;
-        $user->level = $request->level;
+        $user->password = $request->password;
         $user->save();
 
         return redirect()->route('user_edit')->with('message', 'Cập nhật thành công');
