@@ -22,7 +22,7 @@
 
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/common.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script> --}}
 
 @stack('scripts')
 </html>

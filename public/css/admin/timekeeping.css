@@ -69,7 +69,7 @@
   margin-bottom: 20px !important;
 }
 .main-list .form-month {
-  width: 114px !important;
+  width: 120px !important;
   display: inline !important;
   background-color: #ffffff;
   padding: 10px 29px 11px 10px !important;
@@ -148,7 +148,7 @@
   border-top: 1px solid #999999 !important;
 }
 .main-list .w-198 {
-  width: 198px;
+  min-width: 198px;
 }
 .main-list .note {
   font-weight: bold;

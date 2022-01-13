@@ -28,7 +28,7 @@
         }
 
         .form-month {
-            width: 114px !important;
+            width: 120px !important;
             display: inline !important;
             background-color: #ffffff;
             padding: 10px 29px 11px 10px !important;
@@ -109,13 +109,17 @@
 
         .bg-td1 {
             background: #D0DFF5 !important;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 16px;
+            vertical-align: middle !important;
+
         }
 
         .bg-td2 {
             background: #DEF5DC;
             font-weight: 500;
             font-size: 14px;
-            line-height: 16px;
             text-align: center;
             color: #4B545C;
         }
@@ -126,6 +130,7 @@
             color: #333333 !important;
             opacity: 1;
         }
+
         .icofont-close-line-circled {
             font-size: 22px;
             opacity: 1;
@@ -139,14 +144,15 @@
             #main {
                 padding: 30px 10px !important;
             }
-            .form-month {
-                width: 114px !important;
-            }
+
             .content-header {
                 font-size: 16px;
             }
         }
 
+        .modal-dialog {
+            margin: auto;
+        }
     </style>
     <link rel="stylesheet" href="{{ asset('css/atomic.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -171,7 +177,7 @@
                         <option value="{{ $item }}" {{ $item == request()->year ? 'selected' : '' }}>Năm
                             {{ $item }}</option>
                     @empty
-                        
+
                     @endforelse
                 </select>
             </div>
@@ -230,7 +236,8 @@
                             <th class="date">Tổng</th>
                             @foreach ($listUser as $idUser => $name)
                                 <th colspan="2" class="bg-green1">
-                                    {{ isset($arrData[$idUser]['total_time']) ? $total_get: '' }}
+                                    @php($total = isset($arrData[$idUser]['total_time']) ? $arrData[$idUser]['total_time'] : 0)
+                                    {{ isset($arrData[$idUser]['total_time']) ? floor(($total * 60) / 60) . ':' . ($total * 60) % 60 : '' }}
                                 </th>
                             @endforeach
                         </tr>
@@ -242,37 +249,41 @@
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="d-flex" style="height: 75%;">
 
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div style="height: 26px; background:#3B89CF; border: 1px solid #ffffff"></div>
-                    <div style="padding: 0 10px; overflow: auto">
-                        <table class="table text-center mx-auto" style="margin-top: 30px;" id="ot_detail">
-                            <tr>
-                                <th rowspan="2" class="at-ot-date td-middle bg-td1"
-                                    style="width: 68px; border-top: 1px solid #999999;">Ngày</th>
-                                <td colspan="5" class="font-700 td-middle"
-                                    style="padding: 15px 0 14px; font-size: 18px; line-height: 21px; border-top: 1px solid #999999">
-                                    <span id="name"></span>
-                                </td>
-                            </tr>
-                            <tr class="bg-td2">
-                                <td class="bg-light-green ad-ot-title py-16 td-middle">Checkin</td>
-                                <td class="bg-light-green ad-ot-title td-middle">Checkout</td>
-                                <td class="bg-light-green ad-ot-title td-middle" style="width: 82px;">Tổng thời gian
-                                </td>
-                                <td class="bg-light-green ad-ot-title td-middle" style="width: 150px;">Dự án đang
-                                    làm
-                                </td>
-                                <td class="bg-light-green ad-ot-title td-middle">Ghi chú</td>
-                            </tr>
-                        </table>
-                        <div class="ad-ot-close">
-                            <div class="close" style="padding: 27px 0 26px 0; cursor: pointer">
-                                <i class="icofont-close-line-circled"></i>
-                                <span>Đóng</span>
+
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div style="height: 26px; background:#3B89CF; border: 1px solid #ffffff"></div>
+                        <div style="padding: 0 10px; overflow: auto">
+                            <table class="table text-center mx-auto" style="margin-top: 30px;" id="ot_detail">
+                                <tr>
+                                    <th rowspan="2" class="at-ot-date td-middle bg-td1"
+                                        style="width: 68px; border-top: 1px solid #999999;">Ngày</th>
+                                    <td colspan="5" class="font-700 td-middle"
+                                        style="padding: 15px 0 14px; font-size: 18px; line-height: 21px; border-top: 1px solid #999999">
+                                        <span id="name"></span>
+                                    </td>
+                                </tr>
+                                <tr class="bg-td2">
+                                    <td class="bg-light-green ad-ot-title py-16 td-middle">Checkin</td>
+                                    <td class="bg-light-green ad-ot-title td-middle">Checkout</td>
+                                    <td class="bg-light-green ad-ot-title td-middle" style="width: 82px;">Tổng thời gian
+                                    </td>
+                                    <td class="bg-light-green ad-ot-title td-middle" style="width: 150px;">Dự án đang
+                                        làm
+                                    </td>
+                                    <td class="bg-light-green ad-ot-title td-middle">Ghi chú</td>
+                                </tr>
+                            </table>
+                            <div class="ad-ot-close">
+                                <div class="close" style="padding: 27px 0 26px 0; cursor: pointer">
+                                    <i class="icofont-close-line-circled"></i>
+                                    <span>Đóng</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -280,7 +291,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 @push('scripts')
@@ -304,8 +314,8 @@
             var total = $(this).data("total");
             var project = $(this).data("project");
 
-            var checkIn = dataCheckin.split(' ')[1];
-            var checkOut = dataCheckout.split(' ')[1];
+            var checkIn = dataCheckin;
+            var checkOut = dataCheckout;
 
             /*check AM or PM*/
             // var checkInType = (checkIn >= 12) ? 'PM' : "AM";
@@ -333,6 +343,7 @@
                 '</tr>'
             );
             $('#myModal').modal('show');
+            $('#myModal').css('display', 'flex');
         })
     </script>
 @endpush

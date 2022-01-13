@@ -32,11 +32,11 @@
                 <th class="bg-light-green" style="width: 60px">ID</th>
                 <th class="bg-light-green" style="width: 60px">USERNAME</th>
                 <th class="bg-light-green" style="width: 60px">EMAIL</th>
-                <th class="bg-light-green" style="min-width: 166px">HỌ TÊN</th>
+                <th class="bg-light-green" style="min-width: 166px; ">HỌ TÊN</th>
                 <th class="bg-light-green" style="width: 134px; white-space:nowrap">SỐ ĐIỆN THOẠI</th>
                 <th class="bg-light-green" style="min-width: 450px">ĐỊA CHỈ</th>
                 <th class="bg-light-green" style="width: 132px">NGÀY SINH</th>
-                <th class="bg-light-green" style="min-width: 134px; ">NGÀY VÀO <br> CÔNG TY</th>
+                <th class="bg-light-green" style="min-width: 110px; ">NGÀY VÀO <br> CÔNG TY</th>
                 <th class="bg-light-green" style="width: 134px">CHỨC VỤ</th>
                 <th class="bg-light-green" style="width: 134px">CHỈNH SỬA</th>
             </tr>
@@ -49,12 +49,12 @@
                     <td class="py-17 pl-10 font-500 text-center">{{ $user->user_id }}</td>
                     <td class="py-17 pl-10 font-500 text-left">{{ $user->username }}</td>
                     <td class="py-17 pl-10 font-500">{{ $user->email }}</td>
-                    <td class="py-17 pl-10 font-500">{{ $user->name }}</td>
+                    <td class="py-17 pl-10 font-500"  style="white-space:nowrap">{{ $user->name }}</td>
                     <td class="py-17 text-center font-400">{{ $user->phone }}</td>
                     <td class="py-17 pl-10 font-400">{{ $user->address }}</td>
-                    <td class="py-17 pl-28 font-400">
+                    <td class="py-17 text-center pl-28 font-400">
                         {{ $user->dayOfBirth ? date('d/m/Y', strtotime($user->dayOfBirth)) : '' }}</td>
-                    <td class="py-17 pl-28 font-400">
+                    <td class="py-17 text-center pl-28 font-400">
                         {{ $user->dayOfJoin ? date('d/m/Y', strtotime($user->dayOfJoin)) : '' }}</td>
                     <td class="py-17 text-center font-400">{{ \App\Enums\UserLevel::getDescription($user->level) }}
                     </td>
