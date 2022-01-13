@@ -60,7 +60,3 @@
         @endif
     </div>
 @endsection
-
-@push('scripts')
-    <script src="{{asset('js/user-overtime.js')}}"></script>
-@endpush
