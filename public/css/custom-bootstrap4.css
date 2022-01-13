@@ -38,6 +38,7 @@ label {
 
 .form-group input {
     padding: 14px 15px 13px !important;
+    /* padding: 11px 15px 13px !important; */
     font-size: 16px;
     font-weight: 400;
     color: #000000;
@@ -51,7 +52,8 @@ label {
 }
 
 .form-group input {
-    height: -webkit-fill-available !important;
+    /* height: -webkit-fill-available !important; */
+    height: 48px !important;
 }
 
 /*bs4 custom form input icon right*/

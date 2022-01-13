@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label for="checkin" class="tk-label">Giờ Checkin</label>
                     <div class="relative">
-                        <input type="datetime-local" class="form-control relative" id="checkin" name="checkin" required>
+                        <input type="time" class="form-control relative" id="checkin" name="checkin" required>
                         <div class="tk-icon">
                             <i class="icofont-clock-time"></i>
                         </div>
@@ -33,7 +33,7 @@
                 <div class="form-group">
                     <label for="checkout" class="tk-label">Giờ Checkout</label>
                     <div class="relative">
-                        <input type="datetime-local" class="form-control" id="checkout" name="checkout" required>
+                        <input type="time" class="form-control" id="checkout" name="checkout" required>
                         <div class="tk-icon">
                             <i class="icofont-clock-time"></i>
                         </div>

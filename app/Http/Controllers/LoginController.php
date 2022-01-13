@@ -13,23 +13,21 @@ class LoginController extends Controller
     public function index()
     {
         if (Auth::user()) {
-            if (Auth::user()->role == UserRole::ADMIN) {
+            if (Auth::user()->role == UserRole::ADMIN)
                 return redirect()->route('admin_index');
-            } else {
-                return redirect()->route('user_timesheet');
-            }
+            else return redirect()->route('user_timesheet');
         }
         return view('auth.login');
     }
 
     public function login(LoginFormRequest $request)
     {
-        $login = $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
+        $input = $request->all();
 
-        if (Auth::attempt($login)) {
+        $fieldTypeID = filter_var($request->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'user_id';
+        $fieldTypeUsername = filter_var($request->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+        if (Auth::attempt(array($fieldTypeUsername => $input['email'], 'password' => $input['password'])) || Auth::attempt(array($fieldTypeID => $input['email'], 'password' => $input['password']))) {
             if (Auth::user()->role == 0) {
                 return redirect()->route('admin_index');
             } else {

@@ -51,8 +51,8 @@ class OvertimeController extends Controller
         $totalTime = 0;
 
         foreach ($listOverTime as $item) {
-            $checkin = $item->checkin ? Carbon::parse($item->checkin)->format('d-m-Y H:i') : '';
-            $checkout = $item->checkin ? Carbon::parse($item->checkout)->format('d-m-Y H:i') : '';
+            $checkin = $item->checkin ? Carbon::parse($item->checkin)->format('H:i') : '';
+            $checkout = $item->checkout ? Carbon::parse($item->checkout)->format(' H:i') : '';
 
             $totalTime = (strtotime($checkout) - strtotime($checkin)) / 60 / 60;
 
@@ -64,12 +64,16 @@ class OvertimeController extends Controller
                 'project_name' =>  $item->projectName,
             ];
 
-            if (!isset($arrData[$item->user_id]['total'])) $arrData[$item->user_id]['total'] = 0;
+            if (!isset($arrData[$item->user_id]['total_time'])) $arrData[$item->user_id]['total_time'] = 0;
 
-            $arrData[$item->user_id]['total'] += $totalTime;
+            $arrData[$item->user_id]['total_time'] += $totalTime;
         }
 
-        return view('admin.overtime.index', compact('listYear', 'listUser', 'arrDate', 'arrData'));
+        $total = $arrData[$item->user_id]['total_time'];
+        $totalH = floor(($total * 60) / 60);
+        $totalM = (($total * 60) % 60);
+        $total_get = $totalH . ':' . $totalM;
+        return view('admin.overtime.index', compact('listYear', 'listUser', 'arrDate', 'arrData', 'total_get'));
     }
 
     public function edit($id)
