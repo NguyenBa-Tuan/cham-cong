@@ -11,6 +11,10 @@
                 padding-left: 10px !important;
                 padding-right: 10px !important; 
             }
+
+            .tk-general-lb{
+                padding-left: 415px;
+            }
         </style>
     @endpush
 
@@ -107,7 +111,7 @@
                         </div>
 
                         <div class="col-md-9">
-                            <h3 class="mb-30 text-center" >Tổng hợp</h3>
+                            <h3 class="mb-30 tk-general-lb">Tổng hợp</h3>
                             <table class="tk-table">
                                 <thead>
                                 <tr>

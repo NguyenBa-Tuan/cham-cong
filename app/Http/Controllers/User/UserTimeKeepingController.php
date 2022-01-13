@@ -26,11 +26,18 @@ class UserTimeKeepingController extends Controller
 
         $checkID = Auth::user()->id;
 
-        $month = Carbon::now()->format('Y-m');
-        $month_get = $month;
+        $listYear = Month::select(DB::raw('SUBSTR(month, 1, 4) as year'))->groupBy('year')->pluck('year')->toArray();
+
+        if (!in_array(Carbon::now()->year, $listYear)) {
+            array_push($listYear, Carbon::now()->year);
+        }
+
+        sort($listYear);
+
+
 
         $begin = new \DateTime($date . '-01');
-        $end = new \DateTime($date . '-' . Carbon::parse($month_get)->daysInMonth);
+        $end = new \DateTime($date . '-' . Carbon::parse($date)->daysInMonth);
 
         $arrDate = [];
         $key = 0;
@@ -100,7 +107,7 @@ class UserTimeKeepingController extends Controller
             ->where('timesheets.data', '=', 'KP')
             ->count('timesheets.data');
 
-        $total = $dataX - ($dataX_2 / 2) + $dataPL;
-        return view('user.timesheet.index', compact('listYear',  'arrDate', 'month', 'data', 'note', 'dataX', 'dataX_2', 'dataPL', 'dataP', 'dataKP', 'total'));
+        $total = $dataX + ($dataX_2 / 2) + $dataPL;
+        return view('user.timesheet.index', compact('listYear',  'arrDate', 'data', 'note', 'dataX', 'dataX_2', 'dataPL', 'dataP', 'dataKP', 'total'));
     }
 }

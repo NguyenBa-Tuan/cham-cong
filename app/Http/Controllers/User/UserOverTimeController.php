@@ -18,11 +18,12 @@ class UserOverTimeController extends Controller
 
     public function index(Request $request)
     {
+
         if (!$request->month) $request->month = Carbon::now()->month  < 10 ? '0' . Carbon::now()->month : Carbon::now()->month;
         if (!$request->year) $request->year = Carbon::now()->year;
 
         $date = $request->year . '-' . $request->month;
-        $listYear=Overtime::select(DB::raw('SUBSTR(date, 1, 4) as year'))->groupBy('year')->pluck('year')->toArray();
+        $listYear = Overtime::select(DB::raw('SUBSTR(date, 1, 4) as year'))->groupBy('year')->pluck('year')->toArray();
 
         if (!in_array(Carbon::now()->year, $listYear)) {
             array_push($listYear, Carbon::now()->year);
@@ -30,7 +31,6 @@ class UserOverTimeController extends Controller
 
         sort($listYear);
 
-//        $month_get = Carbon::now()->format('Y-m');
 
         $from = $date . '-01';
 
@@ -56,16 +56,12 @@ class UserOverTimeController extends Controller
 
         $data = Overtime::where('user_id', Auth::id())
             ->where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date)
-//            ->whereMonth('date', Carbon::now()->month)
-//            ->whereYear('date', Carbon::now()->year)
             ->orderby('date', 'DESC')
             ->get();
 
         $count = Overtime::where('user_id', Auth::id())
             ->select('totalTime')
             ->where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date)
-//            ->whereMonth('date', Carbon::now()->month)
-//            ->whereYear('date', Carbon::now()->year)
             ->sum(DB::raw("TIME_TO_SEC(totalTime)"));
 
         $h = floor($count / 60 / 60);
@@ -120,7 +116,14 @@ class UserOverTimeController extends Controller
         $create->totalTime = $create->checkout->diff($create->checkin)->format('%H:%I:%S');
         $create->note = $request->note;
         $create->projectName = $request->projectName;
-        $create->save();
-        return redirect()->route('user_overtime');
+
+        $data_check = DB::table('overtimes')->select('user_id', 'date')
+            ->where('user_id', '=', $create->user_id)
+            ->where('date', '=',  $create->date)->first();
+        if ($data_check) return redirect()->route('user_overtime')->with('error', 'fail!');
+        else {
+            $create->save();
+            return redirect()->route('user_overtime')->with('success', 'Success!');
+        }
     }
 }

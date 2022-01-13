@@ -15,16 +15,17 @@ class EditUserFormRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'level' => 'required'
+            'password' => 'confirmed|min:8|max:25',
         ];
     }
 
     public function messages()
     {
-//        return parent::messages();
         return [
             'name.required' => 'Họ tên không được để trống',
-            'level.required' => 'Chức vụ không được để trống',
+            'password.min' => 'Độ dài mật khẩu không được ít hơn 8 ký tự!',
+            'password.max' => 'Độ dài mật khẩu không được nhiều hơn 25 ký tự!',
+            'password.confirmed' => 'Mật khẩu nhập lại không đúng!',
         ];
     }
 }
