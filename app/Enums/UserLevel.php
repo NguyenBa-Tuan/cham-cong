@@ -12,8 +12,7 @@ use BenSampo\Enum\Enum;
 final class UserLevel extends Enum
 {
     /*phan chuc vu cua nhan vien trong cong ty*/
-    const Director = 0;
-    const Dev = 1;
-    const Tester = 2;
-    const Comtor = 3;
+    const Dev = 0;
+    const Tester = 1;
+    const Comtor = 2;
 }
