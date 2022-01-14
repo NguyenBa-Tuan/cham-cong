@@ -11,7 +11,9 @@ use BenSampo\Enum\Enum;
  */
 final class UserLevel extends Enum
 {
-    const Admin = 0;
-    const Employee = 1;
-    const Intern = 2;
+    /*phan chuc vu cua nhan vien trong cong ty*/
+    const Director = 0;
+    const Dev = 1;
+    const Tester = 2;
+    const Comtor = 3;
 }
