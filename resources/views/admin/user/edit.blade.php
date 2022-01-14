@@ -96,6 +96,18 @@
             </div>
             <div class="space-content"></div>
             <div class="default-width">
+                <label class="tk-label" for="password_confirmation">Nhập lại mật khẩu</label>
+                <input class="form-control" type="password" placeholder="●●●●●●●●" name="password_confirmation">
+                @error('password_confirmation')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            
+        </div>
+        <div class="content-group">
+            <div class="default-width">
                 <label class="tk-label" for="dayOfBirth">Ngày sinh</label>
                 <div class="relative">
                     <input class="form-control" type="date" placeholder="" id="dayOfBirth" name="dayOfBirth"
@@ -104,17 +116,6 @@
                         <i class="icofont-clock-time"></i>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="content-group">
-            <div class="default-width">
-                <label class="tk-label" for="password_confirmation">Nhập lại mật khẩu</label>
-                <input class="form-control" type="password" placeholder="●●●●●●●●" name="password_confirmation">
-                @error('password_confirmation')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
             </div>
             <div class="space-content"></div>
             <div class="default-width">

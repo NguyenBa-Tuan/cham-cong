@@ -3,7 +3,6 @@
 }
 .content-user .form-control {
   padding: 12px 15px 11px;
-  /* height: -webkit-fill-available !important; */
   height: 48px !important;
 }
 .content-user .form-control:focus {

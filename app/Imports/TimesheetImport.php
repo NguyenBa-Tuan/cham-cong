@@ -56,7 +56,7 @@ class TimesheetImport implements ToCollection
             $key++;
         }
 
-        $listUser = User::where('level', UserRole::USER)->pluck('name', 'id')->toArray();
+        $listUser = User::where('role', UserRole::USER)->pluck('name', 'id')->toArray();
         foreach ($collection as $key => $row) {
             if ($key >= 8 && $row[0]) {
                 $name = $row[1];

@@ -36,7 +36,7 @@ class TimeKeepingController extends Controller
 
         sort($listYear);
 
-        $listUser = User::where('level', UserRole::USER)
+        $listUser = User::where('role', UserRole::USER)
         ->whereHas('timesheet', function ($query) use ($date) {
             $query->where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date);
         })
