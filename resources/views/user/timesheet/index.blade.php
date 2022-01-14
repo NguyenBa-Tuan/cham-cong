@@ -13,7 +13,8 @@
     }
 
     .tk-general-lb {
-        padding-left: 435px;
+        /* padding-left: 435px; */
+        text-align: center;
     }
 
     .general-row {
