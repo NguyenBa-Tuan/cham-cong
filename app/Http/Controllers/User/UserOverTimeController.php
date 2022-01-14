@@ -120,7 +120,8 @@ class UserOverTimeController extends Controller
         $data_check = DB::table('overtimes')->select('user_id', 'date')
             ->where('user_id', '=', $create->user_id)
             ->where('date', '=',  $create->date)->first();
-        if ($data_check) return redirect()->route('user_overtime')->with('error', 'fail!');
+        if ($data_check) return redirect()->route('user_overtime')->with('error', 'Ngày ' . Carbon::parse($request->date)->format('d/m/Y') . ' đã đăng ký làm đêm!');
+        if ($create->checkout <= $create->checkin) return redirect()->route('user_overtime')->with('error', 'Lỗi: thời gian checkout nhỏ hơn thời gian checkin!');
         else {
             $create->save();
             return redirect()->route('user_overtime')->with('success', 'Success!');

@@ -80,14 +80,40 @@
 <script>
     $("#checkin").timepicker({
         timeFormat: 'H:mm',
-        interval: 15,
+        interval: 10,
         minTime: '0',
         maxTime: '23:50',
         // defaultTime: '11',
         startTime: '00:00',
         dynamic: false,
         dropdown: true,
-        scrollbar: true
+        scrollbar: true,
+        change: () => {
+            var date = $("input#date").val();
+            var checkin = $("input#checkin").val();
+            var checkout = $("input#checkout").val();
+
+            var startCheckPrev = new Date("1/1/1900 " + "18:00:00");
+            var endCheckPrev = new Date("1/1/1900 " + "23:59:00");
+            var startCheckNext = new Date("1/1/1900 " + "00:00:00");
+            var endCheckNext = new Date("1/1/1900 " + "7:00:00");
+
+            var startDate = new Date("1/1/1900 " + checkin);
+            var endDate = new Date("1/1/1900 " + checkout);
+            if (!empty(document.getElementById('checkout').value)) {
+                if (startDate < startCheckPrev || startDate <= startCheckNext) {
+                    alert('Giờ checkout phải lớn hơn giờ checkin!');
+                    document.getElementById('checkout').value = "";
+                    document.getElementById('checkin').value = "";
+                }
+
+                if (checkout <= checkin) {
+                    alert('Giờ checkout phải lớn hơn giờ checkin!');
+                    document.getElementById('checkout').value = "";
+                    document.getElementById('checkin').value = "";
+                }
+            }
+        }
     });
 
     $("#checkout").timepicker({
@@ -134,6 +160,7 @@
                 } else {
                     alert('Giờ checkout phải lớn hơn giờ checkin!');
                     document.getElementById('checkout').value = "";
+                    document.getElementById('checkin').value = "";
                 }
             } else {
                 alert('Khung giờ làm đêm là từ 18:00 đến 23:59, hoặc 0:00 đến 7:00 của ngày hôm sau!');
