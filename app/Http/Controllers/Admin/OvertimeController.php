@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\UserLevel;
+use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -33,7 +34,7 @@ class OvertimeController extends Controller
 
         sort($listYear);
 
-        $listUser = User::where('level', UserLevel::Employee)->pluck('name', 'id')->toArray();
+        $listUser = User::where('role', UserRole::USER)->pluck('name', 'id')->toArray();
 
         $begin = new \DateTime($date . '-01');
         $end = new \DateTime($date . '-' . Carbon::parse($date)->daysInMonth);
@@ -69,8 +70,8 @@ class OvertimeController extends Controller
             $arrData[$item->user_id]['total_time'] += $totalTime;
         }
 
-      
-        
+
+
         return view('admin.overtime.index', compact('listYear', 'listUser', 'arrDate', 'arrData'));
     }
 
