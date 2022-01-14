@@ -70,8 +70,8 @@ class OvertimeController extends Controller
             $arrData[$item->user_id]['total_time'] += $totalTime;
         }
 
-      
-        
+
+
         return view('admin.overtime.index', compact('listYear', 'listUser', 'arrDate', 'arrData'));
     }
 
