@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\UserLevel;
+use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
 use App\Models\Month;
 use App\Models\Timesheet;
@@ -35,7 +36,7 @@ class TimeKeepingController extends Controller
 
         sort($listYear);
 
-        $listUser = User::where('level', UserLevel::Employee)
+        $listUser = User::where('role', UserRole::USER)
         ->whereHas('timesheet', function ($query) use ($date) {
             $query->where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date);
         })

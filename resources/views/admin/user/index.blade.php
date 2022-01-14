@@ -6,15 +6,36 @@
     <link rel="stylesheet" href="{{ asset('css/atomic.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('lib/icofont.min.css') }}">
+    <style>
+        .myTab-content .nav-item:first-child {
+            width: 160px;
+        }
+        .myTab-content .nav-item:last-child {
+            width: 210px;
+        }
+
+        .myTab-content .nav-item button {
+            width: 100%;
+        }
+
+        @media screen and (max-width: 400px) {
+            .myTab-content .nav-item:first-child, .myTab-content .nav-item:last-child  {
+                width: unset;
+            }
+        }
+
+    </style>
 @endpush
 @section('content')
     <div class="myTab-content">
         @if (request()->active == 'sheet')
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
-                        role="tab" aria-controls="home" aria-selected="true">Tạo tài khoản
-                    </button>
+                    <a href="{{ route('adminUserIndex') }}">
+                        <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                            type="button" role="tab" aria-controls="home" aria-selected="true">Tạo tài khoản
+                        </button>
+                    </a>
                 </li>
                 <li class="nav-item" role="presentation">
 
@@ -35,7 +56,8 @@
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
-                        role="tab" aria-controls="home" aria-selected="true"> {{ (isset($user->id)) ? 'Sửa tài khoản' : 'Tạo tài khoản' }}
+                        role="tab" aria-controls="home" aria-selected="true">
+                        {{ isset($user->id) ? 'Sửa tài khoản' : 'Tạo tài khoản' }}
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
