@@ -17,8 +17,10 @@ class CreateOvertimesTable extends Migration
             $table->id();
             $table->unsignedInteger('user_id');
             $table->date('date');
-            $table->time('checkin');
-            $table->time('checkout');
+            // $table->time('checkin');
+            // $table->time('checkout');
+            $table->dateTime('checkin');
+            $table->dateTime('checkout');
             $table->time('totalTime');
             $table->string('projectName');
             $table->text('note')->nullable();

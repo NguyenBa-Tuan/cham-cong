@@ -1,11 +1,20 @@
 @push('styles')
-<link rel="stylesheet" href="{{ asset('css/style.css')}}">
+<!-- <link rel="stylesheet" href="{{ asset('css/style.css')}}">
 <link rel="stylesheet" href="{{ asset('css/atomic.css')}}">
-<link rel="stylesheet" href="{{ asset('css/custom-bootstrap4.css')}}">
+<link rel="stylesheet" href="{{ asset('css/custom-bootstrap4.css')}}"> -->
 <!--ico font -->
 <link rel="stylesheet" href="{{ asset('lib/icofont.min.css')}}">
-<link rel="stylesheet" href="{{ asset('css/lib/jquery.timepicker.min.css')}}">
+<!-- <link rel="stylesheet" href="{{ asset('css/lib/jquery.timepicker.min.css')}}"> -->
+<link rel="stylesheet" href="{{ asset('css/lib/bootstrap-datetimepicker.min.css')}}">
+<style>
+    .bootstrap-datetimepicker-widget table td i {
+        margin-top: -20px !important;
+    }
 
+    .bootstrap-datetimepicker-widget table td{
+        /* padding: 0; */
+    }
+</style>
 @endpush
 
 <div class="tk-content">
@@ -38,8 +47,8 @@
                 <div class="form-group">
                     <label for="checkin" class="tk-label">Giờ Checkin</label>
                     <div class="relative">
-                        <input autocomplete="off" class="form-control relative" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" id="checkin" name="checkin">
-                        <!-- <input type="time" class="form-control relative" id="checkin" name="checkin"> -->
+                        <!-- <input autocomplete="off" class="form-control relative" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" id="checkin" name="checkin"> -->
+                        <input type="text" class="form-control relative" id="checkin" name="checkin">
                         <div class="tk-icon">
                             <i class="icofont-clock-time"></i>
                         </div>
@@ -48,8 +57,8 @@
                 <div class="form-group">
                     <label for="checkout" class="tk-label">Giờ Checkout</label>
                     <div class="relative">
-                        <input autocomplete="off" class="form-control relative" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" id="checkout" name="checkout">
-                        <!-- <input type="time" class="form-control" id="checkout" name="checkout"> -->
+                        <!-- <input autocomplete="off" class="form-control relative" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" id="checkout" name="checkout"> -->
+                        <input type="text" class="form-control" id="checkout" name="checkout">
                         <div class="tk-icon">
                             <i class="icofont-clock-time"></i>
                         </div>
@@ -73,11 +82,57 @@
         </div>
     </div>
 </div>
+<div style="overflow:hidden;">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-8">
+                <div id="datetimepicker12"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
 
+    </script>
+</div>
 @push('scripts')
 
-<script src="{{asset('js/lib/jquery.timepicker.min.js')}}"></script>
+<!-- <script src="{{asset('js/lib/jquery.timepicker.min.js')}}"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
+<script src="{{asset('js/lib/bootstrap-datetimepicker.min.js')}}"></script>
+
 <script>
+    $(function() {
+        $('#datetimepicker12').datetimepicker({
+            inline: true,
+            sideBySide: true
+        });
+    });
+    $(function() {
+        $('#checkin').datetimepicker({
+            format: 'DD-MM-YYYY HH:mm',
+            icons: {
+                time: 'icofont-clock-time',
+                date: 'icofont-clock-time',
+                up: 'icofont-rounded-up',
+                down: 'icofont-rounded-down',
+                previous: 'icofont-simple-left',
+                next: 'icofont-simple-right',
+                today: 'icofont-clock-time',
+                // clear: 'icofont-clock-time',
+                decrementHours: 'icofont-rounded-down',
+                decrementMinutes: 'icofont-rounded-down',
+                incrementHours: 'icofont-rounded-up',
+                incrementMinutes: 'icofont-rounded-up',
+            },
+        });
+
+        $('#checkout').datetimepicker({
+            format: 'DD-MM-YYYY HH:mm',
+        });
+        // $('#checkout').datetimepicker();
+    });
+</script>
+<!-- <script>
     $("#checkin").timepicker({
         timeFormat: 'H:mm',
         interval: 10,
@@ -175,5 +230,5 @@
             alert();
         },
     });
-</script>
+</script> -->
 @endpush
