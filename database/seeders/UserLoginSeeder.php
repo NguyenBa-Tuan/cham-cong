@@ -23,7 +23,7 @@ class UserLoginSeeder extends Seeder
                     'name' => 'Lê Hữu Phước',
                     'email' => 'daudangtung1@gmail.com',
                     'role' => 1,
-                    'level' => UserLevel::Employee,
+                    'level' => UserLevel::Dev,
                     'password' => bcrypt('11111111'),
                 ],
                 [
@@ -32,7 +32,7 @@ class UserLoginSeeder extends Seeder
                     'name' => 'Trần Thị Duyên',
                     'email' => 'daudangtung2@gmail.com',
                     'role' => 1,
-                    'level' => UserLevel::Employee,
+                    'level' => UserLevel::Dev,
                     'password' => bcrypt('11111111'),
                 ],
                 [
@@ -41,7 +41,7 @@ class UserLoginSeeder extends Seeder
                     'name' => 'Cao Ngọc Thế',
                     'email' => 'daudangtung3@gmail.com',
                     'role' => 1,
-                    'level' => UserLevel::Employee,
+                    'level' => UserLevel::Dev,
                     'password' => bcrypt('11111111'),
                 ],
 //                [

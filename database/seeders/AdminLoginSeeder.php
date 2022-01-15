@@ -23,7 +23,7 @@ class AdminLoginSeeder extends Seeder
                 'name' => 'Đậu Đăng Tùng',
                 'email' => 'daudangtung@gmail.com',
                 'role' => UserRole::ADMIN,
-                'level' => UserLevel::Admin,
+                'level' => UserLevel::Dev,
                 'password' => bcrypt('11111111'),
             ],
         );
@@ -34,7 +34,7 @@ class AdminLoginSeeder extends Seeder
                 'username' => 'username2',
                 'email' => 'admin@gmail.com',
                 'role' => UserRole::ADMIN,
-                'level' =>  UserLevel::Admin,
+                'level' =>  UserLevel::Dev,
                 'password' => bcrypt('12345678'),
             ],
         );
