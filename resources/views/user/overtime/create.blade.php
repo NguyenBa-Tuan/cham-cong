@@ -1,29 +1,33 @@
 @push('styles')
-<link rel="stylesheet" href="{{ asset('css/style.css')}}">
-<link rel="stylesheet" href="{{ asset('css/atomic.css')}}">
-<link rel="stylesheet" href="{{ asset('css/custom-bootstrap4.css')}}">
-<!--ico font -->
-<link rel="stylesheet" href="{{ asset('lib/icofont.min.css')}}">
-<link rel="stylesheet" href="{{ asset('css/lib/jquery.timepicker.min.css')}}">
-
+    <!--ico font -->
+    <link rel="stylesheet" href="{{ asset('lib/icofont.min.css')}}">
+    {{--<link rel="stylesheet" href="{{ asset('css/lib/jquery.timepicker.min.css')}}">--}}
+    {{--<link rel="stylesheet" href="{{ asset('css/lib/bootstrap-datetimepicker.min.css')}}">--}}
+    <link rel="stylesheet" href="{{ asset('css/lib/DateTimePicker.css')}}">
+    <style>
+        .custom-color {
+            background-color: #ffffff !important;
+        }
+    </style>
 @endpush
 
 <div class="tk-content">
     <div class="row">
         <div class="col-md-3">
-            <form action="{{route('user_overtime_store')}}" method="POST" id="user_overtime_form" autocomplete="off">
+            <form action="{{route('user_overtime_store')}}" method="POST" id="user_overtime_form" autocomplete="off"
+                  class="form-custom">
                 @csrf
 
                 @if (session()->has('error'))
-                <div class="alert alert-danger alert-block">
-                    {{ session()->get('error') }}
-                </div>
+                    <div class="alert alert-danger alert-block">
+                        {{ session()->get('error') }}
+                    </div>
                 @endif
 
                 @if (session()->has('success'))
-                <div class="alert alert-success alert-block">
-                    {{ session()->get('success') }}
-                </div>
+                    <div class="alert alert-success alert-block">
+                        {{ session()->get('success') }}
+                    </div>
                 @endif
 
                 <div class="form-group relative">
@@ -38,8 +42,11 @@
                 <div class="form-group">
                     <label for="checkin" class="tk-label">Giờ Checkin</label>
                     <div class="relative">
-                        <input autocomplete="off" class="form-control relative" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" id="checkin" name="checkin">
-                        <!-- <input type="time" class="form-control relative" id="checkin" name="checkin"> -->
+                        <!-- <input autocomplete="off" class="form-control relative" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" id="checkin" name="checkin"> -->
+                        {{--                        <input type="text" class="form-control relative" id="checkin" name="checkin">--}}
+                        <input type="text" data-field="datetime" id="checkin" name="checkin"
+                               class="form-control relative custom-color" data-format="yyyy-MM-dd hh:mm">
+                        <div id="checkin_form"></div>
                         <div class="tk-icon">
                             <i class="icofont-clock-time"></i>
                         </div>
@@ -48,8 +55,11 @@
                 <div class="form-group">
                     <label for="checkout" class="tk-label">Giờ Checkout</label>
                     <div class="relative">
-                        <input autocomplete="off" class="form-control relative" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" id="checkout" name="checkout">
-                        <!-- <input type="time" class="form-control" id="checkout" name="checkout"> -->
+                        <!-- <input autocomplete="off" class="form-control relative" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown" id="checkout" name="checkout"> -->
+                        {{--                        <input type="text" class="form-control" id="checkout" name="checkout">--}}
+                        <input type="text" data-field="datetime" id="checkout" name="checkout"
+                               class="form-control relative custom-color" data-format="yyyy-MM-dd hh:mm">
+                        <div id="checkout_form"></div>
                         <div class="tk-icon">
                             <i class="icofont-clock-time"></i>
                         </div>
@@ -57,16 +67,19 @@
                 </div>
                 <div class="form-group">
                     <label for="totalTime" class="tk-label">Tổng thời gian (h)</label>
-                    <input class="form-control w-95" id="totalTime" name="projectName" disabled required style="padding: 13px 26px;">
+                    <input class="form-control w-95" id="totalTime" name="totalInput" disabled required
+                           style="padding: 13px 26px;">
                 </div>
                 <div class="form-group">
                     <label for="project" class="tk-label">Dự án đang làm</label>
-                    <textarea class="form-control" id="project" name="projectName" rows="3" required placeholder="Dự án"></textarea>
+                    <textarea class="form-control" id="project" name="projectName" rows="3" required
+                              placeholder="Dự án"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="note" class="tk-label">Ghi chú</label>
-                    <textarea class="form-control" id="note" rows="3" name="note" placeholder="Nội dung ghi chú"></textarea>
+                    <textarea class="form-control" id="note" rows="3" name="note"
+                              placeholder="Nội dung ghi chú"></textarea>
                 </div>
                 <button class="btn tk-btn" type="submit">Đăng ký</button>
             </form>
@@ -76,8 +89,45 @@
 
 @push('scripts')
 
-<script src="{{asset('js/lib/jquery.timepicker.min.js')}}"></script>
-<script>
+
+    <script src="{{asset('js/lib/DateTimePicker.js')}}"></script>
+    <script src="{{asset('js/user-overtime-fix.js')}}"></script>
+    <script type="text/javascript">
+
+
+
+            // document.querySelector("#checkin").addEventListener("change", myFunction);
+
+            // function myFunction() {
+            //
+            //     var checkin = Date.parse($("#checkin").val());
+            //     var checkout = Date.parse($("#checkout").val());
+            //
+            //
+            //     totalHour = NaN;
+            //     if (checkout > checkin) {
+            //         totalHour = Math.floor((checkout - checkin) / 1000 / 60 / 60);
+            //         totalMin = Math.floor((checkout - checkin) / 1000 / 60 % 60);
+            //
+            //         total = totalHour + ':' + totalMin;
+            //         console.log(total);
+            //         if (totalHour > 24) {
+            //             alert('thoi gian lam ot khong duoc qua 24 tieng!');
+            //             document.getElementById('checkin').value = "";
+            //             document.getElementById('checkout').value = "";
+            //             $('#totalTime').val();
+            //         } else {
+            //             $('#totalTime').val(total);
+            //         }
+            //     }
+            //     else {
+            //         alert('ngay check out phai sau ngay check in!');
+            //         document.getElementById('checkout').value = "";
+            //     }
+            // }
+    </script>
+
+    <!-- <script>
     $("#checkin").timepicker({
         timeFormat: 'H:mm',
         interval: 10,
@@ -175,5 +225,5 @@
             alert();
         },
     });
-</script>
+</script> -->
 @endpush
