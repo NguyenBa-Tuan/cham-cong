@@ -55,7 +55,10 @@ class OvertimeController extends Controller
             $checkin = $item->checkin ? Carbon::parse($item->checkin)->format('H:i') : '';
             $checkout = $item->checkout ? Carbon::parse($item->checkout)->format('H:i') : '';
 
-            $totalTime = (strtotime($checkout) - strtotime($checkin)) / 60 / 60;
+            $checkinGet = $item->checkin ? Carbon::parse($item->checkin)->format('Y-m-d H:i') : '';
+            $checkoutGet = $item->checkout ? Carbon::parse($item->checkout)->format('Y-m-d H:i') : '';
+
+            $totalTime = (strtotime($checkoutGet) - strtotime($checkinGet)) / 60 / 60;
 
             $arrData[$item->user_id][$item->date] = [
                 'checkin' => $checkin,
@@ -69,8 +72,6 @@ class OvertimeController extends Controller
 
             $arrData[$item->user_id]['total_time'] += $totalTime;
         }
-
-
 
         return view('admin.overtime.index', compact('listYear', 'listUser', 'arrDate', 'arrData'));
     }
