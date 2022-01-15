@@ -87,11 +87,16 @@ h2 {
     .login-form {
         width: 320px;
     }
+
+    .login-input {
+        font-size: 13px;
+    }
 }
 
-@media only screen and (max-width: 580px) and (min-width: 320px) {
+@media only screen and (max-width: 580px) {
     h1 {
-        font-size: 35px;
+        font-size: 30px;
+        line-height: 35px;
     }
 
     .login-span {
@@ -105,16 +110,18 @@ h2 {
 }
 
 /*validate form */
-.login-field{
+.login-field {
     position: relative;
 }
 
-.rp-error{
+.rp-error {
     position: absolute;
     bottom: -25px;
     left: 0;
 }
 
-.text-center{
+.text-center {
     text-align: center;
 }
+
+
