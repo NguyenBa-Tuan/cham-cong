@@ -28,7 +28,10 @@ class UserController extends Controller
         $user->phone = $request->phone;
         $user->address = $request->address;
         $user->dayOfBirth = $request->dayOfBirth;
-        $user->password = $request->password;
+
+        if ($request->password)
+            $user->password = $request->password;
+
         $user->save();
 
         return redirect()->route('user_edit')->with('message', 'Cập nhật thành công');

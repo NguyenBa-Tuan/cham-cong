@@ -14,8 +14,7 @@ class EditUserFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'password' => 'confirmed|min:8|max:25',
+            'password' => 'confirmed|min:8|max:25|nullable',
         ];
     }
 
