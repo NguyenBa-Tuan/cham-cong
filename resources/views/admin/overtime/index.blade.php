@@ -212,7 +212,8 @@
                                             data-checkin="{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['checkin'] : '' }}"
                                             data-checkout="{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['checkout'] : '' }}"
                                             data-note="{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['note'] : '' }}"
-                                            data-total="{{ isset($arrData[$idUser][$itemDate['date']]) ? round($arrData[$idUser][$itemDate['date']]['total_time'], 1) : '' }}"
+                                            data-total_1="{{ isset($arrData[$idUser][$itemDate['date']]) ? round($arrData[$idUser][$itemDate['date']]['total_time'], 1) : '' }}"
+                                            data-total="{{ isset($arrData[$idUser][$itemDate['date']]) ? floor(($arrData[$idUser][$itemDate['date']]['total_time'] * 60) / 60) . ':' . ($arrData[$idUser][$itemDate['date']]['total_time'] * 60) % 60 : '' }}"
                                             data-project="{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['project_name'] : '' }}"
                                             href="javascript:void(0)">{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['checkin'] : '' }}</a>
                                         </th>
@@ -222,7 +223,8 @@
                                             data-checkin="{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['checkin'] : '' }}"
                                             data-checkout="{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['checkout'] : '' }}"
                                             data-note="{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['note'] : '' }}"
-                                            data-total="{{ isset($arrData[$idUser][$itemDate['date']]) ? round($arrData[$idUser][$itemDate['date']]['total_time'], 1) : '' }}"
+                                            data-total_1="{{ isset($arrData[$idUser][$itemDate['date']]) ? round($arrData[$idUser][$itemDate['date']]['total_time'], 1) : '' }}"
+                                            data-total="{{ isset($arrData[$idUser][$itemDate['date']]) ? floor(($arrData[$idUser][$itemDate['date']]['total_time'] * 60) / 60) . ':' . ($arrData[$idUser][$itemDate['date']]['total_time'] * 60) % 60 : '' }}"
                                             data-project="{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['project_name'] : '' }}"
                                             href="javascript:void(0)">{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['checkout'] : '' }}</a>
                                         </th>
