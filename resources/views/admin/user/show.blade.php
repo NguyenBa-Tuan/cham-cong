@@ -7,6 +7,7 @@
             text-align: center;
             padding: 24px 10px;
             font-size: 14px;
+            border: 1px solid #999999;
         }
 
         td {
@@ -14,6 +15,7 @@
             font-size: 14px;
             line-height: 19px;
             color: #4B545C;
+            
         }
 
         td a {
