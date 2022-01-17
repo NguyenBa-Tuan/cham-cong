@@ -24,7 +24,7 @@ class UserController extends Controller
     public function update(EditUserFormRequest $request)
     {
         $user = Auth::user();
-        $user->name = $request->name;
+        // $user->name = $request->name;
         $user->phone = $request->phone;
         $user->address = $request->address;
         $user->dayOfBirth = $request->dayOfBirth;

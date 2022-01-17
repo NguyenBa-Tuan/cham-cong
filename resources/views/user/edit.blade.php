@@ -123,7 +123,7 @@
                     <div class="content-group">
                         <div class="default-width">
                             <label class="tk-label" for="name">Họ tên</label>
-                            <input class="form-control" type="text" placeholder="" id="name" name="name" value="{{ $user->name }}">
+                            <input class="form-control" type="text" placeholder="" id="name" name="name" value="{{ $user->name }}" disabled >
                             @error('name')
                             <div class="invalid-feedback">
                                 {{ $message }}
