@@ -108,23 +108,26 @@ class UserOverTimeController extends Controller
 
     public function store(Request $request)
     {
+        //$create->checkin = Carbon::parse($request->checkin);
         $create = new Overtime();
         $create->user_id = Auth::id();
         $create->date = Carbon::parse($request->date)->format('Y-m-d');
-        $create->checkin = Carbon::parse($request->checkin);
+        $create->checkin = Carbon::createFromTimestamp(strtotime($request->date . $request->checkin . ":00"));
+        // $create->checkin = Carbon::parse($request->checkin);
         $create->checkout = Carbon::parse($request->checkout);
         $create->totalTime = $create->checkout->diff($create->checkin)->format('%H:%I:%S');
         $create->note = $request->note;
         $create->projectName = $request->projectName;
+
         $data_check = DB::table('overtimes')->select('user_id', 'date')
             ->where('user_id', '=', $create->user_id)
             ->where('date', '=',  $create->date)->first();
         if ($data_check) return redirect()->route('user_overtime')->with('error', 'Ngày ' . Carbon::parse($request->date)->format('d/m/Y') . ' đã đăng ký làm đêm!');
 
-//        dd($request->totalInput);
-//
-//        $check_total= Carbon::parse($request->totalInput);
-//        if($check_total != $create->totalTime) return  redirect()->route('user_overtime')->with('error', 'Lỗi: Nhập checkin và checkout không đúng!');
+        //        dd($request->totalInput);
+        //
+        //        $check_total= Carbon::parse($request->totalInput);
+        //        if($check_total != $create->totalTime) return  redirect()->route('user_overtime')->with('error', 'Lỗi: Nhập checkin và checkout không đúng!');
         if ($create->checkout <= $create->checkin) return redirect()->route('user_overtime')->with('error', 'Lỗi: thời gian checkout nhỏ hơn thời gian checkin!');
         else {
             $create->save();

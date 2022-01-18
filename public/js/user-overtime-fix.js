@@ -46,6 +46,8 @@ $(document).ready(function () {
                     } else {
                         total = totalHour + ':' + totalMin;
                         $('#totalTime').val(total);
+                        // $('#checkin').val(checkin);
+                        // $('#checkout').val(checkin);
                     }
                 } else {
                     alert('Thời gian checkout phải lớn hơn thời gian checkin!');
@@ -60,22 +62,23 @@ $(document).ready(function () {
                 document.getElementById('totalTime').value = "";
             }
         }
+
+        console.log(checkin, checkout);
     });
 
     $("#checkin").change(function () {
         var checkinDate = $("#date").val();
         var checkinTime = $("#checkin").val();
         var checkin_merge = checkinDate + " " + checkinTime;
-        var checkin = Date.parse(checkin_merge, 'yyyy-MM-dd HH:mm:ss');
+        var checkin = Date.parse(checkin_merge, 'yyyy-MM-dd HH:mm');
         $("#checkin_date").val(checkin_merge);
         var checkout = new Date($("#checkout").val());
         if (checkout === '') document.getElementById('totalTime').value = "";
         else {
-
             var checkinDate = $("#date").val();
             var checkinTime = $("#checkin").val();
             var checkin_merge = checkinDate + " " + checkinTime;
-            var checkin = Date.parse(checkin_merge, 'yyyy-MM-dd HH:mm:ss');
+            var checkin = Date.parse(checkin_merge, 'yyyy-MM-dd HH:mm');
 
             var checkin_day = checkin.getDate();
             var checkin_month = checkin.getMonth();
@@ -111,17 +114,20 @@ $(document).ready(function () {
                     document.getElementById('totalTime').value = "";
                 } else {
                     total = totalHour + ':' + totalMin;
-                    $('#totalTime').val(total);
-                    $("#checkin_date").val(checkin_merge);
+                    // $('#totalTime').val(total);
+                    // $('#checkin').val(checkin);
+                    $('#checkout').val(checkout);
+
+                    // console.log(a, b, c);
                 }
             }
         }
 
     });
 
-    $("#ot_submit").click(function () {
-        $("#checkin").val();
-        $("#checkout").val();
-        console.log(checkin, checkout);
-    });
+    // $("#ot_submit").click(function () {
+    //     // $("#checkin").val();
+    //     // $("#checkout").val();
+
+    // });
 });
