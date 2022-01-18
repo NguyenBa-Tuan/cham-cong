@@ -114,7 +114,7 @@ $(document).ready(function () {
                     document.getElementById('totalTime').value = "";
                 } else {
                     total = totalHour + ':' + totalMin;
-                    // $('#totalTime').val(total);
+                    $('#totalTime').val(total);
                     // $('#checkin').val(checkin);
                     // $('#checkout').val(checkout);
 
