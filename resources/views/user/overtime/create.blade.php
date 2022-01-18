@@ -12,6 +12,21 @@
     .dtpicker-components .dtpicker-compValue {
         padding: 0 !important;
     }
+
+    /* .checkin_form_fix {
+        height: 48px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 61%;
+        pointer-events: none;
+        
+    }
+
+    .show_data{
+        z-index: 10000 !important;
+        display: block !important;
+    } */
 </style>
 @endpush
 
@@ -46,8 +61,10 @@
                 <div class="form-group">
                     <label for="checkin" class="tk-label">Giờ Checkin</label>
                     <div class="relative">
+                        <span class="checkin_form_fix"></span>
                         <input type="text" data-field="time" id="checkin" name="checkin" class="form-control relative custom-color" data-format="HH:mm" required>
                         <div id="checkin_form"></div>
+
                         <div class="tk-icon">
                             <i class="icofont-clock-time"></i>
                         </div>
@@ -58,6 +75,7 @@
                     <div class="relative">
                         <input type="text" data-field="datetime" id="checkout" name="checkout" class="form-control relative custom-color" data-format="yyyy-MM-dd hh:mm">
                         <div id="checkout_form"></div>
+
                         <div class="tk-icon">
                             <i class="icofont-clock-time"></i>
                         </div>
@@ -76,7 +94,7 @@
                     <label for="note" class="tk-label">Ghi chú</label>
                     <textarea class="form-control" id="note" rows="3" name="note" placeholder="Nội dung ghi chú"></textarea>
                 </div>
-                <button class="btn tk-btn" type="submit">Đăng ký</button>
+                <button class="btn tk-btn" type="submit" id="ot_submit">Đăng ký</button>
             </form>
         </div>
     </div>
@@ -84,5 +102,6 @@
 
 @push('scripts')
 <script src="{{asset('js/lib/DateTimePicker.js')}}"></script>
+<script src="{{asset('js/lib/date.js')}}"></script>
 <script src="{{asset('js/user-overtime-fix.js')}}"></script>
 @endpush
