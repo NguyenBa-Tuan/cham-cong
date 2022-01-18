@@ -116,7 +116,6 @@ class UserOverTimeController extends Controller
         $create->totalTime = $create->checkout->diff($create->checkin)->format('%H:%I:%S');
         $create->note = $request->note;
         $create->projectName = $request->projectName;
-
         $data_check = DB::table('overtimes')->select('user_id', 'date')
             ->where('user_id', '=', $create->user_id)
             ->where('date', '=',  $create->date)->first();
