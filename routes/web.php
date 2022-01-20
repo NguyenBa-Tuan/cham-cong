@@ -8,9 +8,11 @@ use App\Http\Controllers\Admin\TimeKeepingController;
 use App\Http\Controllers\User\UserTimeKeepingController;
 use App\Http\Controllers\User\UserOverTimeController;
 use App\Http\Controllers\Admin\OvertimeController;
+use App\Http\Controllers\Admin\RuleController;
 use Illuminate\Support\Facades\Artisan;
 
 use App\Http\Controllers\User\PasswordFirstChangeController;
+use App\Http\Controllers\User\RuleController as UserRuleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +55,8 @@ Route::middleware('checkLogin')->group(function () {
             Route::get('/create', [UserOverTimeController::class, 'create'])->name('user_overtime_create');
             Route::post('/create', [UserOverTimeController::class, 'store'])->name('user_overtime_store');
         });
+
+        Route::get('/rules', [UserRuleController::class, 'index'])->name('user.rule.index');
     });
 
     /*admin*/
@@ -80,6 +84,10 @@ Route::middleware('checkLogin')->group(function () {
             Route::get('/edit/{id}', [OvertimeController::class, 'edit'])->name('overtime_index_edit');
             Route::post('/edit/{id}', [OvertimeController::class, 'update'])->name('overtime_index_update');
         });
+
+        Route::get('/rules', [RuleController::class, 'index'])->name('admin.rule.index');
+        Route::post('/rules', [RuleController::class, 'store'])->name('admin.rule.store');
+        Route::get('/rules/download/{file}', [RuleController::class, 'downloadFile'])->name('admin.rule.download');
     });
 });
 

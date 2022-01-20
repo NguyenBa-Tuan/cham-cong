@@ -18,4 +18,9 @@
             <p>Thông tin cá nhân</p>
         </a>
     </li>
+    <li class="nav-item ">
+        <a href="{{ route('admin.rule.index') }}" class="nav-link @yield('active_rule')">
+            <p>Nội quy công ty</p>
+        </a>
+    </li>
 @endsection
