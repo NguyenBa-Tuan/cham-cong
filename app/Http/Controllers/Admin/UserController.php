@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeMail;
+use App\Models\Level;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
@@ -18,10 +19,10 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $levels = UserLevel::toSelectArray();
+        $levels = Level::orderBy('id', 'DESC')->get();
 
         if ($request->active == 'sheet') {
-            $users = User::all();
+            $users = User::orderBy('id', 'DESC')->get();
 
             return view('admin.user.index', compact('levels', 'users'));
         }
@@ -60,7 +61,7 @@ class UserController extends Controller
 
     public function edit(User $user, Request $request)
     {
-        $levels = UserLevel::toSelectArray();
+        $levels = Level::orderBy('id', 'DESC')->get();
 
         return view('admin.user.index', compact('levels', 'user'));
     }

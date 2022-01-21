@@ -153,6 +153,27 @@
         .modal-dialog {
             margin: auto;
         }
+
+        .table-main .checkout {
+            position: relative;
+        }
+
+        .table-main .checkout:hover {
+            padding-top: 20px;
+        }
+
+        .table-main .checkout:hover .btn-edit {
+            display: unset;
+        }
+
+        .btn-edit {
+            display: none;
+            position: absolute;
+            top: 0;
+            right: 0;
+            cursor: pointer;
+        }
+
     </style>
     <link rel="stylesheet" href="{{ asset('css/atomic.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -215,9 +236,10 @@
                                             data-total_1="{{ isset($arrData[$idUser][$itemDate['date']]) ? round($arrData[$idUser][$itemDate['date']]['total_time'], 1) : '' }}"
                                             data-total="{{ isset($arrData[$idUser][$itemDate['date']]) ? floor(($arrData[$idUser][$itemDate['date']]['total_time'] * 60) / 60) . ':' . ($arrData[$idUser][$itemDate['date']]['total_time'] * 60) % 60 : '' }}"
                                             data-project="{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['project_name'] : '' }}"
-                                            href="javascript:void(0)">{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['checkin'] : '' }}</a>
+                                            href="javascript:void(0)">{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['checkin'] : '' }}
+                                        </a>
                                         </th>
-                                    <td class="{{ $i % 2 == 0 ? 'bg-blue1' : '' }}">
+                                    <td class="{{ isset($arrData[$idUser][$itemDate['date']]) ? 'checkout' : '' }} {{ $i % 2 == 0 ? 'bg-blue1' : '' }}  ">
                                         <a class="timeCheck href-modal" data-day="{{ $itemDate['day'] }}"
                                             data-name="{{ $name }}"
                                             data-checkin="{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['checkin'] : '' }}"
@@ -226,7 +248,16 @@
                                             data-total_1="{{ isset($arrData[$idUser][$itemDate['date']]) ? round($arrData[$idUser][$itemDate['date']]['total_time'], 1) : '' }}"
                                             data-total="{{ isset($arrData[$idUser][$itemDate['date']]) ? floor(($arrData[$idUser][$itemDate['date']]['total_time'] * 60) / 60) . ':' . ($arrData[$idUser][$itemDate['date']]['total_time'] * 60) % 60 : '' }}"
                                             data-project="{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['project_name'] : '' }}"
-                                            href="javascript:void(0)">{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['checkout'] : '' }}</a>
+                                            href="javascript:void(0)">
+                                            @if (isset($arrData[$idUser][$itemDate['date']]))
+                                                {{ $arrData[$idUser][$itemDate['date']]['checkout'] }}
+
+                                            @endif
+
+                                        </a>
+                                        @if (isset($arrData[$idUser][$itemDate['date']]))
+                                            <span class="badge badge-info btn-edit">Quyền sửa</span>
+                                        @endif
                                         </th>
 
                                 @endforeach

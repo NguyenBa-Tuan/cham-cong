@@ -130,9 +130,9 @@
                 <label class="tk-label" for="level">Chức vụ</label>
                 <div class="relative">
                     <select class="form-control" id="level" name="level">
-                        @foreach ($levels as $key => $level)
-                            <option value="{{ $key }}" {{ old('name') == $key ? 'selected' : '' }}>
-                                {{ $level }}</option>
+                        @foreach ($levels as $item)
+                            <option value="{{ $item->id }}" {{ old('name') == $item->id ? 'selected' : '' }}>
+                                {{ $item->name }}</option>
                         @endforeach
                     </select>
                     <div class="tk-icon">

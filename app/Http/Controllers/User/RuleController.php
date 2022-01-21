@@ -14,9 +14,9 @@ class RuleController extends Controller
 {
     public function index()
     {
-        $file = File::where('level', Auth::user()->level)->first();
+        $file = File::where('level_id', Auth::user()->level)->first();
 
-        $url = $file->url ? Storage::url($file->url) : false;
+        $url = isset($file->url) ? Storage::url($file->url) : false;
        
         return view('user.rule.index', compact('url'));
     }
