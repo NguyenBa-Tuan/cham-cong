@@ -92,7 +92,7 @@
 
                 <div class="form-group">
                     <label for="note" class="tk-label">Ghi chú</label>
-                    <textarea class="form-control" id="note" rows="3" name="note" placeholder="Nội dung ghi chú"></textarea>
+                    <textarea class="form-control" id="note" rows="3" name="note" placeholder="Hôm nay bạn làm được những gì"></textarea>
                 </div>
                 <button class="btn tk-btn" type="submit" id="ot_submit">Đăng ký</button>
             </form>

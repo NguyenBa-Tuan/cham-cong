@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Overtime');
     }
+
+    public function getInfoLevelAttribute()
+    {
+        return Level::find($this->level);
+    }
 }

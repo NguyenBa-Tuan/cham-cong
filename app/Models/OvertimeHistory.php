@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Overtime extends Model
+class OvertimeHistory extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'overtime_id',
         'user_id',
         'date',
         'checkin',
@@ -17,11 +18,10 @@ class Overtime extends Model
         'totalTime',
         'note',
         'projectName',
-        'permission',
     ];
 
-    public function overtimeUser()
+    public function user()
     {
-        return $this->belongsTo('App\Models\User', 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

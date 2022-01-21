@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Overtime;
+use App\Models\OvertimeHistory;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -129,9 +130,24 @@ class UserOverTimeController extends Controller
         //        $check_total= Carbon::parse($request->totalInput);
         //        if($check_total != $create->totalTime) return  redirect()->route('user_overtime')->with('error', 'Lỗi: Nhập checkin và checkout không đúng!');
         if ($create->checkout <= $create->checkin) return redirect()->route('user_overtime')->with('error', 'Lỗi: thời gian checkout nhỏ hơn thời gian checkin!');
-        else {
-            $create->save();
-            return redirect()->route('user_overtime')->with('success', 'Success!');
-        }
+
+        $create->save();
+
+        //create History
+
+        $otHistory = new OvertimeHistory();
+        $otHistory->overtime_id = $create->id;
+        $otHistory->user_id = Auth::id();
+        $otHistory->date = Carbon::parse($request->date)->format('Y-m-d');
+        $otHistory->checkin = Carbon::createFromTimestamp(strtotime($request->date . $request->checkin . ":00"));
+        // $create->checkin = Carbon::parse($request->checkin);
+        $otHistory->checkout = Carbon::parse($request->checkout);
+        $otHistory->totalTime = $create->checkout->diff($create->checkin)->format('%H:%I:%S');
+        $otHistory->note = $request->note;
+        $otHistory->projectName = $request->projectName;
+
+        $otHistory->save();
+
+        return redirect()->route('user_overtime')->with('success', 'Success!');
     }
 }

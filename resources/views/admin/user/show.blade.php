@@ -58,7 +58,7 @@
                         {{ $user->dayOfBirth ? date('d/m/Y', strtotime($user->dayOfBirth)) : '' }}</td>
                     <td class="py-17 text-center pl-28 font-400">
                         {{ $user->dayOfJoin ? date('d/m/Y', strtotime($user->dayOfJoin)) : '' }}</td>
-                    <td class="py-17 text-center font-400">{{ \App\Enums\UserLevel::getDescription($user->level) }}
+                    <td class="py-17 text-center font-400" style="white-space: nowrap">{{ $user->infoLevel->name ?? '' }}
                     </td>
                     <td class="py-17 text-center">
                         <a href="{{ route('admin.user.edit', $user->id) }}"><i class="icofont-pencil-alt-1"></i></a>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\TimeKeepingController;
 use App\Http\Controllers\User\UserTimeKeepingController;
 use App\Http\Controllers\User\UserOverTimeController;
@@ -87,7 +88,13 @@ Route::middleware('checkLogin')->group(function () {
 
         Route::get('/rules', [RuleController::class, 'index'])->name('admin.rule.index');
         Route::post('/rules', [RuleController::class, 'store'])->name('admin.rule.store');
+        Route::delete('/rules/{file}', [RuleController::class, 'destroy'])->name('admin.rule.destroy');
         Route::get('/rules/download/{file}', [RuleController::class, 'downloadFile'])->name('admin.rule.download');
+        //=== level==
+        Route::get('/level', [LevelController::class, 'index'])->name('admin.level.index');
+        Route::post('/level', [LevelController::class, 'store'])->name('admin.level.store');
+        Route::get('/level/{level}', [LevelController::class, 'edit'])->name('admin.level.edit');
+        Route::put('/level/{level}', [LevelController::class, 'update'])->name('admin.level.update');
     });
 });
 

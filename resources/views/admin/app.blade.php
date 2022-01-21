@@ -23,4 +23,9 @@
             <p>Nội quy công ty</p>
         </a>
     </li>
+    <li class="nav-item ">
+        <a href="{{ route('admin.level.index') }}" class="nav-link @yield('active_level')">
+            <p>Chức vụ</p>
+        </a>
+    </li>
 @endsection

@@ -135,7 +135,7 @@
                         <div class="default-width">
                             <label class="tk-label" for="level">Chức vụ</label>
                             <div class="relative">
-                                <input class="form-control" type="text" id="level" name="level" readonly value="{{ \App\Enums\UserLevel::getDescription($user->level) }}">
+                                <input class="form-control" type="text" id="level" name="level" readonly value="{{ $user->info_level->name ?? '' }}">
                             </div>
                         </div>
                     </div>

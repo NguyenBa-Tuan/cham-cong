@@ -1,10 +1,11 @@
 <?php
 
+use App\Enums\OvertimePermission;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFilesTable extends Migration
+class AddColumnPermissonToOvertime extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +14,8 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('files', function (Blueprint $table) {
-            $table->id();
-            $table->integer('level_id');
-            $table->string('url');
-            $table->string('name');
-            $table->timestamps();
+        Schema::table('overtimes', function (Blueprint $table) {
+            $table->smallInteger('premission')->default(OvertimePermission::VIEW);
         });
     }
 
@@ -29,6 +26,8 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('files');
+        Schema::table('overtimes', function (Blueprint $table) {
+            $table->dropColumn('premission');
+        });
     }
 }
