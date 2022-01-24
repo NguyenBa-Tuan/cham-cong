@@ -51967,6 +51967,9 @@ body {
   color: #C2C7D0;
   line-height: 44px;
 }
+.aside ul li i {
+  margin-left: 4px;
+}
 
 a {
   text-decoration: none !important;

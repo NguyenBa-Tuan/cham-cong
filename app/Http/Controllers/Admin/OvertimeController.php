@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Overtime;
+use App\Models\OvertimeHistory;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -61,6 +62,8 @@ class OvertimeController extends Controller
             $totalTime = (strtotime($checkoutGet) - strtotime($checkinGet)) / 60 / 60;
 
             $arrData[$item->user_id][$item->date] = [
+                'id' => $item->id,
+                'permission' => $item->permission,
                 'checkin' => $checkin,
                 'checkout' => $checkout,
                 'note' => $item->note,
@@ -88,5 +91,50 @@ class OvertimeController extends Controller
         $update->note = $request->note;
         $update->save();
         return redirect()->route('overtime_index');
+    }
+
+    public function updatePermission(Request $request)
+    {
+        $update = Overtime::findOrFail($request->id);
+        $update->permission = $request->permission;
+        $update->save();
+
+        return response()->json(['code' => 200]);
+    }
+
+    public function history(Request $request)
+    {
+        $history = OvertimeHistory::where('overtime_id', $request->id)
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        if ($history->count() <= 0)
+            $history = Overtime::where('id', $request->id)
+                ->orderBy('id', 'DESC')
+                ->get();
+
+        $arrData = [];
+
+        foreach ($history as $item) {
+            $checkin = $item->checkin ? Carbon::parse($item->checkin)->format('H:i') : '';
+            $checkout = $item->checkout ? Carbon::parse($item->checkout)->format('H:i') : '';
+
+            $checkinGet = $item->checkin ? Carbon::parse($item->checkin)->format('Y-m-d H:i') : '';
+            $checkoutGet = $item->checkout ? Carbon::parse($item->checkout)->format('Y-m-d H:i') : '';
+
+            $totalTime = (strtotime($checkoutGet) - strtotime($checkinGet)) / 60 / 60;
+
+            $arrData[] = [
+                'id' => $item->id,
+                'date' => $item->date,
+                'checkin' => $checkin,
+                'checkout' => $checkout,
+                'note' => $item->note ?? '',
+                'total_time' => floor(($totalTime * 60) / 60) . ':' . ($totalTime * 60) % 60,
+                'project' =>  $item->projectName ?? '',
+            ];
+        }
+
+        return response()->json(['data' => $arrData]);
     }
 }

@@ -173,6 +173,9 @@
             right: 0;
             cursor: pointer;
         }
+        td {
+            vertical-align: middle !important;
+        }
 
     </style>
     <link rel="stylesheet" href="{{ asset('css/atomic.css') }}">
@@ -228,8 +231,9 @@
                                 @foreach ($listUser as $idUser => $name)
                                     @php($i++)
                                     <td class="{{ $i % 2 == 0 ? 'bg-blue1' : '' }}">
-                                        <a class="timeCheck href-modal" data-day="{{ $itemDate['day'] }}"
-                                            data-name="{{ $name }}"
+                                        <a class="timeCheck href-modal"
+                                            data-id="{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['id'] : '' }}"
+                                            data-day="{{ $itemDate['day'] }}" data-name="{{ $name }}"
                                             data-checkin="{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['checkin'] : '' }}"
                                             data-checkout="{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['checkout'] : '' }}"
                                             data-note="{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['note'] : '' }}"
@@ -239,8 +243,10 @@
                                             href="javascript:void(0)">{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['checkin'] : '' }}
                                         </a>
                                         </th>
-                                    <td class="{{ isset($arrData[$idUser][$itemDate['date']]) ? 'checkout' : '' }} {{ $i % 2 == 0 ? 'bg-blue1' : '' }}  ">
+                                    <td
+                                        class="{{ isset($arrData[$idUser][$itemDate['date']]) ? 'checkout' : '' }} {{ $i % 2 == 0 ? 'bg-blue1' : '' }}  ">
                                         <a class="timeCheck href-modal" data-day="{{ $itemDate['day'] }}"
+                                            data-id="{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['id'] : '' }}"
                                             data-name="{{ $name }}"
                                             data-checkin="{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['checkin'] : '' }}"
                                             data-checkout="{{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['checkout'] : '' }}"
@@ -256,9 +262,17 @@
 
                                         </a>
                                         @if (isset($arrData[$idUser][$itemDate['date']]))
-                                            <span class="badge badge-info btn-edit">Quyền sửa</span>
+                                            @if ($arrData[$idUser][$itemDate['date']]['permission'] == \App\Enums\OvertimePermission::VIEW)
+                                                <span class="badge badge-info btn-edit btn-add"
+                                                    data-id="{{ $arrData[$idUser][$itemDate['date']]['id'] }}">Quyền
+                                                    sửa</span>
+                                            @else
+                                                <span class="badge badge-danger btn-edit btn-callback"
+                                                    data-id="{{ $arrData[$idUser][$itemDate['date']]['id'] }}">Thu
+                                                    hồi</span>
+                                            @endif
                                         @endif
-                                        </th>
+                                    </td>
 
                                 @endforeach
                             </tr>
@@ -336,19 +350,87 @@
             let year = $('select[name=year]').val();
             location.assign(`{{ route('overtime_index') }}?year=${year}&month=${month}`)
         });
+        $(document).on('click', '.btn-add', function() {
+            let id = $(this).data('id');
+
+            $(this).parent().append(
+                `<span class="badge badge-danger btn-edit btn-callback" data-id="${ id }">Thu hồi</span>`);
+            $(this).remove();
+
+            $.ajax({
+                url: `{{ route('admin.overtime.update_permission') }}`,
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    _token: `{{ csrf_token() }}`,
+                    id: id,
+                    permission: {{ \App\Enums\OvertimePermission::EDIT }}
+                },
+                success: function(data) {
+
+                }
+            });
+
+        });
+
+        $(document).on('click', '.btn-callback', function() {
+            let id = $(this).data('id');
+            $(this).parent().append(
+                `<span class="badge badge-info btn-edit btn-add" data-id="${ id }">Cấp quyền</span>`);
+            $(this).remove();
+
+            $.ajax({
+                url: `{{ route('admin.overtime.update_permission') }}`,
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    _token: `{{ csrf_token() }}`,
+                    id: id,
+                    permission: {{ \App\Enums\OvertimePermission::VIEW }}
+                },
+                success: function(data) {
+
+                }
+            });
+        });
     </script>
     <script>
         $('.timeCheck').on('click', function() {
-            var dataName = $(this).data('name');
-            var dataCheckin = $(this).data('checkin');
-            var dataCheckout = $(this).data('checkout');
-            var dataNote = $(this).data('note');
-            var dataDay = $(this).data("day");
-            var total = $(this).data("total");
-            var project = $(this).data("project");
+            let dataName = $(this).data('name');
+            $('#name').html(dataName);
 
-            var checkIn = dataCheckin;
-            var checkOut = dataCheckout;
+            var id = $(this).data("id");
+            $.ajax({
+                url: `{{ route('admin.overtime.history') }}`,
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    _token: `{{ csrf_token() }}`,
+                    id: id,
+                },
+                success: function(data) {
+                    $(".remove").remove();
+
+                    $.each(data.data, function(key, item) {
+                        $('#ot_detail').append(
+                            '<tr class="at-ot-date p-30 remove">' +
+                            '<td class="p-30 bg-td1" style="white-space: nowrap">' + item.date + '</td>' +
+                            '<td class=" p-30">' + item.checkin + '</td>' +
+                            '<td class=" p-30">' + item.checkout + '</td>' +
+                            '<td class=" p-30" style="color: #333333; font-weight: bold;">' +
+                            item.total_time +
+                            '</td>' +
+                            '<td class=" p-30">' + item.project + '</td>' +
+                            '<td class=" p-30">' + item.note + '</td>' +
+                            '</tr>'
+                        );
+                    })
+
+
+                    $('#myModal').modal('show');
+                    $('#myModal').css('display', 'flex');
+                }
+            });
 
             /*check AM or PM*/
             // var checkInType = (checkIn >= 12) ? 'PM' : "AM";
@@ -361,22 +443,7 @@
 
             // var countTotal = countHour + ':' + countMin;
 
-            $('#name').html(dataName);
 
-            $(".remove").remove();
-
-            $('#ot_detail').append(
-                '<tr class="at-ot-date p-30 remove">' +
-                '<td class=" p-30 bg-td1">' + dataDay + '</td>' +
-                '<td class=" p-30">' + checkIn + '</td>' +
-                '<td class=" p-30">' + checkOut + '</td>' +
-                '<td class=" p-30" style="color: #333333; font-weight: bold;">' + total + '</td>' +
-                '<td class=" p-30">' + project + '</td>' +
-                '<td class=" p-30">' + dataNote + '</td>' +
-                '</tr>'
-            );
-            $('#myModal').modal('show');
-            $('#myModal').css('display', 'flex');
         })
     </script>
 @endpush

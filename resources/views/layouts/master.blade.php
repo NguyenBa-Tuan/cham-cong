@@ -8,6 +8,7 @@
     <title>{{ env('APP_NAME') }} | @yield('title')</title>
     <link rel="stylesheet" href="{{ asset('css/OverlayScrollbars.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('lib/icofont.min.css') }}">
     @stack('styles')
 </head>
 

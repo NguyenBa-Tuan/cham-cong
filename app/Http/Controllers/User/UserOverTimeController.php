@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Enums\OvertimePermission;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Overtime;
@@ -110,7 +111,17 @@ class UserOverTimeController extends Controller
     public function store(Request $request)
     {
         //$create->checkin = Carbon::parse($request->checkin);
+        $data_check = DB::table('overtimes')->select('user_id', 'date', 'id')
+            ->where('user_id', '=', Auth::id())
+            ->where('date', '=',  $request->date)->first();
+
         $create = new Overtime();
+
+        if ($data_check){
+            $create = Overtime::findOrFail($data_check->id);
+            $create->permission = OvertimePermission::VIEW;
+        }
+
         $create->user_id = Auth::id();
         $create->date = Carbon::parse($request->date)->format('Y-m-d');
         $create->checkin = Carbon::createFromTimestamp(strtotime($request->date . $request->checkin . ":00"));
@@ -120,10 +131,10 @@ class UserOverTimeController extends Controller
         $create->note = $request->note;
         $create->projectName = $request->projectName;
 
-        $data_check = DB::table('overtimes')->select('user_id', 'date')
-            ->where('user_id', '=', $create->user_id)
-            ->where('date', '=',  $create->date)->first();
-        if ($data_check) return redirect()->route('user_overtime')->with('error', 'Ngày ' . Carbon::parse($request->date)->format('d/m/Y') . ' đã đăng ký làm đêm!');
+        // $data_check = DB::table('overtimes')->select('user_id', 'date')
+        //     ->where('user_id', '=', $create->user_id)
+        //     ->where('date', '=',  $create->date)->first();
+        // if ($data_check) return redirect()->route('user_overtime')->with('error', 'Ngày ' . Carbon::parse($request->date)->format('d/m/Y') . ' đã đăng ký làm đêm!');
 
         //        dd($request->totalInput);
         //
@@ -148,6 +159,20 @@ class UserOverTimeController extends Controller
 
         $otHistory->save();
 
-        return redirect()->route('user_overtime')->with('success', 'Success!');
+        return redirect()->route('user_overtime')->with('success', 'Đăng ký thành công!');
+    }
+
+    public function history(Request $request)
+    {
+        $history = Overtime::where(['date' => $request->date, 'user_id' => Auth::user()->id])->first();
+
+        if ($history) {
+            if ($history->permission == OvertimePermission::EDIT)
+                return response()->json(['code' => 200, 'data' => $history]);
+
+            return response()->json(['code' => 400]);
+        }
+
+        return response()->json(['code' => 100]);
     }
 }

@@ -55,6 +55,7 @@ Route::middleware('checkLogin')->group(function () {
             Route::get('/', [UserOverTimeController::class, 'index'])->name('user_overtime');
             Route::get('/create', [UserOverTimeController::class, 'create'])->name('user_overtime_create');
             Route::post('/create', [UserOverTimeController::class, 'store'])->name('user_overtime_store');
+            Route::post('/history', [UserOverTimeController::class, 'history'])->name('user.overtime.history');
         });
 
         Route::get('/rules', [UserRuleController::class, 'index'])->name('user.rule.index');
@@ -84,6 +85,8 @@ Route::middleware('checkLogin')->group(function () {
             Route::get('', [OvertimeController::class, 'index'])->name('overtime_index');
             Route::get('/edit/{id}', [OvertimeController::class, 'edit'])->name('overtime_index_edit');
             Route::post('/edit/{id}', [OvertimeController::class, 'update'])->name('overtime_index_update');
+            Route::post('/update-permission', [OvertimeController::class, 'updatePermission'])->name('admin.overtime.update_permission');
+            Route::post('/history', [OvertimeController::class, 'history'])->name('admin.overtime.history');
         });
 
         Route::get('/rules', [RuleController::class, 'index'])->name('admin.rule.index');

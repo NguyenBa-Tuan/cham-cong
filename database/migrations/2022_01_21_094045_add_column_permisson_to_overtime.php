@@ -15,7 +15,7 @@ class AddColumnPermissonToOvertime extends Migration
     public function up()
     {
         Schema::table('overtimes', function (Blueprint $table) {
-            $table->smallInteger('premission')->default(OvertimePermission::VIEW);
+            $table->smallInteger('permission')->default(OvertimePermission::VIEW);
         });
     }
 
@@ -27,7 +27,7 @@ class AddColumnPermissonToOvertime extends Migration
     public function down()
     {
         Schema::table('overtimes', function (Blueprint $table) {
-            $table->dropColumn('premission');
+            $table->dropColumn('permission');
         });
     }
 }
