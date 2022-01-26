@@ -137,7 +137,7 @@
 
                     }
 
-                    if (res.code == 200) {
+                    if (res.code == 200 || res.code == 400) {
                         let checkin = new Date(res.data.checkin);
                         let checkout = new Date(res.data.checkout);
 
@@ -149,6 +149,9 @@
                         $('#checkin').val(res.data.checkin.substr(-8, 5));
                         $('#checkout').val(res.data.checkout.substr(0, 16));
                         $('#totalTime').val(total);
+                        $('#project').val(res.data.projectName);
+                        $('#note').val(res.data.note);
+
                     }
                 }
             })

@@ -48,10 +48,8 @@
     <table class="" style="width: 100%">
         <thead>
             <tr>
-                <th class="bg-light-green">STT</th>
-                <th class="bg-light-green">Chức vụ</th>
                 <th class="bg-light-green">Tên file</th>
-                <th class="bg-light-green text-center">Áction</th>
+                <th class="bg-light-green text-center">Action</th>
             </tr>
         </thead>
 
@@ -60,10 +58,6 @@
             @forelse ($listFile as $item)
                 @php($i++)
                 <tr>
-                    <td class="text-center">{{ $i }}</td>
-                    <td>
-                        {{ $item->level->name ?? '' }}
-                    </td>
                     <td>{{ $item->name }}</td>
                     <td class="text-center">
                         <a target="_blank" class="download" href="{{ asset(Storage::url($item->url)) }}"><i

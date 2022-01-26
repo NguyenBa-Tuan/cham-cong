@@ -16,7 +16,7 @@ class RuleController extends Controller
     {
         $levels = Level::orderBy('id', 'DESC')->get();
 
-        $listFile = File::all();
+        $listFile = File::whereNull('level_id')->get();
 
         return view('admin.rule.index', compact('levels', 'listFile'));
     }
@@ -25,14 +25,14 @@ class RuleController extends Controller
     {
         try {
             //remove old file pdf
-            $oldPdf = File::where('level_id', $request->level)->first();
+            $oldPdf = File::whereNull('level_id')->first();
             if ($oldPdf) {
-                File::where('level_id', $request->level)->delete();
+                File::whereNull('level_id')->delete();
                 $this->removeFile($oldPdf->url);
             }
 
             //add new
-            $url = 'rule/' . $request->level;
+            $url = 'rule/company';
             // $path = Storage::put($url, $request->file);
             $path = $request->file('file')->store('public/' . $url);
 

@@ -23,7 +23,7 @@
 
 <div class="main-content main-create">
     <div class="mb-30">
-        <span style="color: red">(*) Sau khi upload file nội quy mới, file cũ sẽ bị xóa!</span> 
+        <span style="color: red">(*) Sau khi upload file nội quy mới, file cũ sẽ bị xóa!</span>
     </div>
     @if (session()->has('success'))
         <div class="alert alert-success w-377">
@@ -33,22 +33,6 @@
 
     <form action="{{ route('admin.rule.store') }}" class="frmSm" method="POST" enctype="multipart/form-data">
         @csrf
-        <div class="w-377">
-            <label class="tk-label" for="level">Chức vụ</label>
-            <div class="relative">
-                <select class="form-control level" id="level" name="level">
-                    @foreach ($levels as $item)
-                        <option value="{{ $item->id }}">
-                            {{ $item->name }}
-                        </option>
-                    @endforeach
-                </select>
-                <div class="tk-icon">
-                    <i class="icofont-caret-down"></i>
-                </div>
-            </div>
-        </div>
-
         <div class="dFile">
             <label class="d-block tk-label">Tải lên file PDF</label>
             <input type="file" name="file" id="file" class="w-377 d-none">
@@ -69,7 +53,7 @@
 @push('scripts')
     <script>
         $('.frmSm').submit(e => {
-           
+
             let file = $('#file').val();
 
             if (!file) {

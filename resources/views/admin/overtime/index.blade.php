@@ -158,23 +158,28 @@
             position: relative;
         }
 
-        .table-main .checkout:hover {
-            padding-top: 20px;
-        }
+
 
         .table-main .checkout:hover .btn-edit {
             display: unset;
+
         }
 
         .btn-edit {
             display: none;
+            cursor: pointer;
             position: absolute;
             top: 0;
             right: 0;
-            cursor: pointer;
+            font-size: 12px;
         }
+
         td {
             vertical-align: middle !important;
+        }
+
+        .checkout .badge {
+            padding: 4px !important;
         }
 
     </style>
@@ -264,12 +269,12 @@
                                         @if (isset($arrData[$idUser][$itemDate['date']]))
                                             @if ($arrData[$idUser][$itemDate['date']]['permission'] == \App\Enums\OvertimePermission::VIEW)
                                                 <span class="badge badge-info btn-edit btn-add"
-                                                    data-id="{{ $arrData[$idUser][$itemDate['date']]['id'] }}">Quyền
-                                                    sửa</span>
+                                                    data-id="{{ $arrData[$idUser][$itemDate['date']]['id'] }}"><i
+                                                        class="icofont-edit"></i></span>
                                             @else
                                                 <span class="badge badge-danger btn-edit btn-callback"
-                                                    data-id="{{ $arrData[$idUser][$itemDate['date']]['id'] }}">Thu
-                                                    hồi</span>
+                                                    data-id="{{ $arrData[$idUser][$itemDate['date']]['id'] }}"><i
+                                                        class="icofont-ui-delete"></i></span>
                                             @endif
                                         @endif
                                     </td>
@@ -354,7 +359,7 @@
             let id = $(this).data('id');
 
             $(this).parent().append(
-                `<span class="badge badge-danger btn-edit btn-callback" data-id="${ id }">Thu hồi</span>`);
+                `<span class="badge badge-danger btn-edit btn-callback" data-id="${ id }"><i class="icofont-ui-delete"></i></span>`);
             $(this).remove();
 
             $.ajax({
@@ -376,7 +381,7 @@
         $(document).on('click', '.btn-callback', function() {
             let id = $(this).data('id');
             $(this).parent().append(
-                `<span class="badge badge-info btn-edit btn-add" data-id="${ id }">Cấp quyền</span>`);
+                `<span class="badge badge-info btn-edit btn-add" data-id="${ id }"><i class="icofont-edit"></i></span>`);
             $(this).remove();
 
             $.ajax({
@@ -414,7 +419,8 @@
                     $.each(data.data, function(key, item) {
                         $('#ot_detail').append(
                             '<tr class="at-ot-date p-30 remove">' +
-                            '<td class="p-30 bg-td1" style="white-space: nowrap">' + item.date + '</td>' +
+                            '<td class="p-30 bg-td1" style="white-space: nowrap">' + item
+                            .date + '</td>' +
                             '<td class=" p-30">' + item.checkin + '</td>' +
                             '<td class=" p-30">' + item.checkout + '</td>' +
                             '<td class=" p-30" style="color: #333333; font-weight: bold;">' +

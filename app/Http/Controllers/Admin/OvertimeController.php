@@ -108,11 +108,6 @@ class OvertimeController extends Controller
             ->orderBy('id', 'DESC')
             ->get();
 
-        if ($history->count() <= 0)
-            $history = Overtime::where('id', $request->id)
-                ->orderBy('id', 'DESC')
-                ->get();
-
         $arrData = [];
 
         foreach ($history as $item) {

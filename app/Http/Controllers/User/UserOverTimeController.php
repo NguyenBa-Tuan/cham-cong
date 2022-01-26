@@ -170,7 +170,7 @@ class UserOverTimeController extends Controller
             if ($history->permission == OvertimePermission::EDIT)
                 return response()->json(['code' => 200, 'data' => $history]);
 
-            return response()->json(['code' => 400]);
+            return response()->json(['code' => 400, 'data' => $history]);
         }
 
         return response()->json(['code' => 100]);
