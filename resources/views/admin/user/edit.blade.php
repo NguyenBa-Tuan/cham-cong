@@ -162,6 +162,29 @@
                 @enderror
             </div>
         </div>
+        <div class="content-group">
+            <div class="default-width">
+                <label class="tk-label" for="level">Loại tài khoản</label>
+                <div class="relative">
+                    <select class="form-control" id="role" name="role">
+                        @foreach (\App\Enums\UserRole::getValues() as $item)
+                            <option value="{{ $item }}"
+                            {{ $item == $user->role ? 'selected' : '' }}
+                            >
+                                {{ \App\Enums\UserRole::getDescription($item) }}</option>
+                        @endforeach
+                    </select>
+                    <div class="tk-icon">
+                        <i class="icofont-caret-down"></i>
+                    </div>
+                </div>
+                @error('level')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+        </div>
         <div class="content-group content-group-button text-center">
             <button class="tk-btn admin-btn" type="submit">Cập nhật</button>
         </div>

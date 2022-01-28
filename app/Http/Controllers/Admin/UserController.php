@@ -43,6 +43,7 @@ class UserController extends Controller
         $createUser->dayOfJoin = $request->dayOfJoin;
         $createUser->level = $request->level;
         $createUser->user_id = $request->user_id;
+        $createUser->role = $request->role;
         $createUser->save();
 
         $setToken = DB::table('password_resets')->insert([
@@ -77,6 +78,7 @@ class UserController extends Controller
         $user->dayOfJoin = $request->dayOfJoin;
         $user->level = $request->level;
         $user->user_id = $request->user_id;
+        $user->role = $request->role;
 
         if ($request->password)
             $user->password = $request->password;

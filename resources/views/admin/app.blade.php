@@ -22,7 +22,7 @@
     <li class="nav-item ">
         <a href="{{ route('adminUserIndex') }}" class="nav-link @yield('aside_user')">
             <i class="icofont-search-user"></i>
-            <p>Thông tin cá nhân</p>
+            <p>Thông tin nhân viên</p>
         </a>
     </li>
     <li class="nav-item ">
@@ -35,6 +35,12 @@
         <a href="{{ route('admin.level.index') }}" class="nav-link @yield('active_level')">
             <i class="icofont-layers"></i>
             <p>Chức vụ</p>
+        </a>
+    </li>
+    <li class="nav-item ">
+        <a href="{{ route('payroll.index') }}" class="nav-link @yield('active_payroll')">
+            <i class="icofont-bill"></i>
+            <p>Bảng lương</p>
         </a>
     </li>
 @endsection

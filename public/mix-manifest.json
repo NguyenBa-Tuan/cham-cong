@@ -2,6 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/OverlayScrollbars.min.css": "/css/OverlayScrollbars.min.css",
+    "/css/admin/payroll.css": "/css/admin/payroll.css",
     "/css/admin/user.css": "/css/admin/user.css",
     "/css/admin/timekeeping.css": "/css/admin/timekeeping.css",
     "/js/common.js": "/js/common.js",

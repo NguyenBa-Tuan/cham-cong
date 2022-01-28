@@ -4,7 +4,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4 aside">
     <!-- Brand Logo -->
     <a href="" class="brand-link">
-        <span class="brand-text  header">Hệ thống chấm công</span>
+        <span class="brand-text  header">Quản lý nhân viên</span>
     </a>
 
     <!-- Sidebar -->

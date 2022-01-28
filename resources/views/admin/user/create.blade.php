@@ -131,8 +131,29 @@
                 <div class="relative">
                     <select class="form-control" id="level" name="level">
                         @foreach ($levels as $item)
-                            <option value="{{ $item->id }}" {{ old('name') == $item->id ? 'selected' : '' }}>
+                            <option value="{{ $item->id }}" {{ old('level') == $item->id ? 'selected' : '' }}>
                                 {{ $item->name }}</option>
+                        @endforeach
+                    </select>
+                    <div class="tk-icon">
+                        <i class="icofont-caret-down"></i>
+                    </div>
+                </div>
+                @error('level')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+        </div>
+        <div class="content-group">
+            <div class="default-width">
+                <label class="tk-label" for="level">Loại tài khoản</label>
+                <div class="relative">
+                    <select class="form-control" id="role" name="role">
+                        @foreach (\App\Enums\UserRole::getValues() as $item)
+                            <option value="{{ $item }}">
+                                {{ \App\Enums\UserRole::getDescription($item) }}</option>
                         @endforeach
                     </select>
                     <div class="tk-icon">

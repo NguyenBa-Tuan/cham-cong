@@ -53,3 +53,4 @@ mix.copy(
 //admin
 mix.sass("resources/sass/admin/timekeeping.scss", "public/css/admin");
 mix.sass("resources/sass/admin/user.scss", "public/css/admin");
+mix.sass("resources/sass/admin/payroll.scss", "public/css/admin");

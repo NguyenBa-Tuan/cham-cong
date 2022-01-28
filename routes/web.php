@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\TimeKeepingController;
 use App\Http\Controllers\User\UserTimeKeepingController;
 use App\Http\Controllers\User\UserOverTimeController;
 use App\Http\Controllers\Admin\OvertimeController;
+use App\Http\Controllers\Admin\PayrollController;
 use App\Http\Controllers\Admin\RuleController;
 use Illuminate\Support\Facades\Artisan;
 
@@ -71,7 +72,6 @@ Route::middleware('checkLogin')->group(function () {
             Route::get('/{user}/edit', [UserController::class, 'edit'])->name('admin.user.edit');
             Route::put('/{user}/edit', [UserController::class, 'update'])->name('admin.user.update');
             Route::delete('/{user}', [UserController::class, 'destroy'])->name('admin.user.destroy');
-
         });
 
         Route::prefix('timekeeping')->group(function () {
@@ -98,6 +98,8 @@ Route::middleware('checkLogin')->group(function () {
         Route::post('/level', [LevelController::class, 'store'])->name('admin.level.store');
         Route::get('/level/{level}', [LevelController::class, 'edit'])->name('admin.level.edit');
         Route::put('/level/{level}', [LevelController::class, 'update'])->name('admin.level.update');
+        //==payroll==
+        Route::resource('payroll', PayrollController::class);
     });
 });
 

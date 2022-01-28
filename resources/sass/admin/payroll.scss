@@ -1,0 +1,191 @@
+.main-content {
+    padding: 68px 30px;
+}
+
+.main-create {
+    .w-377 {
+        width: 377px;
+    }
+    .lFile {
+        height: 46px;
+        background: #FFFFFF;
+        border: 1px solid #CED4DA;
+        box-sizing: border-box;
+        border-radius: 3px;
+        margin: 0;
+        text-align: center;
+        line-height: 44px;
+        font-weight: 500 !important;
+        font-size: 16px;
+        text-decoration: underline;
+        color: #444444;
+        cursor: pointer;
+    }
+    .lFile:hover {
+        background: #6c757d4f;
+        color: #ffffff;
+    }
+    .dFile i {
+        font-size: 14px;
+        line-height: 16px;
+        color: #555555;
+        font-weight: 400;
+        display: block;
+    }
+    .dFile span {
+        font-size: 16px;
+        line-height: 19px;
+        font-weight: 400;
+        color: #333333;
+        margin-left: 10px;
+    }
+    .mt-50 {
+        margin-top: 50px;
+    }
+    @media only screen and (min-width: 768px) and (max-width: 1024px) {
+        .w-377 {
+            width: 250px !important;
+        }
+    }
+    @media only screen and (max-width: 767px) {
+        .dFile span {
+            display: block;
+            margin-left: 0;
+        }
+        .w-377 {
+            width: 100% !important;
+        }
+    }
+    .main-content ul {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+}
+
+.main-list {
+    .content-title {
+        font-weight: bold;
+        font-size: 28px;
+        line-height: 33px;
+        text-align: center;
+        color: #151515;
+        margin-bottom: 20px !important;
+    }
+    .form-month {
+        width: 120px !important;
+        display: inline !important;
+        background-color: #ffffff;
+        padding: 10px 29px 11px 10px !important;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: #222222;
+    }
+    .weekend {
+        background: #F5D0E7 !important;
+    }
+    .not-weekend {
+        background: #DEF5DC !important;
+    }
+    .day {
+        background: #E8EDF4 !important;
+        padding-right: initial !important;
+        padding-left: initial !important;
+    }
+    #table1 {}
+    .table thead th {
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 16px;
+        color: #4B545C;
+        border-bottom: 1px solid #dee2e6;
+    }
+    thead td {
+        font-weight: 400;
+        font-size: 16px;
+        text-align: center;
+        color: #4B545C;
+    }
+    th,
+    td {
+        border-color: #999999 !important;
+        white-space: nowrap;
+        vertical-align: middle !important;
+        border-left: 1px solid #999999 !important;
+        text-align: center !important;
+        border-top: none !important;
+    }
+    .border-right {
+        border-right: 1px solid #999999 !important;
+    }
+    .border-top {
+        border-top: 1px solid #999999;
+    }
+    .unset-border-top {
+        border-top: none !important;
+    }
+    div.dataTables_wrapper {
+        width: 100%;
+        margin: 0 auto;
+    }
+    .mt-25 {
+        margin-top: 25px;
+    }
+    .stt {
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 16px;
+        text-align: center;
+        color: #4B545C
+    }
+    .name {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+        color: #4B545C;
+        text-align: left !important;
+    }
+    .dataTables_scrollHead thead tr:first-child th {
+        border-top: 1px solid #999999 !important;
+    }
+    .DTFC_LeftHeadWrapper tr th {
+        border-top: 1px solid #999999 !important;
+    }
+    .w-198 {
+        min-width: 198px;
+    }
+    .note {
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 23px;
+        color: #151515;
+        margin-top: 50px;
+    }
+    .table-note td {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        color: #333333;
+        border-left: none !important;
+        text-align: left !important;
+        padding-top: 10px !important;
+    }
+    .table-note .fw-500 {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: #151515;
+    }
+    .text-left1 {
+        text-align: left !important;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .content-title {
+        font-size: 20px !important;
+    }
+    .main-content {
+        padding-top: 30px !important;
+    }
+}
