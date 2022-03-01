@@ -25,5 +25,6 @@ class Payroll extends Model
         'hourly_overtime',
         'salary',
         'note',
+        'bhxh',
     ];
 }

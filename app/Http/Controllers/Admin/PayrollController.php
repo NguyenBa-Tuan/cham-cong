@@ -11,15 +11,12 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
+// use Illuminate\Http\UploadedFile;
 
 class PayrollController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         if (!$request->month) $request->month = Carbon::now()->month  < 10 ? '0' . Carbon::now()->month : Carbon::now()->month;
@@ -43,7 +40,6 @@ class PayrollController extends Controller
 
         $arrData  = [];
         foreach ($listSalary as $item) {
-
             $arrData[$item->user_id]  = [
                 'basic_salary' => $item->basic_salary,
                 'standard_date' => $item->standard_date,
@@ -57,29 +53,15 @@ class PayrollController extends Controller
                 'daily_salary' => $item->daily_salary,
                 'overtime_salary' => $item->overtime_salary,
                 'hourly_overtime' => $item->hourly_overtime,
+                'bhxh' => $item->bhxh,
                 'salary' => $item->salary,
             ];
         }
-
         return view('admin.payroll.index', compact('listUser', 'arrData', 'listYear'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         DB::beginTransaction();
@@ -88,11 +70,12 @@ class PayrollController extends Controller
             Excel::import($data, request()->file('file'));
 
             if ($data->response) {
+                // $checkfile = request()->file('file');
+              
                 DB::rollBack();
-                return redirect()->route('payroll.index')->with('errorUser', $data->response);
+                return redirect()->route('payroll.index')->with('errorUser', $data->response, ['path'=>$path]);
             } else {
                 DB::commit();
-
                 return redirect()->route('payroll.index')->with('success', __('Upload bảng lương thành công!'));
             }
         } catch (Exception $e) {
@@ -100,47 +83,23 @@ class PayrollController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function overwrite()
+    {
+        // $data=Session::get('checkfile');dd($data);
+    }
+
     public function show($id)
     {
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
     }
 }

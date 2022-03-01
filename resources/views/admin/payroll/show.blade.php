@@ -70,6 +70,7 @@
                     <th>Làm đêm (giờ)</th>
                     <th>Lương đêm/giờ ( 150% giờ LCB)</th>
                     <th>Lương thực nhận</th>
+                    <th>Trích bhxh</th>
                     <th>Ghi chú</th>
                 </tr>
             </thead>
@@ -92,6 +93,7 @@
                             <td class="text-right">{{ ($arrData[$idUser]['overtime']) }}</td>
                             <td class="text-right">{{ number_format($arrData[$idUser]['hourly_overtime']) }}</td>
                             <td class="text-right">{{ number_format($arrData[$idUser]['salary']) }}</td>
+                            <td class="text-right">{{ number_format($arrData[$idUser]['bhxh']) }}</td>
                             <td class="text-left">{{ ($arrData[$idUser]['note']) }}</td>
                         </tr>
                     @endisset

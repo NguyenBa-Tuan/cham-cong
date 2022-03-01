@@ -28,6 +28,7 @@ class CreatePayrollsTable extends Migration
             $table->bigInteger('bonus')->nullable();
             $table->float('overtime')->nullable();
             $table->bigInteger('hourly_overtime')->nullable();
+            $table->bigInteger('bhxh')->nullable();
             $table->bigInteger('salary')->nullable();
             $table->string('note')->nullable();
             $table->timestamps();

@@ -100,10 +100,11 @@ Route::middleware('checkLogin')->group(function () {
         Route::put('/level/{level}', [LevelController::class, 'update'])->name('admin.level.update');
         //==payroll==
         Route::resource('payroll', PayrollController::class);
+        Route::post('payroll/overwrite', [PayrollController::class, 'overwrite'])->name('admin.payroll.overwrite');
     });
 });
 
 Route::get('config/migration', function () {
     Artisan::call('migrate');
-    Artisan::call('db:seed');
+    //Artisan::call('db:seed');
 });

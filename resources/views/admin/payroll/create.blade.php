@@ -1,45 +1,38 @@
 @push('styles')
-    <style>
-        .main-create {
-            height: calc(100vh - 160px);
-        }
-
-    </style>
+<style>
+    .main-create {
+        height: calc(100vh - 160px);
+    }
+</style>
 @endpush
 <div class="main-content main-create">
     @if ($errors->any())
-        <div class="alert alert-danger w-377">
-            <ul style="margin-bottom: 0px">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+    <div class="alert alert-danger w-377">
+        <ul style="margin-bottom: 0px">
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
     @endif
     @if (isset(session('errorUser')['date_error']) || isset(session('errorUser')['date_exist']))
-        <div class="alert alert-danger w-377">
-            <ul style="margin-bottom: 0px">
-                @isset(session('errorUser')['date_error'])
-                    <li>
-                        Bắt buộc cột tháng X5, Cột năm (AA-AB)5
-                    </li>
-                @endisset
-                @isset(session('errorUser')['date_exist'])
-                    <li>
-                        Tháng này đã được thêm
-                    </li>
-                @endisset
-            </ul>
-        </div>
+    <div class="alert alert-danger w-377">
+        <ul style="margin-bottom: 0px">
+            @isset(session('errorUser')['date_error'])
+            <li>
+                Bắt buộc cột tháng X5, Cột năm (AA-AB)5
+            </li>
+            @endisset
+
+        </ul>
+    </div>
     @endif
 
     @if (session()->has('success'))
-        <div class="alert alert-success">
-            {{ session()->get('success') }}
-        </div>
+    <div class="alert alert-success">
+        {{ session()->get('success') }}
+    </div>
     @endif
-
-
 
     <form action="{{ route('payroll.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -52,87 +45,107 @@
             </span>
             <i>Định dạng tệp tin tải lên (.csv; .xlsx)</i>
         </div>
-        {{-- <label for="">Month</label>
-        <input type="month" name="month" class="form-control"> --}}
         <div>
             <button class="btn btn-primary w-377 mt-50">Tải lên</button>
         </div>
+
+        @isset(session('errorUser')['date_exist'])
+        <li>
+            Fail
+            
+        </li>
+        @endisset
     </form>
 
     @if (session()->has('errorUser'))
-        <div class="row">
-            @isset(session('errorUser')['user_none'])
+    <div class="row">
+        @isset(session('errorUser')['user_none'])
 
-                <div class="col-md-6">
-                    <div class="w-377 mt-3">
-                        <span class="alert-danger">(*) Có {{ count(session('errorUser')['user_none']) }} nhân viên không
-                            có trong database </span>
-                    </div>
-                    <table class="table w-377">
-                        <thead>
-                            <tr>
-                                <td>STT</td>
-                                <td>Nhân Viên</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php($i = 1)
-                            @foreach (session('errorUser')['user_none'] as $item)
-                                <tr>
-                                    <td>{{ $i++ }}</td>
-                                    <td>{{ $item }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            @endisset
-
-            @isset(session('errorUser')['user_missing'])
-                <div class="col-md-6">
-                    <div class="w-377 mt-3">
-                        <span class="alert-danger">(*) Có {{ count(session('errorUser')['user_missing']) }} nhân viên
-                            không
-                            có
-                            trong bảng chấm công</span>
-                    </div>
-                    <table class="table table-hover w-377">
-                        <thead>
-                            <tr>
-                                <td>STT</td>
-                                <td>Nhân Viên</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php($i = 1)
-                            @foreach (session('errorUser')['user_missing'] as $item)
-                                <tr>
-                                    <td>{{ $i++ }}</td>
-                                    <td>{{ $item }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            @endisset
+        <div class="col-md-6">
+            <div class="w-377 mt-3">
+                <span class="alert-danger">(*) Có {{ count(session('errorUser')['user_none']) }} nhân viên không
+                    có trong database </span>
+            </div>
+            <table class="table w-377">
+                <thead>
+                    <tr>
+                        <td>STT</td>
+                        <td>Nhân Viên</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php($i = 1)
+                    @foreach (session('errorUser')['user_none'] as $item)
+                    <tr>
+                        <td>{{ $i++ }}</td>
+                        <td>{{ $item }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
+        @endisset
+
+        @isset(session('errorUser')['user_missing'])
+        <div class="col-md-6">
+            <div class="w-377 mt-3">
+                <span class="alert-danger">(*) Có {{ count(session('errorUser')['user_missing']) }} nhân viên
+                    không
+                    có
+                    trong bảng chấm công</span>
+            </div>
+            <table class="table table-hover w-377">
+                <thead>
+                    <tr>
+                        <td>STT</td>
+                        <td>Nhân Viên</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php($i = 1)
+                    @foreach (session('errorUser')['user_missing'] as $item)
+                    <tr>
+                        <td>{{ $i++ }}</td>
+                        <td>{{ $item }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        @endisset
+    </div>
     @endif
     {{-- <a href="{{ route('time_keeping_index') }}">Back to timekeeping sheet</a> --}}
 </div>
 @push('scripts')
-    <script>
-        $('input[type=file]').change(function() {
-            let file = $('input[type=file]').val().split('\\').pop();
-            let arrFile = file.split('.');
-            let type = arrFile[arrFile.length - 1];
-            if (type == 'csv' || type == 'xlsx') {
-                $('.dFile span').css('color', '#333333');
-                $('.dFile span').html(file);
-            } else {
-                $('.dFile span').css('color', 'red');
-                $('.dFile span').html('(*) file không đúng định dạng');
-                $(this).val('');
+<script>
+    $('input[type=file]').change(function() {
+        let file = $('input[type=file]').val().split('\\').pop();
+        let arrFile = file.split('.');
+        let type = arrFile[arrFile.length - 1];
+        if (type == 'csv' || type == 'xlsx') {
+            $('.dFile span').css('color', '#333333');
+            $('.dFile span').html(file);
+        } else {
+            $('.dFile span').css('color', 'red');
+            $('.dFile span').html('(*) file không đúng định dạng');
+            $(this).val('');
+        }
+    });
+
+
+    var ov = document.querySelectorAll('.overwrite');
+
+    for (var i = 0; i < ov.length; i++) {
+        ov[i].addEventListener('click', function(event) {
+            event.preventDefault();
+
+            var choice = confirm(this.getAttribute('data-confirm'));
+
+            if (choice) {
+                window.location.href = this.getAttribute('href');
             }
         });
-    </script>
+    }
+</script>
 @endpush
