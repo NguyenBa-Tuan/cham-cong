@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
-// use Illuminate\Http\UploadedFile;
 
 class PayrollController extends Controller
 {
@@ -68,12 +67,9 @@ class PayrollController extends Controller
         try {
             $data = new PayrollImport();
             Excel::import($data, request()->file('file'));
-
             if ($data->response) {
-                // $checkfile = request()->file('file');
-              
                 DB::rollBack();
-                return redirect()->route('payroll.index')->with('errorUser', $data->response, ['path'=>$path]);
+                return redirect()->route('payroll.index')->with('errorUser', $data->response);
             } else {
                 DB::commit();
                 return redirect()->route('payroll.index')->with('success', __('Upload bảng lương thành công!'));

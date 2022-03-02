@@ -23,7 +23,11 @@
                 Bắt buộc cột tháng X5, Cột năm (AA-AB)5
             </li>
             @endisset
-
+            @isset(session('errorUser')['date_exist'])
+            <li>
+                Tháng này đã được thêm
+            </li>
+            @endisset
         </ul>
     </div>
     @endif
@@ -34,11 +38,13 @@
     </div>
     @endif
 
+
+
     <form action="{{ route('payroll.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="dFile">
             <label class="d-block">Dữ liệu tải lên</label>
-            <input type="file" name="file" id="file" class="w-377 d-none">
+            <input type="file" name="file" id="file" class="w-377 d-none" require>
             <label for="file" class="lFile w-377">Chọn tệp tin</label>
             <span>
                 Chưa có tệp tin
@@ -48,13 +54,6 @@
         <div>
             <button class="btn btn-primary w-377 mt-50">Tải lên</button>
         </div>
-
-        @isset(session('errorUser')['date_exist'])
-        <li>
-            Fail
-            
-        </li>
-        @endisset
     </form>
 
     @if (session()->has('errorUser'))
@@ -115,7 +114,7 @@
         @endisset
     </div>
     @endif
-    {{-- <a href="{{ route('time_keeping_index') }}">Back to timekeeping sheet</a> --}}
+
 </div>
 @push('scripts')
 <script>
@@ -132,20 +131,5 @@
             $(this).val('');
         }
     });
-
-
-    var ov = document.querySelectorAll('.overwrite');
-
-    for (var i = 0; i < ov.length; i++) {
-        ov[i].addEventListener('click', function(event) {
-            event.preventDefault();
-
-            var choice = confirm(this.getAttribute('data-confirm'));
-
-            if (choice) {
-                window.location.href = this.getAttribute('href');
-            }
-        });
-    }
 </script>
 @endpush
