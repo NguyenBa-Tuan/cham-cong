@@ -1,3 +1,6 @@
+@push('meta')
+<meta name="csrf-token-x" content="{{csrf_token()}}">
+@endpush
 @push('styles')
 <style>
     .main-create {
@@ -32,19 +35,25 @@
     </div>
     @endif
 
-    @if (session()->has('success'))
+
+    @if (session()->has('upload'))
+    @isset(session('upload')['upload'])
     <div class="alert alert-success">
-        {{ session()->get('success') }}
+        Upload bảng lương thành công!
     </div>
+    @endisset
+    @isset(session('upload')['override'])
+    <div class="alert alert-success">
+        Thay đổi bảng lương thành công!
+    </div>
+    @endisset
     @endif
 
-
-
-    <form action="{{ route('payroll.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('payroll.store') }}" method="POST" enctype="multipart/form-data" id="form-main">
         @csrf
         <div class="dFile">
             <label class="d-block">Dữ liệu tải lên</label>
-            <input type="file" name="file" id="file" class="w-377 d-none" require>
+            <input type="file" name="file" id="file" class="w-377 d-none" required>
             <label for="file" class="lFile w-377">Chọn tệp tin</label>
             <span>
                 Chưa có tệp tin
@@ -55,11 +64,14 @@
             <button class="btn btn-primary w-377 mt-50">Tải lên</button>
         </div>
     </form>
-
+    @if(session()->has('check_data'))
+    @isset(session('check_data')['data_e'])
+    <p id="dcheck" style="background-color: red; font-size: 23px">already uploaded!</p>
+    @endisset
+    @endif
     @if (session()->has('errorUser'))
     <div class="row">
         @isset(session('errorUser')['user_none'])
-
         <div class="col-md-6">
             <div class="w-377 mt-3">
                 <span class="alert-danger">(*) Có {{ count(session('errorUser')['user_none']) }} nhân viên không
@@ -117,9 +129,10 @@
 
 </div>
 @push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-    $('input[type=file]').change(function() {
-        let file = $('input[type=file]').val().split('\\').pop();
+    $('#form-main input[type=file]').change(function() {
+        let file = $('#form-main input[type=file]').val().split('\\').pop();
         let arrFile = file.split('.');
         let type = arrFile[arrFile.length - 1];
         if (type == 'csv' || type == 'xlsx') {
@@ -131,5 +144,33 @@
             $(this).val('');
         }
     });
+
+    // $('input[type=file]').change(function() {
+    //     $.ajaxSetup({
+    //         headers: {
+    //             'X-CSRF-TOKEN': $('meta[name="csrf-token-x"]').attr('content')
+    //         }
+    //     });
+
+    //     var datacheck = $('#dcheck').text();
+    //     console.log(datacheck);
+    //     $.ajax({
+    //         type: 'post',
+    //         url: '{{route("check-override")}}',
+    //         dataType: 'html',
+    //         data: {
+    //             datacheck,
+    //             _token: '{{ csrf_token() }}',
+    //         },
+    //         contentType: false,
+    //         processData: false,
+    //         success: function(data) {
+    //             if (data) $('form').attr('action', '{{route("override-payroll")}}');
+    //         },
+    //         error: function(data) {
+    //             console.log(data);
+    //         }
+    //     });
+    // });
 </script>
 @endpush

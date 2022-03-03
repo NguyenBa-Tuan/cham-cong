@@ -13,6 +13,12 @@ class Note extends Model
 
     protected $fillable = [
         'note',
+        'full_job',
+        'half_job',
+        'ncl',
+        'np',
+        'kp',
+        'total',
     ];
 
     public function noteTimesheet()

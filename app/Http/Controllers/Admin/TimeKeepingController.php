@@ -14,6 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Models\User;
 use App\Http\Requests\ImportExcelRequest;
 use App\Imports\TimesheetImport;
+use App\Models\Note;
 use Exception;
 
 class TimeKeepingController extends Controller
@@ -37,10 +38,10 @@ class TimeKeepingController extends Controller
         sort($listYear);
 
         $listUser = User::where('role', UserRole::USER)
-        ->whereHas('timesheet', function ($query) use ($date) {
-            $query->where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date);
-        })
-        ->pluck('name', 'id')->toArray();
+            ->whereHas('timesheet', function ($query) use ($date) {
+                $query->where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date);
+            })
+            ->pluck('name', 'id')->toArray();
 
         $listCheckin = Timesheet::where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date)->get();
 
@@ -68,6 +69,12 @@ class TimeKeepingController extends Controller
 
             $arrData[$item->user_id][$item->data] += 1;
             $arrData[$item->user_id]['note'] = $item->note;
+            $arrData[$item->user_id]['full_job'] = $item->notes->full_job;
+            $arrData[$item->user_id]['half_job'] = $item->notes->half_job;
+            $arrData[$item->user_id]['ncl'] = $item->notes->ncl;
+            $arrData[$item->user_id]['np'] = $item->notes->np;
+            $arrData[$item->user_id]['kp'] = $item->notes->kp;
+            $arrData[$item->user_id]['total'] = $item->notes->total;
         }
 
         return view('admin.timekeeping.index', [
@@ -116,20 +123,22 @@ class TimeKeepingController extends Controller
         DB::beginTransaction();
 
         try {
-            // $create = new Month;
-            // $create->month = $request->month;
-            // $create->save();
-
             $data = new TimesheetImport();
             Excel::import($data, request()->file('file'));
-
-            if ($data->response) {
-                DB::rollBack();
-                return redirect()->route('time_keeping_index')->with('errorUser', $data->response);
+            $response = $data->response;
+            if ($response) {
+                if ($response['user_missing'] || $response['user_none']) {
+                    DB::rollBack();
+                    return redirect()->route('time_keeping_index')->with('errorUser', $data->response);
+                } else if ($response['override'] || $response['upload']) {
+                    DB::commit();
+                    return redirect()->route('time_keeping_index')->with('doneUser', $data->response);
+                } else {
+                    DB::rollBack();
+                    return redirect()->route('time_keeping_index')->with('errorUser', $data->response);
+                }
             } else {
-                DB::commit();
-
-                return redirect()->route('time_keeping_index')->with('success', __('Upload bảng chấm công thành công!'));
+                DB::rollBack();
             }
         } catch (Exception $exception) {
             DB::rollBack();

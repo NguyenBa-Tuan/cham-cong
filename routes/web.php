@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\OvertimeController;
 use App\Http\Controllers\Admin\PayrollController;
 use App\Http\Controllers\Admin\RuleController;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\Admin\OverridePayRollController;
 
 use App\Http\Controllers\User\PasswordFirstChangeController;
 use App\Http\Controllers\User\RuleController as UserRuleController;
@@ -100,7 +101,9 @@ Route::middleware('checkLogin')->group(function () {
         Route::put('/level/{level}', [LevelController::class, 'update'])->name('admin.level.update');
         //==payroll==
         Route::resource('payroll', PayrollController::class);
-        // Route::post('payroll/overwrite', [PayrollController::class, 'overwrite'])->name('admin.payroll.overwrite');
+        // Route::get('/payroll/check-override', [OverridePayRollController::class, 'checkOverride'])->name('check-override-get');
+        Route::post('/payroll/check-override', [OverridePayRollController::class, 'checkOverride'])->name('check-override');
+        Route::post('/payroll/override', [OverridePayRollController::class, 'override'])->name('override-payroll');
     });
 });
 
