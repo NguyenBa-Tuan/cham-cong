@@ -19,10 +19,15 @@ class Note extends Model
         'np',
         'kp',
         'total',
+        'month_id',
     ];
 
     public function noteTimesheet()
     {
         return $this->hasMany('App\Models\Timesheet');
+    }
+    public function noteMonth()
+    {
+        return $this->belongsTo('App\Models\Month');
     }
 }

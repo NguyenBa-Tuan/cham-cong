@@ -59,55 +59,13 @@ class UserTimeKeepingController extends Controller
             ->where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date)
             ->get();
 
-        $note = DB::table('timesheets')
+        $count_total = DB::table('timesheets')
             ->join('notes', 'timesheets.note_id', '=', 'notes.id')
             ->join('users', 'timesheets.user_id', '=', 'users.id')
             ->where('timesheets.user_id', '=', $checkID)
             ->where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date)
-            ->select('notes.note')->distinct()
+            ->select('notes.note', 'notes.total', 'notes.full_job', 'notes.half_job', 'notes.np', 'notes.kp', 'notes.ncl')->distinct()
             ->get();
-
-        $dataX = DB::table('timesheets')
-            ->join('notes', 'timesheets.note_id', '=', 'notes.id')
-            ->join('users', 'timesheets.user_id', '=', 'users.id')
-            ->where('timesheets.user_id', '=', $checkID)
-            ->where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date)
-            ->where('timesheets.data', '=', 'X')
-            ->count('timesheets.data');
-
-        $dataX_2 = DB::table('timesheets')
-            ->join('notes', 'timesheets.note_id', '=', 'notes.id')
-            ->join('users', 'timesheets.user_id', '=', 'users.id')
-            ->where('timesheets.user_id', '=', $checkID)
-            ->where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date)
-            ->where('timesheets.data', '=', 'X/2')
-            ->count('timesheets.data');
-
-        $dataPL = DB::table('timesheets')
-            ->join('notes', 'timesheets.note_id', '=', 'notes.id')
-            ->join('users', 'timesheets.user_id', '=', 'users.id')
-            ->where('timesheets.user_id', '=', $checkID)
-            ->where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date)
-            ->where('timesheets.data', '=', 'PL')
-            ->count('timesheets.data');
-
-        $dataP = DB::table('timesheets')
-            ->join('notes', 'timesheets.note_id', '=', 'notes.id')
-            ->join('users', 'timesheets.user_id', '=', 'users.id')
-            ->where('timesheets.user_id', '=', $checkID)
-            ->where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date)
-            ->where('timesheets.data', '=', 'P')
-            ->count('timesheets.data');
-
-        $dataKP = DB::table('timesheets')
-            ->join('notes', 'timesheets.note_id', '=', 'notes.id')
-            ->join('users', 'timesheets.user_id', '=', 'users.id')
-            ->where('timesheets.user_id', '=', $checkID)
-            ->where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date)
-            ->where('timesheets.data', '=', 'KP')
-            ->count('timesheets.data');
-
-        $total = $dataX + ($dataX_2 / 2) + $dataPL;
-        return view('user.timesheet.index', compact('listYear',  'arrDate', 'data', 'note', 'dataX', 'dataX_2', 'dataPL', 'dataP', 'dataKP', 'total'));
+        return view('user.timesheet.index', compact('listYear',  'arrDate', 'data', 'count_total'));
     }
 }

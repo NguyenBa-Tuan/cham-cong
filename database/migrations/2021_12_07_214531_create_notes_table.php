@@ -22,6 +22,7 @@ class CreateNotesTable extends Migration
             $table->string('kp')->nullable();
             $table->string('total')->nullable();
             $table->string('note')->nullable();
+            $table->integer('month_id');
         });
     }
 

@@ -58,7 +58,7 @@
             width: 100%;
         }
 
-        .general-right{
+        .general-right {
             margin-top: 20px;
         }
     }
@@ -156,7 +156,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>e
 
                     <div class="general-right">
                         <h3 class="mb-30 tk-general-lb">Tổng hợp</h3>
@@ -173,14 +173,14 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($count_total as $d)
                                 <tr class="tk-data-general">
-                                    <td class="font-500">{{$dataX}}</td>
-                                    <td class="font-500">{{$dataX_2}}</td>
-                                    <td class="font-500">{{$dataPL}}</td>
-                                    <td class="font-500">{{$dataP}}</td>
-                                    <td class="font-500">{{$dataKP}}</td>
-                                    <td class="bg-light-green font-700">{{$total}}</td>
-                                    @foreach($note as $d)
+                                    <td class="font-500">{{$d->full_job}}</td>
+                                    <td class="font-500">{{$d->half_job}}</td>
+                                    <td class="font-500">{{$d->ncl}}</td>
+                                    <td class="font-500">{{$d->np}}</td>
+                                    <td class="font-500">{{$d->kp}}</td>
+                                    <td class="bg-light-green font-700">{{$d->total}}</td>
                                     <td class="f-500">{{$d->note}}</td>
                                     @endforeach
                                 </tr>

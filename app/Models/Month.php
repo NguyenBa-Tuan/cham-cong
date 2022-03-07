@@ -18,4 +18,9 @@ class Month extends Model
     {
         return $this->hasOne('App\Models\Timesheet');
     }
+
+    public function monthNote()
+    {
+        return $this->hasOne('App\Models\Note');
+    }
 }

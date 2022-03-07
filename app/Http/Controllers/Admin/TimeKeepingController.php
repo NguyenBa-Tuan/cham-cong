@@ -76,7 +76,7 @@ class TimeKeepingController extends Controller
             $arrData[$item->user_id]['kp'] = $item->notes->kp;
             $arrData[$item->user_id]['total'] = $item->notes->total;
         }
-
+        // dd($arrData);
         return view('admin.timekeeping.index', [
             'listYear' => $listYear,
             'listUser' => $listUser,
