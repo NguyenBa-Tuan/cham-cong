@@ -28,10 +28,12 @@ class PayrollImport implements ToCollection, WithCalculatedFormulas
 
         $arrError['upload'] = 1;
         $listUser = User::where('role', UserRole::USER)->pluck('name', 'id')->toArray();
+        
         foreach ($collection as $key => $item) {
+            
             if ($key >= 8 && $item[0] && $item[1]) {
                 $name = $item[1];
-
+               
                 if ($id = array_search($name, $listUser)) {
 
                     PayRoll::create([
