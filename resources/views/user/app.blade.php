@@ -27,4 +27,11 @@
             <p>Nội quy công ty</p>
         </a>
     </li>
+
+     <li class="nav-item ">
+        <a href="{{ route('user.payroll') }}" class="nav-link @yield('active_user_payroll')">
+            <i class="icofont-bill"></i>
+            <p>Bảng lương</p>
+        </a>
+    </li> 
 @endsection

@@ -20,8 +20,13 @@ class OverridePayRollImport implements ToCollection, WithCalculatedFormulas
         $arrError = [];
         $dateInt = $collection->toArray()[3][0];
         $date = date('Y-m-d', strtotime('1899-12-31+' . ($dateInt - 1) . ' days'));
+       
 
         $check_data = PayRoll::where('date', $date);
+
+        dd($date, $check_data);
+
+
         if ($check_data->count() > 0) {
             $check_data->delete();
 

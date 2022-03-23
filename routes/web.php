@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\PayrollController;
 use App\Http\Controllers\Admin\RuleController;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Admin\OverridePayRollController;
+use App\Http\Controllers\User\UserPayrollController;
+use App\Http\Controllers\User\UserOnLeaveController;
 
 use App\Http\Controllers\User\PasswordFirstChangeController;
 use App\Http\Controllers\User\RuleController as UserRuleController;
@@ -61,6 +63,11 @@ Route::middleware('checkLogin')->group(function () {
         });
 
         Route::get('/rules', [UserRuleController::class, 'index'])->name('user.rule.index');
+        /*payroll*/
+        Route::get('/payroll', [UserPayrollController::class, 'index'])->name('user.payroll');
+
+        /*on leave*/
+        Route::get('/on-leave', [UserOnLeaveController::class], 'index')->name('user.index');
     });
 
     /*admin*/
