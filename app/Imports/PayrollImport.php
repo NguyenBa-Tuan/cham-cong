@@ -28,14 +28,12 @@ class PayrollImport implements ToCollection, WithCalculatedFormulas
 
         $arrError['upload'] = 1;
         $listUser = User::where('role', UserRole::USER)->pluck('name', 'id')->toArray();
-        
         foreach ($collection as $key => $item) {
-            
             if ($key >= 8 && $item[0] && $item[1]) {
                 $name = $item[1];
-               
-                if ($id = array_search($name, $listUser)) {
 
+                if ($id = array_search($name, $listUser)) {
+     
                     PayRoll::create([
                         'date' => $date,
                         'user_id' => $id,
@@ -53,14 +51,21 @@ class PayrollImport implements ToCollection, WithCalculatedFormulas
                         'bhxh' => round($item[13]),
                         'salary' => round($item[14]),
                         'note' => $item[15],
+                        // 'salary' => round($item[13]),
+                        // 'note' => $item[14],
                     ]);
-
+                    
                     unset($listUser[$id]);
                 } else {
                     $arrError['user_none'][] = $name;
                 }
             }
         }
+<<<<<<< HEAD
+=======
+//dd($arr);
+
+>>>>>>> 25f48fc (fix)
 
         if (count($listUser) > 0)
             $arrError['user_missing'] = $listUser;

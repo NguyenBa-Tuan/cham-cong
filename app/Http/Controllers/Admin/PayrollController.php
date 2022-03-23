@@ -66,8 +66,14 @@ class PayrollController extends Controller
         return view('admin.payroll.index', compact('listUser', 'arrData', 'listYear'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
+        //
     }
 
     public function store(Request $request)
@@ -104,13 +110,34 @@ class PayrollController extends Controller
 
     public function edit($id)
     {
+        //
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id)
     {
+        //
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
+        //
+    }
+
+    public function overwrite(Request $request)
+    {
+        
     }
 }
