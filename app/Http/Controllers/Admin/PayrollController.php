@@ -44,7 +44,6 @@ class PayrollController extends Controller
 
         $arrData  = [];
         foreach ($listSalary as $item) {
-
             $arrData[$item->user_id]  = [
                 'basic_salary' => $item->basic_salary,
                 'standard_date' => $item->standard_date,

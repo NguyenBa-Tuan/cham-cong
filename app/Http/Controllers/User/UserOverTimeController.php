@@ -24,7 +24,7 @@ class UserOverTimeController extends Controller
         if (!$request->month) $request->month = Carbon::now()->month  < 10 ? '0' . Carbon::now()->month : Carbon::now()->month;
         if (!$request->year) $request->year = Carbon::now()->year;
 
-        $date = $request->year . '-' . $request->month;
+        $date1 = $request->year . '-' . $request->month;
         $listYear = Overtime::select(DB::raw('SUBSTR(date, 1, 4) as year'))->groupBy('year')->pluck('year')->toArray();
 
         if (!in_array(Carbon::now()->year, $listYear)) {
@@ -34,9 +34,9 @@ class UserOverTimeController extends Controller
         sort($listYear);
 
 
-        $from = $date . '-01';
+        $from = $date1 . '-01';
 
-        $to = $date . '-' . Carbon::parse($date)->daysInMonth;
+        $to = $date1 . '-' . Carbon::parse($date1)->daysInMonth;
 
         $begin = new \DateTime($from);
         $end = new \DateTime($to);
@@ -57,14 +57,15 @@ class UserOverTimeController extends Controller
         }
 
         $data = Overtime::where('user_id', Auth::id())
-            ->where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date)
+            ->where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date1)
             ->orderby('date', 'DESC')
             ->get();
 
         $count = Overtime::where('user_id', Auth::id())
             ->select('totalTime')
-            ->where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date)
+            ->where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date1)
             ->sum(DB::raw("TIME_TO_SEC(totalTime)"));
+
 
         $h = floor($count / 60 / 60);
         $m = $count / 60 % 60;
@@ -99,7 +100,7 @@ class UserOverTimeController extends Controller
             $arrNote[$item->date] = [
                 'note' => $item->note,
             ];
-        }
+        } 
         return view('user.overtime.index', compact('listYear', 'data', 'arrDate', 'arrCheckin', 'arrCheckout', 'arrTotalTime', 'arrProjectName', 'arrNote', 'getTotal'));
     }
 
@@ -117,7 +118,7 @@ class UserOverTimeController extends Controller
 
         $create = new Overtime();
 
-        if ($data_check){
+        if ($data_check) {
             $create = Overtime::findOrFail($data_check->id);
             $create->permission = OvertimePermission::VIEW;
         }

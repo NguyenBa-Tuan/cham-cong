@@ -1,4 +1,5 @@
 /*width*/
+
 .w-105 {
     width: 104px;
 }
@@ -19,7 +20,9 @@
     width: 95px;
 }
 
+
 /*background color*/
+
 .bg-light-green {
     background-color: #DEF5DC;
 }
@@ -28,7 +31,9 @@
     background-color: #F5D0E7;
 }
 
+
 /*margin*/
+
 .mb-15 {
     margin-bottom: 15px;
 }
@@ -49,7 +54,9 @@
     margin: 0 auto;
 }
 
+
 /*padding*/
+
 .pl-10 {
     padding-left: 10px !important;
 }
@@ -67,7 +74,9 @@
     padding-right: 130px;
 }
 
+
 /*font weight*/
+
 .font-400 {
     font-weight: 400;
 }
@@ -80,7 +89,9 @@
     font-weight: 500;
 }
 
+
 /*font-size*/
+
 .f-14 {
     font-size: 14px;
 }
@@ -93,7 +104,9 @@
     font-size: 18px;
 }
 
+
 /*line height*/
+
 .line-h-16 {
     line-height: 16px;
 }
@@ -105,6 +118,7 @@
 .line-h-21 {
     line-height: 21px;
 }
+
 
 /*another atomic css*/
 
@@ -142,4 +156,8 @@
 
 .p-30 {
     padding: 30px;
+}
+
+.pointer {
+    cursor: pointer;
 }

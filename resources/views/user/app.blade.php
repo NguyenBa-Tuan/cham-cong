@@ -34,4 +34,10 @@
             <p>Bảng lương</p>
         </a>
     </li> 
+    <li class="nav-item ">
+        <a href="{{ route('user.onleave.index') }}" class="nav-link @yield('active_user_onleave')">
+        <i class="icofont-page"></i>
+            <p>Nghỉ phép</p>
+        </a>
+    </li> 
 @endsection

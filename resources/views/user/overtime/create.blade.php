@@ -1,8 +1,7 @@
 @push('styles')
     <!--ico font -->
     <link rel="stylesheet" href="{{ asset('lib/icofont.min.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('css/lib/jquery.timepicker.min.css')}}"> --}}
-    {{-- <link rel="stylesheet" href="{{ asset('css/lib/bootstrap-datetimepicker.min.css')}}"> --}}
+
     <link rel="stylesheet" href="{{ asset('css/lib/DateTimePicker.css') }}">
     <style>
         .custom-color {
@@ -12,21 +11,6 @@
         .dtpicker-components .dtpicker-compValue {
             padding: 0 !important;
         }
-
-        /* .checkin_form_fix {
-                            height: 48px;
-                            position: absolute;
-                            left: 0;
-                            top: 0;
-                            width: 61%;
-                            pointer-events: none;
-                            
-                        }
-
-                        .show_data{
-                            z-index: 10000 !important;
-                            display: block !important;
-                        } */
 
     </style>
 @endpush
@@ -57,8 +41,8 @@
                 <div class="form-group relative">
                     <label for="date" class="tk-label">Ngày</label>
                     <div class="relative">
-                        <input type="text" data-field="date" class="form-control relative custom-color" id="date"
-                            name="date" required data-format="yyyy-MM-dd">
+                        <input type="text" data-field="date" class="form-control relative custom-color pointer" id="date"
+                            name="date" required data-format="yyyy-MM-dd" readonly>
                         <div id="checkin_date"></div>
                         <div class="tk-icon">
                             <i class="icofont-calendar"></i>
@@ -70,7 +54,7 @@
                     <div class="relative">
                         <span class="checkin_form_fix"></span>
                         <input type="text" data-field="time" id="checkin" name="checkin"
-                            class="form-control relative custom-color" data-format="HH:mm" required>
+                            class="form-control relative custom-color pointer" data-format="HH:mm" required readonly>
                         <div id="checkin_form"></div>
 
                         <div class="tk-icon">
@@ -82,7 +66,7 @@
                     <label for="checkout" class="tk-label">Giờ Checkout</label>
                     <div class="relative">
                         <input type="text" data-field="datetime" id="checkout" name="checkout"
-                            class="form-control relative custom-color" data-format="yyyy-MM-dd hh:mm">
+                            class="form-control relative custom-color pointer" data-format="yyyy-MM-dd hh:mm" readonly>
                         <div id="checkout_form"></div>
 
                         <div class="tk-icon">

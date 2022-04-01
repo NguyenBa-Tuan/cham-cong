@@ -49,11 +49,7 @@
     @endisset
     @endif
 
-<<<<<<< HEAD
     <form action="{{ route('payroll.store') }}" method="POST" enctype="multipart/form-data" id="form-main">
-=======
-    <form action="{{ route('payroll.store') }}" method="POST" enctype="multipart/form-data">
->>>>>>> 25f48fc (fix)
         @csrf
         <div class="dFile">
             <label class="d-block">Dữ liệu tải lên</label>

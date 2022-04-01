@@ -40,8 +40,7 @@ class TimeKeepingController extends Controller
         $listUser = User::where('role', UserRole::USER)
             ->whereHas('timesheet', function ($query) use ($date) {
                 $query->where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date);
-            })
-            ->pluck('name', 'id')->toArray();
+            })->pluck('name', 'id')->toArray();
 
         $listCheckin = Timesheet::where(DB::raw('DATE_FORMAT(date, "%Y-%m")'), $date)->get();
 
@@ -76,7 +75,7 @@ class TimeKeepingController extends Controller
             $arrData[$item->user_id]['kp'] = $item->notes->kp;
             $arrData[$item->user_id]['total'] = $item->notes->total;
         }
-        // dd($arrData);
+        //dd($arrData);
         return view('admin.timekeeping.index', [
             'listYear' => $listYear,
             'listUser' => $listUser,
