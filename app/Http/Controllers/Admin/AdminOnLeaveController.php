@@ -62,6 +62,8 @@ class AdminOnLeaveController extends Controller
             // if (!isset($arrData[$item->user_id]['status'])) $arrData[$item->user_id]['status'] = 3;
         }
 
+        
+
         $request_employee = Onleave::with('user')->where('status', 2)->get();
 
         return view('admin.onleave.index', compact('request_employee', 'listYear', 'listOnleaveAccept', 'listUser', 'arrDate', 'arrData'));

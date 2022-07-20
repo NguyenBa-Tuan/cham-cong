@@ -26,8 +26,9 @@ class TimesheetImport implements ToCollection, WithCalculatedFormulas
 
         $date = $collection[4][26] . '-' . (strlen($collection[4][23]) < 2 ? '0' . $collection[4][23] : $collection[4][23]);
         $check_date = Month::where('month', $date)->first();
-
-        if ($check_date) {
+        // dd($date);
+        if ($check_date) {  
+            
             $check_date_id = $check_date->id;
 
             Note::where('month_id', $check_date_id)->delete();
@@ -58,6 +59,7 @@ class TimesheetImport implements ToCollection, WithCalculatedFormulas
                 $key++;
             }
             $count_day_month = Carbon::parse($end->format('Y-m-d'))->daysInMonth;
+            
             $listUser = User::where('role', UserRole::USER)->pluck('name', 'id')->toArray();
             foreach ($collection as $key => $row) {
                 if ($key >= 8 && $row[0]) {
@@ -82,7 +84,7 @@ class TimesheetImport implements ToCollection, WithCalculatedFormulas
                         $full_job = $row[33];
                         $half_job = $row[34];
                         $ncl = $row[35];
-                        $np = $row[33];
+                        $np = $row[36];
                         $kp = $row[37];
                         $total = $row[38];
                         $note = $row[39];
@@ -178,7 +180,7 @@ class TimesheetImport implements ToCollection, WithCalculatedFormulas
                         $full_job = $row[33];
                         $half_job = $row[34];
                         $ncl = $row[35];
-                        $np = $row[33];
+                        $np = $row[36];
                         $kp = $row[37];
                         $total = $row[38];
                         $note = $row[39];

@@ -22,12 +22,12 @@ class OverridePayRollImport implements ToCollection, WithCalculatedFormulas
         $date = date('Y-m-d', strtotime('1899-12-31+' . ($dateInt - 1) . ' days'));
        
 
-        $check_data = PayRoll::where('date', $date);
+        $check_data = PayRoll::where('date', $date)->first();
 
-        dd($date, $check_data);
+        // dd($date, $check_data);
 
 
-        if ($check_data->count() > 0) {
+        if ($check_data) {
             $check_data->delete();
 
             $listUser = User::where('role', UserRole::USER)->pluck('name', 'id')->toArray();

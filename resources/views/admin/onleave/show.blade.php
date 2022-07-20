@@ -47,9 +47,17 @@
         transition: all 300ms ease-in-out;
     }
 
+    .ol_update_accept{
+        background: #3B89CF;
+    }
+
     .ol_update:hover {
         color: red;
         background-color: #FFFFFF;
+    }
+
+    .ol_update_accept:hover{
+        color: #3B89CF;
     }
 
     @media screen and (max-width: 1440px) {
@@ -283,7 +291,7 @@
                             </div>
                             @if($arrData[$idUser][$itemDate['date']]['status']==1)
 
-                            <a href="javascript:void(0)" title="Đã duyệt" class="ol_update">Đã duyệt</a>
+                            <a href="javascript:void(0)" title="Đã duyệt" class="ol_update ol_update_accept">Đã duyệt</a>
 
                             @elseif($arrData[$idUser][$itemDate['date']]['status']==0)
 
