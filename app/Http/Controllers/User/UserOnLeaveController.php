@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OnleaveMail;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class UserOnLeaveController extends Controller
 {
@@ -86,10 +87,11 @@ class UserOnLeaveController extends Controller
     {
         $checkDate = Carbon::now()->addDays(1);
 
-        $admin = User::where('role', 0)->get();
+        $admin = User::where('role', '0')->get();
         $arrAdminMail = [];
+
         foreach ($admin as $adminMail) {
-            $arrAdminMail[$adminMail->email] = ['email' => $adminMail->email];
+            $arrAdminMail[] = ['email' => $adminMail->email];
         }
 
         $store = new Onleave();
@@ -100,17 +102,10 @@ class UserOnLeaveController extends Controller
         $store->ongoing = $request->on_going;
         $store->status = 2;
 
-        
-
         $date_start = Onleave::where(DB::raw('DATE_FORMAT(timeStart, "%Y-%m-%d")'), Carbon::parse($request->timeStart)->toDateString())->where('user_id',  Auth::id())->first();
 
         $check_timeStart = Onleave::where('timeStart', $store->timeStart)->where('user_id',  Auth::id())->first();
         $check_timeEnd = Onleave::where('timeEnd', $store->timeEnd)->where('user_id',  Auth::id())->first();
-
-        // $time_start_input = Carbon::parse($request->timeStart)->format('H:i');
-        // $time_end_input = Carbon::parse($request->timeEnd)->format('H:i');
-        // if ($time_start_input != "07:30" || $time_start_input != "13:30" || $time_end_input != "13:30" || $time_end_input != "17:30")
-        //     return redirect()->route('user.onleave.index')->with('fail', 'Thời gian nhập vào không đúng. Bắt buộc phải đúng khung giờ: 7h30->11h30, 13h30->17h30');
 
         if ($check_timeStart) return redirect()->route('user.onleave.index')->with('fail', 'Thời gian bắt đầu nghỉ đã được đăng ký!');
         if ($check_timeEnd) return redirect()->route('user.onleave.index')->with('fail', 'Thời gian kết thúc nghỉ đã được đăng ký!');
@@ -121,11 +116,11 @@ class UserOnLeaveController extends Controller
 
         else {
             foreach ($arrAdminMail as $emails) {
-                foreach ($emails as $email) {
-                    Mail::to($email)->send(new OnleaveMail($store));
-                }
+                // dd($emails['email']);
+                Mail::to($emails['email'])->send(new OnleaveMail($store));
             }
             $store->save();
+            Log::info('he thong cham cong xin nghi phep: ' . $store);
             return redirect()->route('user.onleave.index')->with('success', 'success');
         }
     }
