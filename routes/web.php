@@ -61,9 +61,9 @@ Route::middleware('checkLogin')->group(function () {
 
         Route::prefix('timekeeping')->group(function () {
             Route::get('/', [TimeKeepingController::class, 'index'])->name('time_keeping_index');
-            Route::get('/show/{id}', [TimeKeepingController::class, 'show'])->name('time_keeping_show');
-            Route::get('/import', [TimeKeepingController::class, 'import'])->name('time_keeping_create');
-            Route::post('/import', [TimeKeepingController::class, 'upload'])->name('time_keeping_import');
+            // Route::get('/show/{id}', [TimeKeepingController::class, 'show'])->name('time_keeping_show');
+            // Route::get('/import', [TimeKeepingController::class, 'import'])->name('time_keeping_create');
+            Route::post('/import', [TimeKeepingController::class, 'store'])->name('time_keeping_import');
         });
 
         //=== level==
