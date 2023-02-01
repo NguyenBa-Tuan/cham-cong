@@ -58,17 +58,6 @@
             <input type="text" name="level" class="form-control" value="{{ $level->name }}" required>
         </div>
 
-        <div class="dFile mt-4">
-            <label class="d-block tk-label">Tải lên file PDF</label>
-            <input type="file" name="file" id="file" class="w-377 d-none" >
-            <label for="file" class="lFile w-377">Chọn tệp tin</label>
-            <span>
-                {{ $level->file->name ?? '' }}
-            </span>
-            <i>Định dạng tệp tin tải lên (.pdf)</i>
-        </div>
-        {{-- <label for="">Month</label>
-        <input type="month" name="month" class="form-control"> --}}
         <div>
             <button class="btn btn-primary w-377 mt-50">Cập nhật</button>
         </div>

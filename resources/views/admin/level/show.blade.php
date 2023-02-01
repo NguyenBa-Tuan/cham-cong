@@ -50,7 +50,6 @@
             <tr>
                 <th class="bg-light-green">STT</th>
                 <th class="bg-light-green">Chức vụ</th>
-                <th class="bg-light-green">Tên file</th>
                 <th class="bg-light-green text-center">Action</th>
             </tr>
         </thead>
@@ -64,16 +63,8 @@
                     <td>
                         {{ $item->name }}
                     </td>
-                    <td>{{ $item->file->name ?? '' }}</td>
-
                     <td >
-                        <div style="display:inline-block; width: 45%; text-align: right">
-                            @if (isset($item->file->url))
-                                <a target="_blank" class="download"
-                                    href="{{ asset(Storage::url($item->file->url)) }}"><i
-                                        class="icofont-file-pdf"></i></a>
-                            @endif
-                        </div>
+
                         <div style="display:inline-block; width: 40%;">
                             <a class="edit ml-1" href="{{ route('admin.level.edit', $item->id) }}"><i
                                     class="icofont-edit"></i></a>

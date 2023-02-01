@@ -49,15 +49,6 @@
             <input type="text" name="level" class="form-control" required>
         </div>
 
-        <div class="dFile mt-4">
-            <label class="d-block tk-label">Tải lên file PDF</label>
-            <input type="file" name="file" id="file" class="w-377 d-none">
-            <label for="file" class="lFile w-377">Chọn tệp tin</label>
-            <span>
-                Chưa có tệp tin
-            </span>
-            <i>Định dạng tệp tin tải lên (.pdf)</i>
-        </div>
         {{-- <label for="">Month</label>
         <input type="month" name="month" class="form-control"> --}}
         <div>

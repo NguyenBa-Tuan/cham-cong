@@ -6,7 +6,7 @@ use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
 use App\Imports\OverridePayRollImport;
 use App\Imports\PayrollImport;
-use App\Models\PayRoll;
+use App\Models\Payroll;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;

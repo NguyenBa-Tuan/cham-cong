@@ -7,15 +7,10 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\TimeKeepingController;
 use App\Http\Controllers\User\UserTimeKeepingController;
-use App\Http\Controllers\User\UserOverTimeController;
-use App\Http\Controllers\Admin\OvertimeController;
 use App\Http\Controllers\Admin\PayrollController;
-use App\Http\Controllers\Admin\RuleController;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Admin\OverridePayRollController;
 use App\Http\Controllers\User\UserPayrollController;
-use App\Http\Controllers\User\UserOnLeaveController;
-use App\Http\Controllers\Admin\AdminOnLeaveController;
 
 use App\Http\Controllers\User\PasswordFirstChangeController;
 use App\Http\Controllers\User\RuleController as UserRuleController;
@@ -40,14 +35,6 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login_check');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// Route::get('/password/{id}', [UserController::class, 'editPassword'])->name('userEditPassword');
-// Route::post('/password/{id}', [UserController::class, 'updatePassword'])->name('userUpdatePassword');
-
-
-/*06/01/2022 send user password with url lifetime*/
-Route::get('/reset/{token}', [PasswordFirstChangeController::class, 'index'])->name('reset_password_index');
-Route::post('/reset/{token}', [PasswordFirstChangeController::class, 'update'])->name('reset_password_update');
-
 Route::middleware('checkLogin')->group(function () {
     /*user*/
     Route::middleware('checkUser')->prefix('user')->group(function () {
@@ -56,22 +43,8 @@ Route::middleware('checkLogin')->group(function () {
 
         Route::get('/timesheet', [UserTimeKeepingController::class, 'index'])->name('user_timesheet');
 
-        Route::prefix('overtime')->group(function () {
-            Route::get('/', [UserOverTimeController::class, 'index'])->name('user_overtime');
-            Route::get('/create', [UserOverTimeController::class, 'create'])->name('user_overtime_create');
-            Route::post('/create', [UserOverTimeController::class, 'store'])->name('user_overtime_store');
-            Route::post('/history', [UserOverTimeController::class, 'history'])->name('user.overtime.history');
-        });
-
-        Route::get('/rules', [UserRuleController::class, 'index'])->name('user.rule.index');
         /*payroll*/
         Route::get('/payroll', [UserPayrollController::class, 'index'])->name('user.payroll');
-
-        /*on leave*/
-        Route::get('/on-leave', [UserOnLeaveController::class, 'index'])->name('user.onleave.index');
-        Route::get('/on-leave/create', [UserOnLeaveController::class, 'create'])->name('user.onleave.create');
-        Route::post('/on-leave/create', [UserOnLeaveController::class, 'store'])->name('user.onleave.store');
-        Route::post('/on-leave/history', [UserOnLeaveController::class, 'history'])->name('user.onleave.history');
     });
 
     /*admin*/
@@ -93,18 +66,6 @@ Route::middleware('checkLogin')->group(function () {
             Route::post('/import', [TimeKeepingController::class, 'upload'])->name('time_keeping_import');
         });
 
-        Route::prefix('overtime')->group(function () {
-            Route::get('', [OvertimeController::class, 'index'])->name('overtime_index');
-            Route::get('/edit/{id}', [OvertimeController::class, 'edit'])->name('overtime_index_edit');
-            Route::post('/edit/{id}', [OvertimeController::class, 'update'])->name('overtime_index_update');
-            Route::post('/update-permission', [OvertimeController::class, 'updatePermission'])->name('admin.overtime.update_permission');
-            Route::post('/history', [OvertimeController::class, 'history'])->name('admin.overtime.history');
-        });
-
-        Route::get('/rules', [RuleController::class, 'index'])->name('admin.rule.index');
-        Route::post('/rules', [RuleController::class, 'store'])->name('admin.rule.store');
-        Route::delete('/rules/{file}', [RuleController::class, 'destroy'])->name('admin.rule.destroy');
-        Route::get('/rules/download/{file}', [RuleController::class, 'downloadFile'])->name('admin.rule.download');
         //=== level==
         Route::get('/level', [LevelController::class, 'index'])->name('admin.level.index');
         Route::post('/level', [LevelController::class, 'store'])->name('admin.level.store');
@@ -115,10 +76,6 @@ Route::middleware('checkLogin')->group(function () {
         // Route::get('/payroll/check-override', [OverridePayRollController::class, 'checkOverride'])->name('check-override-get');
         Route::post('/payroll/check-override', [OverridePayRollController::class, 'checkOverride'])->name('check-override');
         Route::post('/payroll/override', [OverridePayRollController::class, 'override'])->name('override-payroll');
-
-        /*on leave*/
-        Route::get('/onleave', [AdminOnLeaveController::class, 'index'])->name('admin.onleave.index');
-        Route::post('/onleave/{id}', [AdminOnLeaveController::class, 'update'])->name('admin.onleave.update');
     });
 });
 
