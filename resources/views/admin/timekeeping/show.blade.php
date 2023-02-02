@@ -26,135 +26,53 @@
 <div class="main-content main-list">
     <p class="text-center content-title">BẢNG CHẤM CÔNG HÀNH CHÍNH</p>
     <div class="text-center d-flex" style="justify-content: center">
-        <select name="month" class="form-select form-month">
-            @for ($i = 1; $i <= 12; $i++) <option value="{{ $i < 10 ? '0' . $i : $i }}" {{ $i == request()->month ? 'selected' : '' }}>Tháng
-                {{ $i }}</option>
-                @endfor
-        </select>
-        <hr style="border: 1px solid #4B545C; width: 6px; margin: 22px 5px; opacity: 1;box-sizing: border-box;">
-        <select name="year" class="form-select form-month">
-            @forelse ($listYear as $item)
-            <option value="{{ $item }}" {{ $item == request()->year ? 'selected' : '' }}>Năm
-                {{ $item }}
-            </option>
-            @empty
-
-            @endforelse
-        </select>
-    </div>
-    <div class="mt-25">
-        <table id="table1" class="table">
-            <thead>
-                <tr>
-                    <th rowspan="2">STT</th>
-                    <th rowspan="2">Họ tên</th>
-                    @foreach ($arrDate as $item)
-                    <th class="day">{{ $item['day'] }}</th>
+        <div class="mt-25">
+            @foreach($data as $key => $value)
+            {{$value['month']}}
+            <table id="table1" class="table">
+                <thead>
+                    <tr>
+                        <th>Tên</th>
+                        <th>Số ngày công</th>
+                        <th>Lương tháng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($value['data'] as $data)
+                    <tr>
+                        <td>{{\App\Models\User::where('id', $data->user_id)->first()->name}}</td>
+                        <td>{{$data->data}}</td>
+                        <td>{{$data->salary_per_month}}</td>
+                    </tr>
                     @endforeach
-                    <th rowspan="2">Đủ công</th>
-                    <th rowspan="2">Nửa Công</th>
-                    <th rowspan="2">Nghỉ có lương</th>
-                    <th rowspan="2">Nghỉ phép</th>
-                    <th rowspan="2">Không phép</th>
-                    <th rowspan="2">Tổng cộng</th>
-                    <th rowspan="2" class="border-right">Ghi chú</th>
-                </tr>
-                <tr>
-                    @foreach ($arrDate as $item)
-                    <th class="unset-border-top {{ in_array($item['day_of_week'], ['T7', 'CN']) ? 'weekend' : 'not-weekend' }}">
-                        {{ $item['day_of_week'] }}
-                    </th>
-                    @endforeach
-                </tr>
-            </thead>
-            <tbody>
-                @php($i = 1)
-                @foreach ($listUser as $idUser => $itemUser)
-                <tr>
-                    <td class="stt">{{ $i++ }}</td>
-                    <td class="name">{{ $itemUser }}</td>
-                    @foreach ($arrDate as $itemDate)
-                    @if (isset($arrData[$idUser][$itemDate['date']]) && $arrData[$idUser][$itemDate['date']]['data'] == 'LL')
-                    <td class="{{ in_array($itemDate['day_of_week'], ['T7', 'CN']) ? 'weekend' : '' }}" style="background: #F79646 !important">
-
-                    </td>
-                    @else
-                    <td class="{{ in_array($itemDate['day_of_week'], ['T7', 'CN']) ? 'weekend' : '' }}">
-                        {{ isset($arrData[$idUser][$itemDate['date']]) ? $arrData[$idUser][$itemDate['date']]['data'] : '' }}
-                    </td>
-                    @endif
-
-                    @endforeach
-                    <td>{{ isset($arrData[$idUser]['full_job']) ? $arrData[$idUser]['full_job'] : '' }}</td>
-                    <td>{{ isset($arrData[$idUser]['half_job']) ? $arrData[$idUser]['half_job'] : '' }}</td>
-                    <td>{{ isset($arrData[$idUser]['ncl']) ? $arrData[$idUser]['ncl'] : '' }}</td>
-                    <td>{{ isset($arrData[$idUser]['np']) ? $arrData[$idUser]['np'] : '' }}</td>
-                    <td>{{ isset($arrData[$idUser]['kp']) ? $arrData[$idUser]['kp'] : '' }}</td>
-                    <td class="font-weight-bold">{{ isset($arrData[$idUser]['total']) ? $arrData[$idUser]['total'] : '' }}</td>
-
-                    <td class="border-right text-left1">
-                        {{ isset($arrData[$idUser]['note']) ? $arrData[$idUser]['note'] : '' }}
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+            @endforeach
+        </div>
     </div>
-    <div>
-        <p class="note w-198">KÝ HIỆU CHẤM CÔNG</p>
-        <table class="w-198 table-note">
-            <tr>
-                <td>Đủ công</td>
-                <td class="fw-500">X</td>
-            </tr>
-            <tr>
-                <td>Nửa công</td>
-                <td class="fw-500">X/2</td>
-            </tr>
-            <tr>
-                <td>Nghỉ phép</td>
-                <td class="fw-500">P</td>
-            </tr>
-            <tr>
-                <td>Nghỉ không phép</td>
-                <td class="fw-500">KP</td>
-            </tr>
-            <tr>
-                <td>Nghỉ có lương</td>
-                <td class="fw-500">PL</td>
-            </tr>
-            <tr>
-                <td>Nghỉ lễ có lương</td>
-                <td>
-                    <div style="width:24px; height: 16px; background: #F79646"></div>
-                </td>
-            </tr>
-        </table>
-    </div>
-</div>
-@push('scripts')
-<script src="{{ asset('js/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('js/datatables/dataTables.fixedColumns.min.js') }}"></script>
-<script>
-    $(document).ready(function() {
-        $('#table1').DataTable({
-            "paging": false,
-            "searching": false,
-            "ordering": false,
-            "info": false,
-            scrollY: true,
-            scrollX: true,
-            scrollCollapse: true,
-            fixedColumns: {
-                leftColumns: 2,
-            }
+    @push('scripts')
+    <script src="{{ asset('js/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/datatables/dataTables.fixedColumns.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#table1').DataTable({
+                "paging": false,
+                "searching": false,
+                "ordering": false,
+                "info": false,
+                scrollY: true,
+                scrollX: true,
+                scrollCollapse: true,
+                fixedColumns: {
+                    leftColumns: 2,
+                }
+            });
         });
-    });
-    $('.form-month').change(function() {
-        let month = $('select[name=month]').val();
-        let year = $('select[name=year]').val();
+        $('.form-month').change(function() {
+            let month = $('select[name=month]').val();
+            let year = $('select[name=year]').val();
 
-        location.assign(`{{ route('time_keeping_index') }}?active=sheet&year=${year}&month=${month}`)
-    });
-</script>
-@endpush
+            location.assign(`{{ route('time_keeping_index') }}?active=sheet&year=${year}&month=${month}`)
+        });
+    </script>
+    @endpush

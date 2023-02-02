@@ -15,6 +15,7 @@ class Timesheet extends Model
         'data',
         'note_id',
         'month_id',
+        'salary_per_month',
     ];
 
     protected $hidden = [

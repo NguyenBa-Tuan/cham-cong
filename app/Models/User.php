@@ -26,6 +26,7 @@ class User extends Authenticatable
         'dayOfJoin',
         'role',
         'level',
+        'salary_per_day',
     ];
 
     protected $hidden = [
