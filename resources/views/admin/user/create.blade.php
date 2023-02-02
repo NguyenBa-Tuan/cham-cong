@@ -1,34 +1,34 @@
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/atomic.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/custom-bootstrap4.css') }}">
-    <!--ico font -->
-    <link rel="stylesheet" href="{{ asset('lib/icofont.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/admin/user.css') }}">
-    <style>
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/atomic.css') }}">
+<link rel="stylesheet" href="{{ asset('css/custom-bootstrap4.css') }}">
+<!--ico font -->
+<link rel="stylesheet" href="{{ asset('lib/icofont.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/admin/user.css') }}">
+<style>
 
 
-    </style>
+</style>
 @endpush
 <form action="{{ route('adminUserStore') }}" method="POST">
     @csrf
     <div class="content-user">
         <div class="content-group content-group-button">
             @if (session()->has('message'))
-                <div class="alert alert-success">
-                    {{ session()->get('message') }}
-                </div>
+            <div class="alert alert-success">
+                {{ session()->get('message') }}
+            </div>
             @endif
         </div>
-        
+
         <div class="content-group">
             <div class="default-width">
                 <label for="">ID</label>
                 <input type="text" name="user_id" value="{{ old('user_id') }}" class="form-control">
                 @error('user_id')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
                 @enderror
             </div>
             <div class="space-content"></div>
@@ -41,22 +41,20 @@
             <div class="default-width">
                 <div>
                     <label class="tk-label" for="username">Username</label>
-                    <input class="form-control" type="text" placeholder="" id="username" name="username"
-                        value="{{ old('username') }}">
+                    <input class="form-control" type="text" placeholder="" id="username" name="username" value="{{ old('username') }}">
                     @error('username')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                     @enderror
                 </div>
                 <div class="mt-30">
                     <label class="tk-label" for="email">Email</label>
-                    <input class="form-control" type="email" placeholder="" id="email" name="email"
-                        value="{{ old('email') }}">
+                    <input class="form-control" type="email" placeholder="" id="email" name="email" value="{{ old('email') }}">
                     @error('email')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                     @enderror
                 </div>
 
@@ -64,8 +62,7 @@
             <div class="space-content"></div>
             <div class="default-width">
                 <label class="tk-label" for="address">Địa chỉ</label>
-                <textarea class="form-control" placeholder="Nhập địa chỉ" id="address"
-                    name="address">{{ old('address') }}</textarea>
+                <textarea class="form-control" placeholder="Nhập địa chỉ" id="address" name="address">{{ old('address') }}</textarea>
             </div>
         </div>
         <div class="content-group">
@@ -73,9 +70,9 @@
                 <label class="tk-label" for="password">Mật khẩu</label>
                 <input class="form-control" type="password" placeholder="●●●●●●●●" id="password" name="password">
                 @error('password')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
                 @enderror
             </div>
             <div class="space-content"></div>
@@ -83,19 +80,18 @@
                 <label class="tk-label" for="password_confirmation">Nhập lại mật khẩu</label>
                 <input class="form-control" type="password" placeholder="●●●●●●●●" name="password_confirmation">
                 @error('password_confirmation')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
                 @enderror
             </div>
-           
+
         </div>
         <div class="content-group">
             <div class="default-width">
                 <label class="tk-label" for="dayOfBirth">Ngày sinh</label>
                 <div class="relative">
-                    <input class="form-control" type="date" placeholder="" id="dayOfBirth" name="dayOfBirth"
-                        value="{{ old('dayOfBirth') }}">
+                    <input class="form-control" type="date" placeholder="" id="dayOfBirth" name="dayOfBirth" value="{{ old('dayOfBirth') }}">
                     <div class="tk-icon">
                         <i class="icofont-clock-time"></i>
                     </div>
@@ -105,8 +101,7 @@
             <div class="default-width">
                 <label class="tk-label" for="dayOfJoin">Ngày vào công ty</label>
                 <div class="relative">
-                    <input class="form-control" type="date" placeholder="" id="dayOfJoin" name="dayOfJoin"
-                        value="{{ old('dayOfJoin') }}">
+                    <input class="form-control" type="date" placeholder="" id="dayOfJoin" name="dayOfJoin" value="{{ old('dayOfJoin') }}">
                     <div class="tk-icon">
                         <i class="icofont-calendar"></i>
                     </div>
@@ -116,12 +111,11 @@
         <div class="content-group">
             <div class="default-width">
                 <label class="tk-label" for="name">Họ tên</label>
-                <input class="form-control" type="text" placeholder="" id="name" name="name"
-                    value="{{ old('name') }}">
+                <input class="form-control" type="text" placeholder="" id="name" name="name" value="{{ old('name') }}">
                 @error('name')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
                 @enderror
 
             </div>
@@ -131,8 +125,9 @@
                 <div class="relative">
                     <select class="form-control" id="level" name="level">
                         @foreach ($levels as $item)
-                            <option value="{{ $item->id }}" {{ old('level') == $item->id ? 'selected' : '' }}>
-                                {{ $item->name }}</option>
+                        <option value="{{ $item->id }}" {{ old('level') == $item->id ? 'selected' : '' }}>
+                            {{ $item->name }}
+                        </option>
                         @endforeach
                     </select>
                     <div class="tk-icon">
@@ -140,9 +135,9 @@
                     </div>
                 </div>
                 @error('level')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
                 @enderror
             </div>
         </div>
@@ -152,8 +147,9 @@
                 <div class="relative">
                     <select class="form-control" id="role" name="role">
                         @foreach (\App\Enums\UserRole::getValues() as $item)
-                            <option value="{{ $item }}">
-                                {{ \App\Enums\UserRole::getDescription($item) }}</option>
+                        <option value="{{ $item }}">
+                            {{ \App\Enums\UserRole::getDescription($item) }}
+                        </option>
                         @endforeach
                     </select>
                     <div class="tk-icon">
@@ -161,10 +157,21 @@
                     </div>
                 </div>
                 @error('level')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
                 @enderror
+            </div>
+            <div class="space-content"></div>
+            <div class="default-width">
+                <label class="tk-label" for="salary_per_day">Lương cơ bản/ ngày</label>
+                <input class="form-control" type="text" placeholder="" id="salary_per_day" name="salary_per_day" value="{{ old('salary_per_day') }}" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                @error('salary_per_day')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+
             </div>
         </div>
         <div class="content-group content-group-button text-center">
@@ -173,3 +180,12 @@
 
     </div>
 </form>
+
+<script>
+    $('#salary_per_day').keyup(function(e) {
+        if (/\D/g.test(this.value)) {
+            // Filter non-digits from input value.
+            this.value = this.value.replace(/\D/g, '');
+        }
+    });
+</script>

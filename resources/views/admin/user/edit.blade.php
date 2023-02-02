@@ -176,6 +176,17 @@
                 </div>
                 @enderror
             </div>
+            <div class="space-content"></div>
+            <div class="default-width">
+                <label class="tk-label" for="salary_per_day">Lương cơ bản/ ngày</label>
+                <input class="form-control" type="text" placeholder="" id="salary_per_day" name="salary_per_day" value="{{ $user->salary_per_day }}" onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                @error('salary_per_day')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+
+            </div>
         </div>
         <div class="content-group content-group-button text-center">
             <button class="tk-btn admin-btn" type="submit">Cập nhật</button>
@@ -188,6 +199,14 @@
     $('.btn-delete').click(() => {
         if (confirm('Dữ liệu xóa sẽ không thể khôi phục ?')) {
             $('.frmDelete').submit();
+        }
+    });
+</script>
+<script>
+    $('#salary_per_day').keyup(function(e) {
+        if (/\D/g.test(this.value)) {
+            // Filter non-digits from input value.
+            this.value = this.value.replace(/\D/g, '');
         }
     });
 </script>

@@ -44,14 +44,15 @@ class UserController extends Controller
         $createUser->level = $request->level;
         $createUser->user_id = $request->user_id;
         $createUser->role = $request->role;
+        $createUser->salary_per_day = $request->salary_per_day;
         $createUser->save();
 
-        $setToken = DB::table('password_resets')->insert([
-            'email' => $createUser->email,
-            'token' => Str::random(60),
-            'created_at' => Carbon::now(),
-            'expire_at' => Carbon::now()->addHours(24),
-        ]);
+        // $setToken = DB::table('password_resets')->insert([
+        //     'email' => $createUser->email,
+        //     'token' => Str::random(60),
+        //     'created_at' => Carbon::now(),
+        //     'expire_at' => Carbon::now()->addHours(24),
+        // ]);
 
         // $token_data = DB::table('password_resets')->where('email', $createUser->email)->first();
         // if (!$token_data) return redirect()->to('login');
@@ -79,6 +80,7 @@ class UserController extends Controller
         $user->level = $request->level;
         $user->user_id = $request->user_id;
         $user->role = $request->role;
+        $user->salary_per_day = $request->salary_per_day;
 
         if ($request->password)
             $user->password = $request->password;
