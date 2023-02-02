@@ -16,7 +16,12 @@ class Month extends Model
 
     public function monthTimesheet()
     {
-        return $this->hasOne('App\Models\Timesheet');
+        return $this->hasMany('App\Models\Timesheet', 'month_id');
+    }
+
+    public function monthUser()
+    {
+        return $this->hasOne('App\Models\User', 'user_id');
     }
 
     public function monthNote()

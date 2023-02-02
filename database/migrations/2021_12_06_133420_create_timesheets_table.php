@@ -10,7 +10,6 @@ class CreateTimesheetsTable extends Migration
     {
         Schema::create('timesheets', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('month_id');
             $table->unsignedInteger('note_id')->nullable();

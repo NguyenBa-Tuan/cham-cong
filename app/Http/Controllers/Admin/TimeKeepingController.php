@@ -161,13 +161,50 @@ class TimeKeepingController extends Controller
     //     return $arr[Carbon::parse($day)->dayOfWeek];
     // }
 
-    public function index(Request $request){
-        $users = User::orderBy('id', 'DESC')->get();
-        return view('admin.timekeeping.index', compact('users'));
+    public function index(Request $request)
+    {
+        $users = User::where('role', 1)->get();
+        $timeSheets = Timesheet::orderBy('month_id', 'DESC')->get();
+        $data = [];
+        $month = Month::all();
+        foreach ($month as $key => $value) {
+            $data[] = [
+                'month' => $value->month,
+                'data' => $value->monthTimesheet,
+            ];
+        }
+        // dd($data);
+
+        return view('admin.timekeeping.index', compact('data', 'users'));
     }
 
     public function store(Request $request)
     {
-        dd($request);
+        if (Month::where('month', $request->month)->first()) return redirect()->back()->with('errors', 'Tháng nhập vào đã tồn tại');
+        try {
+            DB::beginTransaction();
+            $month = Month::create(['month' => $request->month]);
+            $count_user = User::where('role', 1)->count();
+
+            $data = $request->all();
+            $data_input_user = [];
+            for ($i = 0; $i < $count_user; ++$i) {
+                $data_input_user[] = [
+                    'user_id' => $data['user_id_' . $i],
+                    'data' => $data['data_' . $i],
+                    'month_id' => $month->id,
+                ];
+            }
+            foreach ($data_input_user as $value) {
+                $salary_user = User::where('id', $value['user_id'])->first()->salary_per_day;
+                $value['salary_per_month'] = $value['data'] * $salary_user;
+                Timesheet::create($value);
+            }
+            DB::commit();
+            return redirect()->back()->with('success', 'Tạo thành công!');
+        } catch (Exception $e) {
+            DB::rollBack();
+            dd($e);
+        }
     }
 }
